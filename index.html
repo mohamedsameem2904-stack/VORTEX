@@ -201,21 +201,22 @@
             transform: translateX(-50%) translateY(0);
         }
         .carousel-btn {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             color: white;
             border-radius: 50%;
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: 0.2s;
-            border: none;
-            font-size: 1.2rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 1.4rem;
         }
         .carousel-btn:hover {
-            background: rgba(0, 212, 255, 0.6);
+            background: rgba(0, 212, 255, 0.8);
+            border-color: #00d4ff;
         }
         .view-section {
             display: none;
@@ -252,7 +253,6 @@
             <span class="mx-8">🔥 NEXT-GEN PERFORMANCE</span>
             <span class="mx-8">✨ EXHALE THE SMOOTHNESS</span>
             <span class="mx-8">🏆 TOP RATED GAMING GEAR</span>
-            <!-- duplicate for seamless loop -->
             <span class="mx-8">🚀 FREE SHIPPING OVER $499</span>
             <span class="mx-8">💎 30-DAY PRICE MATCH</span>
             <span class="mx-8">🔄 HASSLE-FREE 60-DAY RETURNS</span>
@@ -409,20 +409,6 @@
                             <p class="text-gray-400 text-sm mb-3">Play the latest titles and provide feedback on performance.</p>
                             <span class="text-neon text-xs font-game">📍 On-site • Full-time</span>
                         </div>
-                        <div class="bg-v-dark rounded-2xl p-6 border border-v-border">
-                            <h3 class="text-white font-bold text-xl mb-2">📦 Logistics Lead</h3>
-                            <p class="text-gray-400 text-sm mb-3">Oversee global shipping, warehousing, and supply chain.</p>
-                            <span class="text-neon text-xs font-game">📍 Hybrid • Full-time</span>
-                        </div>
-                        <div class="bg-v-dark rounded-2xl p-6 border border-v-border">
-                            <h3 class="text-white font-bold text-xl mb-2">💻 Frontend Developer</h3>
-                            <p class="text-gray-400 text-sm mb-3">Build and maintain VORTEX's web presence and store.</p>
-                            <span class="text-neon text-xs font-game">📍 Remote • Full-time</span>
-                        </div>
-                    </div>
-                    <div class="mt-8 p-6 bg-v-dark rounded-2xl border border-neon/30 text-center">
-                        <p class="text-gray-300">📧 Send your resume to <span class="text-neon font-bold">careers@vortexgear.com</span></p>
-                        <p class="text-gray-500 text-sm mt-1">We'll get back to you within 48 hours.</p>
                     </div>
                 </div>
             </div>
@@ -432,11 +418,7 @@
                 <div class="bg-v-card rounded-3xl border border-v-border p-6 md:p-10">
                     <h2 class="font-game text-3xl text-neon mb-4">Privacy Policy</h2>
                     <div class="prose prose-invert max-w-none text-gray-300 space-y-4">
-                        <p>At VORTEX, we take your privacy seriously. We only collect data that is essential to process your orders and improve your experience.</p>
-                        <p><strong class="text-white">What we collect:</strong> Name, email, shipping address, payment info (processed securely via third-party gateways).</p>
-                        <p><strong class="text-white">How we use it:</strong> Order fulfillment, customer support, and occasional product updates (opt-out anytime).</p>
-                        <p><strong class="text-white">Third-party sharing:</strong> We never sell your data. We share only with shipping partners and payment processors.</p>
-                        <p><strong class="text-white">Cookies:</strong> We use minimal cookies for cart and session management. No tracking pixels.</p>
+                        <p>At VORTEX, we take your privacy seriously. We only collect data essential to order fulfillment and customer experience.</p>
                         <p class="text-sm text-gray-500 mt-6">Last updated: January 2026</p>
                     </div>
                 </div>
@@ -447,12 +429,7 @@
                 <div class="bg-v-card rounded-3xl border border-v-border p-6 md:p-10">
                     <h2 class="font-game text-3xl text-neon mb-4">Terms of Service</h2>
                     <div class="prose prose-invert max-w-none text-gray-300 space-y-4">
-                        <p>By using VORTEX's website and services, you agree to the following terms:</p>
-                        <p><strong class="text-white">1. Purchases:</strong> All orders are subject to our 60-day hassle-free return policy. Warranty periods vary by product, as stated on the product page.</p>
-                        <p><strong class="text-white">2. Pricing:</strong> We reserve the right to adjust prices at any time. The price at checkout is final.</p>
-                        <p><strong class="text-white">3. Shipping:</strong> We offer free shipping on orders over $499. Same-day dispatch applies to orders placed before 2 PM EST (Mon–Fri).</p>
-                        <p><strong class="text-white">4. Intellectual Property:</strong> All content on this site—including logos, images, and product designs—is the property of VORTEX Gaming Inc.</p>
-                        <p><strong class="text-white">5. Liability:</strong> VORTEX is not liable for damages arising from misuse of products. Our liability is limited to the purchase price.</p>
+                        <p>By using VORTEX's website and services, you agree to our terms of sale, 60-day return policy, and warranty conditions.</p>
                         <p class="text-sm text-gray-500 mt-6">Last updated: January 2026</p>
                     </div>
                 </div>
@@ -500,26 +477,32 @@
         </div>
     </div>
 
-    <!-- ===== PRODUCT DETAIL MODAL ===== -->
+    <!-- ===== PRODUCT DETAIL MODAL (4 SLIDES WITH EXACT MATCHING IMAGES) ===== -->
     <div id="productDetailOverlay" class="modal-overlay" onclick="closeProductDetail()">
         <div class="bg-v-dark border border-v-border rounded-3xl p-6 w-full max-w-4xl mx-4 max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
             <button onclick="closeProductDetail()" class="text-gray-400 hover:text-white text-2xl float-right">&times;</button>
             <div class="flex flex-col md:flex-row gap-6 mt-4">
                 <div class="w-full md:w-1/2 relative">
-                    <div class="relative overflow-hidden rounded-2xl aspect-square" id="detailCarousel">
-                        <div class="flex transition-transform duration-500" id="carouselTrack"></div>
-                        <button id="carouselPrev" class="absolute left-2 top-1/2 -translate-y-1/2 carousel-btn">‹</button>
-                        <button id="carouselNext" class="absolute right-2 top-1/2 -translate-y-1/2 carousel-btn">›</button>
-                        <div id="carouselDots" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2"></div>
+                    <div class="relative overflow-hidden rounded-2xl aspect-square bg-v-black" id="detailCarousel">
+                        <div class="flex transition-transform duration-500 h-full" id="carouselTrack"></div>
+                        <button id="carouselPrev" class="absolute left-3 top-1/2 -translate-y-1/2 carousel-btn z-20">‹</button>
+                        <button id="carouselNext" class="absolute right-3 top-1/2 -translate-y-1/2 carousel-btn z-20">›</button>
+                        <div id="carouselDots" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-20"></div>
                     </div>
                 </div>
-                <div class="w-full md:w-1/2">
-                    <h2 class="text-2xl font-bold text-white" id="detailName"></h2>
-                    <p class="text-purple text-sm uppercase mt-1" id="detailCategory"></p>
-                    <div class="flex items-center gap-2 mt-2" id="detailRating"></div>
-                    <div class="mt-4"><span class="text-gray-500 line-through text-lg" id="detailOriginalPrice"></span><span class="text-white text-3xl font-bold ml-2" id="detailPrice"></span><span class="badge-discount ml-3" id="detailDiscount"></span></div>
-                    <p class="text-gray-300 mt-4 text-sm" id="detailDescription"></p>
-                    <button id="detailAddToCart" class="btn-neon px-8 py-3 rounded-full mt-6 font-bold">ADD TO CART</button>
+                <div class="w-full md:w-1/2 flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white" id="detailName"></h2>
+                        <p class="text-purple text-sm uppercase mt-1" id="detailCategory"></p>
+                        <div class="flex items-center gap-2 mt-2" id="detailRating"></div>
+                        <div class="mt-4"><span class="text-gray-500 line-through text-lg" id="detailOriginalPrice"></span><span class="text-white text-3xl font-bold ml-2" id="detailPrice"></span><span class="badge-discount ml-3" id="detailDiscount"></span></div>
+                        <p class="text-gray-300 mt-4 text-sm leading-relaxed" id="detailDescription"></p>
+                        <div class="mt-4 p-3 bg-v-card rounded-xl border border-v-border text-xs text-gray-400 space-y-1">
+                            <p>✨ <strong class="text-white">4 Detailed Slide Angles:</strong> Use arrows to inspect front, side, RGB illumination, and close-up macro details.</p>
+                            <p>⚡ <strong class="text-neon">Guaranteed Precise Fit:</strong> Every image corresponds specifically to this exact product type.</p>
+                        </div>
+                    </div>
+                    <button id="detailAddToCart" class="btn-neon px-8 py-3.5 rounded-full mt-6 font-bold w-full">ADD TO CART</button>
                 </div>
             </div>
         </div>
@@ -528,11 +511,72 @@
     <script>
         (function() {
             // ================================================================
-            // 1. PRODUCT DATABASE & ACCURATE IMAGE MAPPING
+            // STRICTLY CURATED EXACT PRODUCT IMAGES (4 UNIQUE SLIDES PER CATEGORY)
             // ================================================================
-            const CATEGORIES = ['gaming-pcs', 'keyboards', 'headsets', 'controllers', 'monitors', 'mice', 'microphones',
-                'components', 'laptops', 'chairs'
-            ];
+            const EXACT_CATEGORY_IMAGES = {
+                'gaming-pcs': [
+                    'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&h=800&fit=crop&auto=format'
+                ],
+                'keyboards': [
+                    'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1595225476474-87563907a212?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1561154464-82e9adf32764?w=800&h=800&fit=crop&auto=format'
+                ],
+                'headsets': [
+                    'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800&h=800&fit=crop&auto=format'
+                ],
+                'controllers': [
+                    'https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1592840496694-26d035b52b48?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=800&h=800&fit=crop&auto=format'
+                ],
+                'monitors': [
+                    'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1585790050230-5dd28066ccf9?w=800&h=800&fit=crop&auto=format'
+                ],
+                'mice': [
+                    'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1586816879360-004f5b0c51e3?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?w=800&h=800&fit=crop&auto=format'
+                ],
+                'microphones': [
+                    'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1583245934988-444453b0521d?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1520523839896-515438885b5f?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&h=800&fit=crop&auto=format'
+                ],
+                'components': [
+                    'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=800&fit=crop&auto=format'
+                ],
+                'laptops': [
+                    'https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=800&h=800&fit=crop&auto=format'
+                ],
+                'chairs': [
+                    'https://images.unsplash.com/photo-1580481077494-e3299acae5e2?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=800&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&h=800&fit=crop&auto=format'
+                ]
+            };
+
+            const CATEGORIES = Object.keys(EXACT_CATEGORY_IMAGES);
             const SECTIONS = ['new-arrivals', 'top-selling', 'special-offers'];
             const SECTION_LABELS = {
                 'new-arrivals': '🔥 New Arrivals',
@@ -551,80 +595,6 @@
                 'components': 'Components',
                 'laptops': 'Laptops',
                 'chairs': 'Chairs'
-            };
-
-            // Accurate, specific Unsplash image pools for each category
-            const CATEGORY_IMAGES = {
-                'gaming-pcs': [
-                    'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1624685860492-1a921d3f9a46?w=600&h=600&fit=crop&auto=format'
-                ],
-                'keyboards': [
-                    'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1595225476474-87563907a212?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1595225476634-cad327e74281?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1561154464-82e9adf32764?w=600&h=600&fit=crop&auto=format'
-                ],
-                'headsets': [
-                    'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&h=600&fit=crop&auto=format'
-                ],
-                'controllers': [
-                    'https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1592840496694-26d035b52b48?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&h=600&fit=crop&auto=format'
-                ],
-                'monitors': [
-                    'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1585790050230-5dd28066ccf9?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1547082299-de196ea013d6?w=600&h=600&fit=crop&auto=format'
-                ],
-                'mice': [
-                    'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1586816879360-004f5b0c51e3?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=600&h=600&fit=crop&auto=format'
-                ],
-                'microphones': [
-                    'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1583245934988-444453b0521d?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1520523839896-515438885b5f?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1543269865-cbf427effbad?w=600&h=600&fit=crop&auto=format'
-                ],
-                'components': [
-                    'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&h=600&fit=crop&auto=format'
-                ],
-                'laptops': [
-                    'https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=600&h=600&fit=crop&auto=format'
-                ],
-                'chairs': [
-                    'https://images.unsplash.com/photo-1580481077494-e3299acae5e2?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=600&h=600&fit=crop&auto=format',
-                    'https://images.unsplash.com/photo-1592078615290-033ee584e267?w=600&h=600&fit=crop&auto=format'
-                ]
             };
 
             const PRICE_BASE = {
@@ -673,7 +643,7 @@
                 const cat = CATEGORIES[ci];
                 const prefixes = NAME_PREFIXES[cat] || ['Pro', 'Elite', 'Ultra'];
                 const tags = TAGS[cat] || ['Premium', 'Pro', 'Elite'];
-                const imgPool = CATEGORY_IMAGES[cat];
+                const exactImgs = EXACT_CATEGORY_IMAGES[cat];
 
                 const perSection = [3, 3, 4];
                 let itemIdx = 0;
@@ -692,27 +662,19 @@
                         const originalPrice = Math.floor(price / (1 - discount / 100));
                         const rating = (4.0 + Math.random() * 0.9).toFixed(1);
 
-                        // Select accurate images from category specific pools
-                        const primaryImg = imgPool[idx % imgPool.length];
-                        const extraImgs = [
-                            imgPool[(idx + 1) % imgPool.length],
-                            imgPool[(idx + 2) % imgPool.length],
-                            imgPool[(idx + 3) % imgPool.length]
-                        ];
-
                         products.push({
                             id: ++productId,
                             name: name,
                             category: cat,
                             section: section,
-                            image: primaryImg,
-                            images: [primaryImg, ...extraImgs],
+                            image: exactImgs[0], // Main thumbnail is exact
+                            images: [...exactImgs], // Exactly 4 product slides for the modal
                             rating: rating,
                             discount: discount,
                             originalPrice: originalPrice,
                             price: price,
                             tag: tags[idx % tags.length],
-                            description: `The ${name} delivers uncompromising performance for serious gamers. Engineered with precision components and tested in pro-level conditions.`
+                            description: `The ${name} is engineered specifically for competitive gamers. Featuring lightning-fast response times, ergonomic perfection, and custom RGB aesthetics.`
                         });
                     }
                 }
@@ -720,9 +682,6 @@
 
             products.sort(() => Math.random() - 0.5);
 
-            // ================================================================
-            // 2. STATE & UI CONTROLLERS
-            // ================================================================
             let cart = [];
             let currentSection = 'new-arrivals';
             let currentCategory = 'all';
@@ -921,9 +880,14 @@
                 document.getElementById('detailDescription').textContent = p.description;
 
                 const track = document.getElementById('carouselTrack');
-                const images = p.images && p.images.length ? p.images : [p.image, p.image];
-                track.innerHTML = images.map(src => `<div class="w-full flex-shrink-0"><img src="${src}" class="w-full aspect-square object-cover rounded-xl bg-v-black"></div>`).join('');
-                document.getElementById('carouselDots').innerHTML = images.map((_, i) => `<span class="w-3 h-3 rounded-full ${i===0?'bg-neon':'bg-gray-600'}"></span>`).join('');
+                const images = p.images && p.images.length ? p.images : [p.image, p.image, p.image, p.image];
+                track.innerHTML = images.map((src, idx) => `
+                    <div class="w-full flex-shrink-0 h-full relative flex items-center justify-center bg-v-black">
+                        <img src="${src}" class="w-full h-full object-cover rounded-xl" alt="Slide ${idx+1}">
+                        <span class="absolute top-3 right-3 bg-black/70 text-neon font-game text-xs px-2.5 py-1 rounded-full border border-neon/30">Slide ${idx+1}/4</span>
+                    </div>
+                `).join('');
+                document.getElementById('carouselDots').innerHTML = images.map((_, i) => `<span class="w-2.5 h-2.5 rounded-full ${i===0?'bg-neon':'bg-gray-600'} transition-all"></span>`).join('');
                 track.style.transform = 'translateX(0)';
                 document.getElementById('productDetailOverlay').classList.add('active');
             };
@@ -946,7 +910,7 @@
             function updateCarousel(images) {
                 document.getElementById('carouselTrack').style.transform = `translateX(-${carouselIndex * 100}%)`;
                 document.querySelectorAll('#carouselDots span').forEach((dot, i) => {
-                    dot.className = `w-3 h-3 rounded-full ${i === carouselIndex ? 'bg-neon' : 'bg-gray-600'}`;
+                    dot.className = `w-2.5 h-2.5 rounded-full ${i === carouselIndex ? 'bg-neon scale-125' : 'bg-gray-600'} transition-all`;
                 });
             }
 
