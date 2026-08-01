@@ -1,1145 +1,897 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VORTEX| Premium Gaming PCs & Peripherals</title>
-    <script src="https://cdn.tailwindcss.com">
-    </script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'neon-blue': '#00e5ff',
-                        'neon-purple': '#b44dff',
-                        'neon-green': '#00ff88',
-                        'neon-pink': '#ff2d78',
-                        'dark-bg': '#06060c',
-                        'dark-card': '#0d0d1a',
-                        'dark-card2': '#111122',
-                        'dark-border': '#1a1a2e',
-                        'dark-hover': '#161630',
-                    },
-                    fontFamily: {
-                        'orbitron': ['Orbitron', 'sans-serif'],
-                        'inter': ['Inter', 'sans-serif'],
-                    },
-                    animation: {
-                        'glow-pulse': 'glowPulse 2s ease-in-out infinite',
-                        'float': 'float 3s ease-in-out infinite',
-                        'slide-in-right': 'slideInRight 0.3s ease-out',
-                        'slide-out-right': 'slideOutRight 0.3s ease-in',
-                        'fade-in': 'fadeIn 0.3s ease-out',
-                        'badge-pop': 'badgePop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-                        'scan-line': 'scanLine 8s linear infinite',
-                    },
-                    keyframes: {
-                        glowPulse: {
-                            '0%, 100%': { boxShadow: '0 0 20px rgba(0, 229, 255, 0.4), 0 0 60px rgba(0, 229, 255, 0.1)' },
-                            '50%': { boxShadow: '0 0 35px rgba(0, 229, 255, 0.7), 0 0 100px rgba(0, 229, 255, 0.25)' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-15px)' },
-                        },
-                        slideInRight: {
-                            '0%': { transform: 'translateX(100%)', opacity: '0' },
-                            '100%': { transform: 'translateX(0)', opacity: '1' },
-                        },
-                        slideOutRight: {
-                            '0%': { transform: 'translateX(0)', opacity: '1' },
-                            '100%': { transform: 'translateX(100%)', opacity: '0' },
-                        },
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
-                        },
-                        badgePop: {
-                            '0%': { transform: 'scale(0.5)', opacity: '0' },
-                            '60%': { transform: 'scale(1.2)', opacity: '1' },
-                            '100%': { transform: 'scale(1)', opacity: '1' },
-                        },
-                        scanLine: {
-                            '0%': { backgroundPosition: '0% 0%' },
-                            '100%': { backgroundPosition: '0% 200%' },
-                        },
-                    },
-                },
-            },
-        };
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --neon-blue: #00e5ff;
-            --neon-purple: #b44dff;
-            --neon-green: #00ff88;
-            --neon-pink: #ff2d78;
-        }
-
-        * {
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #06060c;
-            overflow-x: hidden;
-        }
-        .font-orbitron {
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0a0a14;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1a1a35;
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #2a2a50;
-        }
-
-        /* Neon glow text */
-        .neon-text-blue {
-            text-shadow: 0 0 10px rgba(0, 229, 255, 0.6), 0 0 30px rgba(0, 229, 255, 0.3), 0 0 60px rgba(0, 229, 255, 0.15);
-        }
-        .neon-text-purple {
-            text-shadow: 0 0 10px rgba(180, 77, 255, 0.6), 0 0 30px rgba(180, 77, 255, 0.3);
-        }
-        .neon-text-green {
-            text-shadow: 0 0 10px rgba(0, 255, 136, 0.6), 0 0 30px rgba(0, 255, 136, 0.3);
-        }
-
-        /* Neon border */
-        .neon-border-blue {
-            box-shadow: 0 0 10px rgba(0, 229, 255, 0.3), inset 0 0 10px rgba(0, 229, 255, 0.05);
-            border-color: rgba(0, 229, 255, 0.4);
-        }
-        .neon-border-purple {
-            box-shadow: 0 0 10px rgba(180, 77, 255, 0.3), inset 0 0 10px rgba(180, 77, 255, 0.05);
-            border-color: rgba(180, 77, 255, 0.4);
-        }
-
-        /* Glow button */
-        .btn-glow-blue {
-            box-shadow: 0 0 15px rgba(0, 229, 255, 0.35), 0 0 40px rgba(0, 229, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        .btn-glow-blue:hover {
-            box-shadow: 0 0 25px rgba(0, 229, 255, 0.6), 0 0 70px rgba(0, 229, 255, 0.25);
-            transform: translateY(-2px);
-        }
-        .btn-glow-purple {
-            box-shadow: 0 0 15px rgba(180, 77, 255, 0.35), 0 0 40px rgba(180, 77, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        .btn-glow-purple:hover {
-            box-shadow: 0 0 25px rgba(180, 77, 255, 0.6), 0 0 70px rgba(180, 77, 255, 0.25);
-            transform: translateY(-2px);
-        }
-
-        /* Card hover */
-        .card-hover {
-            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1.2);
-        }
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 229, 255, 0.1);
-            border-color: rgba(0, 229, 255, 0.3);
-        }
-
-        /* Grid background */
-        .grid-bg {
-            background-image:
-                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
-
-        /* Hero scan line effect */
-        .hero-scan::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: repeating-linear-gradient(0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(0, 229, 255, 0.008) 2px,
-                    rgba(0, 229, 255, 0.008) 4px);
-            pointer-events: none;
-            animation: scanLine 8s linear infinite;
-        }
-
-        /* Cart badge animation */
-        .cart-badge-pop {
-            animation: badgePop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        /* Toast */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 9999;
-            animation: slideInRight 0.3s ease-out, fadeOut 0.3s ease-in 2.5s forwards;
-        }
-        @keyframes fadeOut {
-            to {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-        }
-
-        /* Overlay */
-        .overlay {
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(4px);
-        }
-
-        /* Input focus */
-        input:focus,
-        select:focus {
-            outline: none;
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
-        }
-
-        /* RGB border animation for hero */
-        @keyframes rgbBorder {
-            0% {
-                border-color: #00e5ff;
-            }
-            33% {
-                border-color: #b44dff;
-            }
-            66% {
-                border-color: #ff2d78;
-            }
-            100% {
-                border-color: #00e5ff;
-            }
-        }
-        .rgb-border-anim {
-            animation: rgbBorder 4s linear infinite;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>VORTEX — Elite Gaming Hardware</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --bg:#05060a;
+      --panel:#0b0d12;
+      --muted:#9aa3b2;
+      --neon-blue:#00d0ff;
+      --neon-purple:#9b5cff;
+      --accent-gradient: linear-gradient(90deg,var(--neon-blue),var(--neon-purple));
+    }
+    html,body{height:100%}
+    body{
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(155,92,255,0.06), transparent 8%),
+                  radial-gradient(1000px 500px at 90% 90%, rgba(0,208,255,0.04), transparent 8%),
+                  var(--bg);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    /* Neon text */
+    .neon {
+      color: #eafcff;
+      text-shadow: 0 0 6px rgba(0,208,255,0.18), 0 0 18px rgba(155,92,255,0.08);
+    }
+    /* subtle glass panels */
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.04);
+      box-shadow: 0 6px 30px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+    /* cart drawer */
+    .drawer {
+      transform: translateX(110%);
+      transition: transform .32s cubic-bezier(.2,.9,.2,1);
+    }
+    .drawer.open { transform: translateX(0%); }
+    /* modal */
+    .modal { display:none; }
+    .modal.open { display:flex; }
+    /* product image hover */
+    .prod-img { transition: transform .35s ease, box-shadow .35s ease; }
+    .prod-card:hover .prod-img { transform: translateY(-6px) scale(1.02); box-shadow: 0 12px 40px rgba(0,0,0,0.6); }
+    /* rating stars */
+    .star { color: #ffd166; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.6)); }
+    /* responsive tweaks */
+    @media (max-width: 1024px){
+      aside { display:none; }
+      main { margin-left: 0 !important; padding: 1.25rem; }
+    }
+    /* badge */
+    .badge {
+      background: linear-gradient(90deg,#00d0ff,#9b5cff);
+      color:#041022;
+      font-weight:700;
+      padding: .12rem .5rem;
+      border-radius: 999px;
+      font-size: .75rem;
+      box-shadow: 0 6px 18px rgba(155,92,255,0.12);
+    }
+    /* subtle animated gradient border for hero */
+    .hero-border {
+      background: linear-gradient(90deg, rgba(0,208,255,0.06), rgba(155,92,255,0.06));
+      border-radius: 14px;
+      padding: 1px;
+    }
+  </style>
 </head>
-<body class="text-gray-200 antialiased">
+<body>
 
-    <!-- ==================== HEADER / NAVIGATION ==================== -->
-    <header class="sticky top-0 z-50 bg-dark-bg/90 backdrop-blur-xl border-b border-dark-border shadow-lg shadow-black/30">
-        <!-- Top bar -->
-        <div class="bg-gradient-to-r from-neon-blue/10 via-neon-purple/10 to-neon-pink/10 px-4 py-1.5 text-center text-xs text-gray-400 font-medium tracking-wider">
-            ⚡ Free Shipping on orders over $199 | 🔥 Black Friday Deals Live Now | 💰 Buy Now, Pay Later with Klarna
+  <!-- Top header -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass backdrop-blur-md px-6 py-3 flex items-center justify-between border-b border-white/5">
+    <div class="flex items-center gap-4">
+      <button id="menu-toggle" class="lg:hidden p-2 rounded-md text-gray-200 hover:bg-white/2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-md bg-gradient-to-br from-[#071428] to-[#0b0f1a] flex items-center justify-center border border-white/5">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 12h18" stroke="#00d0ff" stroke-width="1.6" stroke-linecap="round"/><path d="M12 3v18" stroke="#9b5cff" stroke-width="1.6" stroke-linecap="round"/></svg>
         </div>
+        <div>
+          <div class="text-lg font-extrabold neon">VORTEX</div>
+          <div class="text-xs text-gray-400 -mt-1">Elite Gaming Hardware</div>
+        </div>
+      </a>
+    </div>
 
-        <!-- Main nav -->
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
-            <!-- Logo -->
-            <a href="#" class="flex items-center gap-2 flex-shrink-0 group">
-                <div class="w-10 h-10 bg-gradient-to-br from-neon-blue to-neon-purple rounded-lg flex items-center justify-center shadow-lg shadow-neon-blue/30 group-hover:shadow-neon-blue/60 transition-all duration-300">
-                    <i class="fa-solid fa-bolt text-white text-xl"></i>
-                </div>
-                <span class="font-orbitron text-xl sm:text-2xl font-bold tracking-wider">
-                    <span class="text-white">NEXUS</span><span class="text-neon-blue neon-text-blue">GEAR</span>
-                </span>
-            </a>
+    <div class="flex-1 max-w-2xl mx-6">
+      <div class="relative">
+        <input id="searchInput" type="search" placeholder="Search gaming PCs, GPUs, headsets, keyboards..." class="w-full rounded-full py-3 pl-4 pr-12 bg-[#071022] border border-white/5 text-sm text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#00d0ff]/30" />
+        <button id="searchBtn" class="absolute right-1 top-1/2 -translate-y-1/2 px-3 py-2 rounded-full bg-gradient-to-r from-[#00d0ff] to-[#9b5cff] text-black text-sm font-semibold">Search</button>
+      </div>
+    </div>
 
-            <!-- Search bar (desktop) -->
-            <div class="hidden lg:flex flex-1 max-w-lg relative">
-                <input type="text" id="searchInput" placeholder="Search gaming gear, PCs, components..."
-                class="w-full bg-dark-card2 border border-dark-border rounded-full py-2.5 pl-5 pr-12 text-sm text-gray-200 placeholder-gray-500 focus:border-neon-blue focus:shadow-lg focus:shadow-neon-blue/10 transition-all duration-300">
-                <button class="absolute right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 bg-neon-blue/20 hover:bg-neon-blue/40 rounded-full flex items-center justify-center transition-all duration-300 group">
-                    <i class="fa-solid fa-magnifying-glass text-neon-blue group-hover:text-white transition-colors text-sm"></i>
-                </button>
-                <!-- Search dropdown -->
-                <div id="searchDropdown" class="absolute top-full mt-2 w-full bg-dark-card2 border border-dark-border rounded-xl shadow-2xl shadow-black/50 hidden overflow-hidden z-50 max-h-80 overflow-y-auto"></div>
-            </div>
+    <div class="flex items-center gap-4">
+      <button id="accountBtn" class="p-2 rounded-md hover:bg-white/2 text-gray-200" title="Account">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#cfefff"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M5.121 17.804A9 9 0 1118.88 6.196 9 9 0 015.12 17.804z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      </button>
 
-            <!-- Right actions -->
-            <div class="flex items-center gap-2 sm:gap-4 flex-shrink-0">
-                <!-- Currency -->
-                <select id="currencySelect" class="hidden sm:block bg-dark-card2 border border-dark-border rounded-lg px-2 py-2 text-xs text-gray-300 cursor-pointer hover:border-neon-blue/50 transition-colors">
-                    <option value="USD">🇺🇸 USD $</option>
-                    <option value="EUR">🇪🇺 EUR €</option>
-                    <option value="GBP">🇬🇧 GBP £</option>
-                    <option value="INR">🇮🇳 INR ₹</option>
-                </select>
+      <button id="cartBtn" class="relative p-2 rounded-md hover:bg-white/2 text-gray-200" title="Cart">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#cfefff"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M3 3h2l.4 2M7 13h10l4-8H5.4"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M16 21a1 1 0 11-2 0 1 1 0 012 0zM8 21a1 1 0 11-2 0 1 1 0 012 0z"/></svg>
+        <span id="cartCount" class="absolute -top-2 -right-2 badge">0</span>
+      </button>
+    </div>
+  </header>
 
-                <!-- Account -->
-                <button class="hidden sm:flex items-center gap-1.5 text-gray-400 hover:text-neon-blue transition-colors duration-300 text-sm px-2 py-2">
-                    <i class="fa-regular fa-circle-user text-lg"></i>
-                    <span class="hidden lg:inline">Account</span>
-                </button>
+  <!-- Layout -->
+  <div class="pt-20 max-w-[1400px] mx-auto px-4">
 
-                <!-- Wishlist -->
-                <button class="hidden sm:flex items-center gap-1.5 text-gray-400 hover:text-neon-pink transition-colors duration-300 text-sm px-2 py-2 relative">
-                    <i class="fa-regular fa-heart text-lg"></i>
-                    <span class="absolute -top-1 -right-1 w-4 h-4 bg-neon-pink text-white text-[10px] rounded-full flex items-center justify-center font-bold">3</span>
-                </button>
+    <div class="flex gap-6">
 
-                <!-- Cart -->
-                <button id="cartBtn" class="relative flex items-center gap-1.5 text-gray-300 hover:text-neon-blue transition-colors duration-300 px-3 py-2 rounded-lg hover:bg-dark-hover">
-                    <i class="fa-solid fa-bag-shopping text-lg"></i>
-                    <span id="cartCount" class="absolute -top-1 -right-0 w-5 h-5 bg-neon-blue text-dark-bg text-[11px] rounded-full flex items-center justify-center font-bold cart-badge-pop hidden">0</span>
-                    <span class="hidden lg:inline text-sm font-medium">Cart</span>
-                </button>
-
-                <!-- Mobile menu toggle -->
-                <button id="mobileMenuBtn" class="lg:hidden text-gray-300 hover:text-neon-blue transition-colors p-2">
-                    <i class="fa-solid fa-bars text-xl"></i>
-                </button>
-            </div>
+      <!-- Sidebar -->
+      <aside id="sidebar" class="w-64 hidden lg:block sticky top-20 self-start glass p-4 rounded-xl border border-white/5">
+        <h3 class="text-sm text-gray-300 uppercase tracking-wider mb-3">Categories</h3>
+        <nav class="space-y-2">
+          <button class="cat-btn w-full text-left py-2 px-3 rounded-md hover:bg-white/2 flex items-center justify-between" data-cat="all">
+            <span>All Products</span><span class="text-xs text-gray-400">•</span>
+          </button>
+          <button class="cat-btn w-full text-left py-2 px-3 rounded-md hover:bg-white/2 flex items-center justify-between" data-cat="prebuilt">
+            <span>Prebuilt Gaming PCs</span><span class="text-xs text-gray-400">PCs</span>
+          </button>
+          <button class="cat-btn w-full text-left py-2 px-3 rounded-md hover:bg-white/2 flex items-center justify-between" data-cat="graphics">
+            <span>Graphics Cards</span><span class="text-xs text-gray-400">GPU</span>
+          </button>
+          <button class="cat-btn w-full text-left py-2 px-3 rounded-md hover:bg-white/2 flex items-center justify-between" data-cat="memory">
+            <span>Desktop Memory</span><span class="text-xs text-gray-400">RAM</span>
+          </button>
+          <button class="cat-btn w-full text-left py-2 px-3 rounded-md hover:bg-white/2 flex items-center justify-between" data-cat="laptops">
+            <span>Gaming Laptops</span><span class="text-xs text-gray-400">Laptops</span>
+          </button>
+          <button class="cat-btn w-full text-left py-2 px-3 rounded-md hover:bg-white/2 flex items-center justify-between" data-cat="headsets">
+            <span>Gaming Headsets</span><span class="text-xs text-gray-400">Audio</span>
+          </button>
+          <button class="cat-btn w-full text-left py-2 px-3 rounded-md hover:bg-white/2 flex items-center justify-between" data-cat="keyboards">
+            <span>Keyboards</span><span class="text-xs text-gray-400">Peripherals</span>
+          </button>
+          <button class="cat-btn w-full text-left py-2 px-3 rounded-md hover:bg-white/2 flex items-center justify-between" data-cat="controllers">
+            <span>Controllers</span><span class="text-xs text-gray-400">Gamepads</span>
+          </button>
+          <button class="cat-btn w-full text-left py-2 px-3 rounded-md hover:bg-white/2 flex items-center justify-between" data-cat="monitors">
+            <span>Monitors</span><span class="text-xs text-gray-400">Displays</span>
+          </button>
+          <button class="cat-btn w-full text-left py-2 px-3 rounded-md hover:bg-white/2 flex items-center justify-between" data-cat="mouse">
+            <span>Mouse</span><span class="text-xs text-gray-400">Mice</span>
+          </button>
+          <button class="cat-btn w-full text-left py-2 px-3 rounded-md hover:bg-white/2 flex items-center justify-between" data-cat="microphones">
+            <span>Microphones</span><span class="text-xs text-gray-400">Mics</span>
+          </button>
+          <button class="cat-btn w-full text-left py-2 px-3 rounded-md hover:bg-white/2 flex items-center justify-between" data-cat="parts">
+            <span>Parts & Accessories</span><span class="text-xs text-gray-400">Parts</span>
+          </button>
         </nav>
+      </aside>
 
-        <!-- Category nav (desktop) -->
-        <div class="hidden lg:block border-t border-dark-border bg-dark-card/60 backdrop-blur-md">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-1 overflow-x-auto py-2">
-                <a href="#gaming-pcs" class="whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-neon-blue hover:bg-dark-hover transition-all duration-300">🖥️ Gaming PCs</a>
-                <a href="#components" class="whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-neon-purple hover:bg-dark-hover transition-all duration-300">⚡ Components</a>
-                <a href="#monitors" class="whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-neon-green hover:bg-dark-hover transition-all duration-300">🖥️ Monitors</a>
-                <a href="#keyboards" class="whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-neon-blue hover:bg-dark-hover transition-all duration-300">⌨️ Keyboards</a>
-                <a href="#mice" class="whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-neon-purple hover:bg-dark-hover transition-all duration-300">🖱️ Mice</a>
-                <a href="#headsets" class="whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-neon-pink hover:bg-dark-hover transition-all duration-300">🎧 Headsets</a>
-                <a href="#controllers" class="whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-neon-green hover:bg-dark-hover transition-all duration-300">🎮 Controllers</a>
-                <a href="#laptops" class="whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-neon-blue hover:bg-dark-hover transition-all duration-300">💻 Laptops</a>
-            </div>
-        </div>
+      <!-- Main -->
+      <main class="flex-1">
 
-        <!-- Mobile menu -->
-        <div id="mobileMenu" class="lg:hidden hidden border-t border-dark-border bg-dark-card2 px-4 py-4 space-y-2">
-            <div class="relative mb-3">
-                <input type="text" placeholder="Search..." class="w-full bg-dark-bg border border-dark-border rounded-full py-2.5 pl-4 pr-10 text-sm text-gray-200 placeholder-gray-500">
-                <button class="absolute right-2 top-1/2 -translate-y-1/2 text-neon-blue"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <!-- Hero -->
+        <section class="hero-border rounded-xl mb-8">
+          <div class="bg-[#071022] rounded-lg p-6 lg:p-10 flex flex-col lg:flex-row items-center gap-6">
+            <div class="flex-1">
+              <h1 class="text-4xl lg:text-5xl font-extrabold neon">VORTEX TITAN CHASSIS</h1>
+              <p class="mt-3 text-gray-300 max-w-xl">A high-end gaming chassis engineered for extreme cooling, RGB control, and uncompromised performance. Built for streamers and competitive gamers.</p>
+              <div class="mt-6 flex gap-3">
+                <a id="heroShop" href="#new-arrivals" class="px-6 py-3 rounded-full bg-gradient-to-r from-[#00d0ff] to-[#9b5cff] text-black font-semibold shadow-lg">Shop Now</a>
+                <a href="#special-offers" class="px-6 py-3 rounded-full border border-white/6 text-sm text-gray-200">Explore Offers</a>
+              </div>
+              <div class="mt-6 flex gap-4 items-center">
+                <div class="badge">Free Shipping</div>
+                <div class="text-sm text-gray-400">30-day returns • 24/7 support</div>
+              </div>
             </div>
-            <a href="#gaming-pcs" class="block px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-neon-blue hover:bg-dark-hover">🖥️ Gaming PCs</a>
-            <a href="#components" class="block px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-neon-purple hover:bg-dark-hover">⚡ Components</a>
-            <a href="#monitors" class="block px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-neon-green hover:bg-dark-hover">🖥️ Monitors</a>
-            <a href="#keyboards" class="block px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-neon-blue hover:bg-dark-hover">⌨️ Keyboards</a>
-            <a href="#mice" class="block px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-neon-purple hover:bg-dark-hover">🖱️ Mice</a>
-            <a href="#headsets" class="block px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-neon-pink hover:bg-dark-hover">🎧 Headsets</a>
-            <a href="#controllers" class="block px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-neon-green hover:bg-dark-hover">🎮 Controllers</a>
-        </div>
-    </header>
+            <div class="w-full lg:w-1/2">
+              <img src="https://images.unsplash.com/photo-1606813902843-9f2f6b1b4f6b?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=2b1b6d6b0f6b8f6b8f6b8f6b8f6b8f6b" alt="Gaming Chassis" class="w-full rounded-xl shadow-2xl">
+            </div>
+          </div>
+        </section>
 
-    <!-- ==================== HERO SECTION ==================== -->
-    <section class="relative overflow-hidden bg-dark-bg grid-bg hero-scan min-h-[500px] sm:min-h-[600px] lg:min-h-[700px] flex items-center">
-        <!-- Animated RGB orbs -->
-        <div class="absolute top-10 left-10 w-64 h-64 bg-neon-blue/10 rounded-full blur-[100px] animate-pulse"></div>
-        <div class="absolute bottom-10 right-10 w-80 h-80 bg-neon-purple/10 rounded-full blur-[120px] animate-pulse delay-1000"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-neon-pink/5 rounded-full blur-[150px]"></div>
+        <!-- Promotions -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <article class="glass p-4 rounded-xl border border-white/5 flex items-center gap-4">
+            <img src="https://images.unsplash.com/photo-1611078481239-7f2b0b9b6b6b?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=abc" alt="Graphics Cards" class="w-28 h-20 object-cover rounded-md">
+            <div>
+              <h4 class="font-bold neon">Graphics Cards</h4>
+              <p class="text-sm text-gray-300">Top-tier GPUs for 4K & ray tracing.</p>
+            </div>
+            <div class="ml-auto">
+              <a href="#graphics" class="text-sm badge">Shop GPUs</a>
+            </div>
+          </article>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center py-12 lg:py-0">
-                <!-- Text content -->
-                <div class="text-center lg:text-left space-y-6">
-                    <div class="inline-flex items-center gap-2 bg-neon-blue/10 border border-neon-blue/30 rounded-full px-4 py-1.5 text-neon-blue text-sm font-semibold tracking-wide">
-                        <span class="w-2 h-2 bg-neon-blue rounded-full animate-pulse"></span> NEW GENERATION
-                    </div>
-                    <h1 class="font-orbitron text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-tight">
-                        <span class="text-white">EXHALE THE</span><br>
-                        <span class="bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink bg-clip-text text-transparent neon-text-blue">SMOOTHNESS</span>
-                    </h1>
-                    <p class="text-gray-400 text-base sm:text-lg max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                        Dominate every frame with the all-new <strong class="text-white">Nexus Phantom X</strong> — engineered for elite gamers. Featuring liquid cooling, RGB sync, and next-gen GPU support.
-                    </p>
-                    <div class="flex flex-wrap gap-3 justify-center lg:justify-start">
-                        <button class="btn-glow-blue bg-gradient-to-r from-neon-blue to-cyan-500 text-dark-bg font-bold px-8 py-3.5 rounded-full text-base hover:scale-105 transition-transform duration-300 font-orbitron tracking-wider">
-                            SHOP NOW <i class="fa-solid fa-arrow-right ml-2"></i>
-                        </button>
-                        <button class="border-2 border-neon-purple/50 text-neon-purple font-semibold px-8 py-3.5 rounded-full text-base hover:bg-neon-purple/10 hover:border-neon-purple transition-all duration-300 font-orbitron tracking-wider">
-                            BUILD YOURS <i class="fa-solid fa-screwdriver-wrench ml-2"></i>
-                        </button>
-                    </div>
-                    <!-- Trust badges -->
-                    <div class="flex flex-wrap gap-3 justify-center lg:justify-start pt-2">
-                        <span class="bg-dark-card2 border border-dark-border rounded-full px-3 py-1.5 text-xs text-gray-400 flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-neon-green"></i> Price Guarantee</span>
-                        <span class="bg-dark-card2 border border-dark-border rounded-full px-3 py-1.5 text-xs text-gray-400 flex items-center gap-1.5"><i class="fa-solid fa-rotate-left text-neon-blue"></i> 90-Day Return</span>
-                        <span class="bg-dark-card2 border border-dark-border rounded-full px-3 py-1.5 text-xs text-gray-400 flex items-center gap-1.5"><i class="fa-solid fa-truck-fast text-neon-purple"></i> Free Shipping</span>
-                        <span class="bg-dark-card2 border border-dark-border rounded-full px-3 py-1.5 text-xs text-gray-400 flex items-center gap-1.5"><i class="fa-solid fa-clock text-neon-pink"></i> Buy Now Pay Later</span>
-                    </div>
-                </div>
-                <!-- Hero visual -->
-                <div class="relative flex justify-center lg:justify-end">
-                    <div class="relative w-72 h-72 sm:w-96 sm:h-96 lg:w-[450px] lg:h-[450px] rounded-3xl bg-gradient-to-br from-dark-card2 via-dark-card to-dark-bg border-2 border-dark-border rgb-border-anim flex items-center justify-center overflow-hidden shadow-2xl shadow-black/60">
-                        <!-- Simulated chassis -->
-                        <div class="absolute inset-4 rounded-2xl bg-gradient-to-br from-neon-blue/5 to-neon-purple/10 border border-white/5 flex items-center justify-center">
-                            <div class="text-center">
-                                <i class="fa-solid fa-computer text-7xl sm:text-8xl lg:text-9xl text-neon-blue/40 animate-float"></i>
-                                <div class="mt-4 font-orbitron text-neon-blue neon-text-blue text-sm sm:text-base tracking-widest">PHANTOM X</div>
-                            </div>
-                        </div>
-                        <!-- RGB strips -->
-                        <div class="absolute top-0 left-4 right-4 h-1 bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink rounded-full opacity-70"></div>
-                        <div class="absolute bottom-0 left-4 right-4 h-1 bg-gradient-to-r from-neon-pink via-neon-purple to-neon-blue rounded-full opacity-70"></div>
-                        <div class="absolute left-0 top-4 bottom-4 w-1 bg-gradient-to-b from-neon-blue to-neon-purple rounded-full opacity-50"></div>
-                        <div class="absolute right-0 top-4 bottom-4 w-1 bg-gradient-to-b from-neon-purple to-neon-pink rounded-full opacity-50"></div>
-                        <!-- Glow points -->
-                        <div class="absolute top-8 right-8 w-3 h-3 bg-neon-blue rounded-full shadow-lg shadow-neon-blue animate-pulse"></div>
-                        <div class="absolute bottom-10 left-6 w-3 h-3 bg-neon-purple rounded-full shadow-lg shadow-neon-purple animate-pulse delay-300"></div>
-                        <div class="absolute top-1/2 right-10 w-2 h-2 bg-neon-green rounded-full shadow-lg shadow-neon-green animate-pulse delay-700"></div>
-                    </div>
-                </div>
+          <article class="glass p-4 rounded-xl border border-white/5 flex items-center gap-4">
+            <img src="https://images.unsplash.com/photo-1587202372775-6f6b6b6b6b6b?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=def" alt="Desktop Memory" class="w-28 h-20 object-cover rounded-md">
+            <div>
+              <h4 class="font-bold neon">Desktop Memory</h4>
+              <p class="text-sm text-gray-300">High-frequency RAM kits for low latency.</p>
             </div>
-        </div>
-    </section>
+            <div class="ml-auto">
+              <a href="#memory" class="text-sm badge">Shop RAM</a>
+            </div>
+          </article>
 
-    <!-- ==================== FEATURED CATEGORIES ==================== -->
-    <section class="py-16 bg-dark-bg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-10">
-                <h2 class="font-orbitron text-3xl sm:text-4xl font-bold text-white">FEATURED <span class="text-neon-blue neon-text-blue">SERIES</span></h2>
-                <p class="text-gray-500 mt-2">Engineered for victory</p>
+          <article class="glass p-4 rounded-xl border border-white/5 flex items-center gap-4">
+            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=ghi" alt="Gaming Laptops" class="w-28 h-20 object-cover rounded-md">
+            <div>
+              <h4 class="font-bold neon">Gaming Laptops</h4>
+              <p class="text-sm text-gray-300">Portable powerhouses for gaming on the go.</p>
             </div>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Card 1 -->
-                <div class="card-hover bg-dark-card2 border border-dark-border rounded-2xl overflow-hidden group cursor-pointer">
-                    <div class="h-48 bg-gradient-to-br from-red-900/40 via-dark-card2 to-orange-900/30 flex items-center justify-center relative overflow-hidden">
-                        <i class="fa-solid fa-microchip text-7xl text-red-500/50 group-hover:scale-110 transition-transform duration-500"></i>
-                        <div class="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded-full">HOT</div>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-orbitron text-lg font-bold text-white group-hover:text-neon-pink transition-colors">Radeon RX 7900 Series</h3>
-                        <p class="text-gray-500 text-sm mt-1">Next-gen AMD RDNA™ 3 architecture</p>
-                        <span class="inline-block mt-3 text-neon-pink font-bold">From $899</span>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="card-hover bg-dark-card2 border border-dark-border rounded-2xl overflow-hidden group cursor-pointer">
-                    <div class="h-48 bg-gradient-to-br from-purple-900/40 via-dark-card2 to-neon-purple/20 flex items-center justify-center relative overflow-hidden">
-                        <i class="fa-solid fa-memory text-7xl text-purple-500/50 group-hover:scale-110 transition-transform duration-500"></i>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-orbitron text-lg font-bold text-white group-hover:text-neon-purple transition-colors">Dominator RGB RAM</h3>
-                        <p class="text-gray-500 text-sm mt-1">DDR5 64GB Kit @ 6400MHz</p>
-                        <span class="inline-block mt-3 text-neon-purple font-bold">From $249</span>
-                    </div>
-                </div>
-                <!-- Card 3 -->
-                <div class="card-hover bg-dark-card2 border border-dark-border rounded-2xl overflow-hidden group cursor-pointer sm:col-span-2 lg:col-span-1">
-                    <div class="h-48 bg-gradient-to-br from-cyan-900/40 via-dark-card2 to-neon-blue/20 flex items-center justify-center relative overflow-hidden">
-                        <i class="fa-solid fa-laptop text-7xl text-cyan-500/50 group-hover:scale-110 transition-transform duration-500"></i>
-                        <div class="absolute top-3 right-3 bg-neon-green text-dark-bg text-xs font-bold px-2.5 py-1 rounded-full">NEW</div>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-orbitron text-lg font-bold text-white group-hover:text-neon-blue transition-colors">Nexus Blade Pro Laptop</h3>
-                        <p class="text-gray-500 text-sm mt-1">RTX 4090 • i9-14900HX • 240Hz</p>
-                        <span class="inline-block mt-3 text-neon-blue font-bold">From $2,499</span>
-                    </div>
-                </div>
+            <div class="ml-auto">
+              <a href="#laptops" class="text-sm badge">Shop Laptops</a>
             </div>
-        </div>
-    </section>
+          </article>
+        </section>
 
-    <!-- ==================== NEW ARRIVALS ==================== -->
-    <section id="new-arrivals" class="py-16 bg-dark-card/40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between mb-8">
-                <div>
-                    <h2 class="font-orbitron text-2xl sm:text-3xl font-bold text-white">🔥 NEW <span class="text-neon-blue neon-text-blue">ARRIVALS</span></h2>
-                    <p class="text-gray-500 text-sm mt-1">Fresh gear, just dropped</p>
-                </div>
-                <a href="#" class="text-neon-blue hover:text-white text-sm font-semibold transition-colors hidden sm:flex items-center gap-1">View All <i class="fa-solid fa-chevron-right text-xs"></i></a>
-            </div>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" id="newArrivalsGrid">
-                <!-- Dynamically filled by JS -->
-            </div>
-        </div>
-    </section>
+        <!-- New Arrivals -->
+        <section id="new-arrivals" class="mb-10">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-2xl font-bold neon">New Arrivals</h2>
+            <div class="text-sm text-gray-400">Latest prebuilt rigs & components</div>
+          </div>
 
-    <!-- ==================== SPECIAL OFFERS ==================== -->
-    <section id="special-offers" class="py-16 bg-dark-bg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between mb-8">
-                <div>
-                    <h2 class="font-orbitron text-2xl sm:text-3xl font-bold text-white">💰 SPECIAL <span class="text-neon-green neon-text-green">OFFERS</span></h2>
-                    <p class="text-gray-500 text-sm mt-1">Limited time deals</p>
-                </div>
-                <a href="#" class="text-neon-green hover:text-white text-sm font-semibold transition-colors hidden sm:flex items-center gap-1">View All <i class="fa-solid fa-chevron-right text-xs"></i></a>
-            </div>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" id="specialOffersGrid">
-                <!-- Dynamically filled by JS -->
-            </div>
-        </div>
-    </section>
+          <div id="gridNew" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+        </section>
 
-    <!-- ==================== PC COMPONENTS SECTION ==================== -->
-    <section id="components" class="py-16 bg-dark-card/40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-10">
-                <h2 class="font-orbitron text-2xl sm:text-3xl font-bold text-white">⚡ PC <span class="text-neon-purple neon-text-purple">COMPONENTS</span></h2>
-                <p class="text-gray-500 text-sm mt-1">Performance & budget picks</p>
-            </div>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" id="componentsGrid">
-                <!-- Dynamically filled by JS -->
-            </div>
-        </div>
-    </section>
+        <!-- Special Offers -->
+        <section id="special-offers" class="mb-16">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-2xl font-bold neon">Special Offers</h2>
+            <div class="text-sm text-gray-400">Limited-time discounts & bundles</div>
+          </div>
 
-    <!-- ==================== GAMING GEAR SECTION ==================== -->
-    <section id="gaming-gear" class="py-16 bg-dark-bg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-10">
-                <h2 class="font-orbitron text-2xl sm:text-3xl font-bold text-white">🎯 GAMING <span class="text-neon-pink neon-text-blue">GEAR</span></h2>
-                <p class="text-gray-500 text-sm mt-1">Headsets, keyboards, mice & more</p>
-            </div>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" id="gamingGearGrid">
-                <!-- Dynamically filled by JS -->
-            </div>
-        </div>
-    </section>
+          <div id="gridOffers" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+        </section>
 
-    <!-- ==================== FOOTER ==================== -->
-    <footer class="bg-dark-card2 border-t border-dark-border pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Newsletter -->
-            <div class="bg-gradient-to-r from-dark-card via-dark-card2 to-dark-card border border-dark-border rounded-2xl p-8 sm:p-10 mb-12 text-center relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-40 h-40 bg-neon-blue/5 rounded-full blur-[60px]"></div>
-                <div class="absolute bottom-0 left-0 w-40 h-40 bg-neon-purple/5 rounded-full blur-[60px]"></div>
-                <div class="relative z-10">
-                    <h3 class="font-orbitron text-2xl sm:text-3xl font-bold text-white mb-3">GET THE LATEST <span class="text-neon-blue neon-text-blue">DEALS</span></h3>
-                    <p class="text-gray-400 mb-6 max-w-md mx-auto">Subscribe for exclusive discounts, early access to drops, and gaming news.</p>
-                    <form id="newsletterForm" class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
-                        <input type="email" placeholder="Enter your email" required
-                        class="flex-1 bg-dark-bg border border-dark-border rounded-full py-3 px-5 text-gray-200 placeholder-gray-500 focus:border-neon-blue transition-all duration-300">
-                        <button type="submit" class="btn-glow-blue bg-neon-blue text-dark-bg font-bold px-8 py-3 rounded-full font-orbitron tracking-wider hover:scale-105 transition-transform duration-300 whitespace-nowrap">
-                            SUBSCRIBE <i class="fa-solid fa-paper-plane ml-1"></i>
-                        </button>
-                    </form>
-                    <p id="newsletterMsg" class="text-neon-green text-sm mt-3 hidden">✅ Subscribed successfully!</p>
-                </div>
-            </div>
+        <!-- Footer CTA -->
+        <section class="glass p-6 rounded-xl text-center border border-white/5 mb-12">
+          <h3 class="text-xl font-bold neon">Ready to build your dream rig?</h3>
+          <p class="text-gray-300 mt-2">Explore curated prebuilt systems and hand-picked components.</p>
+          <div class="mt-4 flex justify-center gap-3">
+            <a href="#new-arrivals" class="px-6 py-3 rounded-full bg-gradient-to-r from-[#00d0ff] to-[#9b5cff] text-black font-semibold">Browse New Arrivals</a>
+            <a href="#special-offers" class="px-6 py-3 rounded-full border border-white/6 text-gray-200">See Offers</a>
+          </div>
+        </section>
 
-            <!-- Main footer grid -->
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
-                <!-- Brand -->
-                <div class="lg:col-span-1">
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="w-9 h-9 bg-gradient-to-br from-neon-blue to-neon-purple rounded-lg flex items-center justify-center">
-                            <i class="fa-solid fa-bolt text-white"></i>
-                        </div>
-                        <span class="font-orbitron text-lg font-bold text-white">NEXUS<span class="text-neon-blue">GEAR</span></span>
-                    </div>
-                    <p class="text-gray-500 text-sm leading-relaxed mb-4">Premium gaming hardware engineered for competitive players and enthusiasts worldwide.</p>
-                    <div class="flex gap-3">
-                        <a href="#" class="w-9 h-9 bg-dark-border rounded-full flex items-center justify-center text-gray-400 hover:text-neon-blue hover:bg-neon-blue/10 transition-all"><i class="fa-brands fa-discord"></i></a>
-                        <a href="#" class="w-9 h-9 bg-dark-border rounded-full flex items-center justify-center text-gray-400 hover:text-neon-purple hover:bg-neon-purple/10 transition-all"><i class="fa-brands fa-twitch"></i></a>
-                        <a href="#" class="w-9 h-9 bg-dark-border rounded-full flex items-center justify-center text-gray-400 hover:text-neon-pink hover:bg-neon-pink/10 transition-all"><i class="fa-brands fa-youtube"></i></a>
-                        <a href="#" class="w-9 h-9 bg-dark-border rounded-full flex items-center justify-center text-gray-400 hover:text-neon-blue hover:bg-neon-blue/10 transition-all"><i class="fa-brands fa-x-twitter"></i></a>
-                        <a href="#" class="w-9 h-9 bg-dark-border rounded-full flex items-center justify-center text-gray-400 hover:text-neon-green hover:bg-neon-green/10 transition-all"><i class="fa-brands fa-instagram"></i></a>
-                    </div>
-                </div>
-                <!-- Quick Links -->
-                <div>
-                    <h4 class="font-orbitron text-sm font-bold text-white mb-4 tracking-wider">QUICK LINKS</h4>
-                    <ul class="space-y-2.5 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-neon-blue transition-colors">Gaming PCs</a></li>
-                        <li><a href="#" class="hover:text-neon-blue transition-colors">Components</a></li>
-                        <li><a href="#" class="hover:text-neon-blue transition-colors">Peripherals</a></li>
-                        <li><a href="#" class="hover:text-neon-blue transition-colors">Monitors</a></li>
-                        <li><a href="#" class="hover:text-neon-blue transition-colors">Sale / Deals</a></li>
-                    </ul>
-                </div>
-                <!-- Support -->
-                <div>
-                    <h4 class="font-orbitron text-sm font-bold text-white mb-4 tracking-wider">SUPPORT</h4>
-                    <ul class="space-y-2.5 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-neon-purple transition-colors">Contact Us</a></li>
-                        <li><a href="#" class="hover:text-neon-purple transition-colors">Shipping Info</a></li>
-                        <li><a href="#" class="hover:text-neon-purple transition-colors">Returns & Warranty</a></li>
-                        <li><a href="#" class="hover:text-neon-purple transition-colors">FAQs</a></li>
-                        <li><a href="#" class="hover:text-neon-purple transition-colors">Track Order</a></li>
-                    </ul>
-                </div>
-                <!-- Blog / Reviews -->
-                <div>
-                    <h4 class="font-orbitron text-sm font-bold text-white mb-4 tracking-wider">EXPERT REVIEWS</h4>
-                    <div class="space-y-3">
-                        <a href="#" class="block bg-dark-card border border-dark-border rounded-lg p-3 hover:border-neon-blue/30 transition-all group">
-                            <p class="text-xs text-gray-400 group-hover:text-neon-blue transition-colors line-clamp-2">"The Nexus Phantom X is the best prebuilt gaming PC we've tested in 2024..."</p>
-                            <span class="text-[10px] text-neon-blue mt-1 block">— PC Gamer Magazine</span>
-                        </a>
-                        <a href="#" class="block bg-dark-card border border-dark-border rounded-lg p-3 hover:border-neon-purple/30 transition-all group">
-                            <p class="text-xs text-gray-400 group-hover:text-neon-purple transition-colors line-clamp-2">"Incredible build quality and thermal performance. A true contender..."</p>
-                            <span class="text-[10px] text-neon-purple mt-1 block">— Gamers Nexus</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
+      </main>
+    </div>
+  </div>
 
-            <!-- Bottom bar -->
-            <div class="border-t border-dark-border pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-600">
-                <p>© 2026 NexusGear Inc. All rights reserved.</p>
-                <div class="flex gap-4">
-                    <a href="#" class="hover:text-gray-400 transition-colors">Privacy Policy</a>
-                    <a href="#" class="hover:text-gray-400 transition-colors">Terms of Service</a>
-                    <a href="#" class="hover:text-gray-400 transition-colors">Cookie Settings</a>
-                </div>
-                <div class="flex gap-2 text-lg text-gray-500">
-                    <i class="fa-brands fa-cc-visa"></i>
-                    <i class="fa-brands fa-cc-mastercard"></i>
-                    <i class="fa-brands fa-cc-amex"></i>
-                    <i class="fa-brands fa-cc-paypal"></i>
-                    <span class="text-[10px] font-bold tracking-wider">KLARNA</span>
-                    <span class="text-[10px] font-bold tracking-wider">AFTERPAY</span>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- ==================== CART DRAWER ==================== -->
-    <div id="cartOverlay" class="overlay fixed inset-0 z-[100] hidden transition-opacity duration-300" onclick="closeCart()"></div>
-    <div id="cartDrawer" class="fixed top-0 right-0 h-full w-full sm:w-[420px] z-[110] bg-dark-card2 border-l border-dark-border shadow-2xl shadow-black/60 transform translate-x-full transition-transform duration-350 ease-out flex flex-col">
-        <!-- Cart header -->
-        <div class="flex items-center justify-between p-5 border-b border-dark-border">
-            <h3 class="font-orbitron text-lg font-bold text-white flex items-center gap-2">
-                <i class="fa-solid fa-bag-shopping text-neon-blue"></i> YOUR CART
-                <span id="cartDrawerCount" class="text-sm text-gray-400 font-inter">(0)</span>
-            </h3>
-            <button onclick="closeCart()" class="w-8 h-8 rounded-full bg-dark-border flex items-center justify-center text-gray-400 hover:text-white hover:bg-neon-pink/20 transition-all">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-        </div>
-        <!-- Cart items -->
-        <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-5 space-y-4">
-            <div class="text-center py-16 text-gray-500">
-                <i class="fa-solid fa-cart-shopping text-5xl mb-4 opacity-30"></i>
-                <p class="text-lg font-medium">Your cart is empty</p>
-                <p class="text-sm mt-1">Add some epic gear to get started!</p>
-            </div>
-        </div>
-        <!-- Cart footer -->
-        <div id="cartFooter" class="border-t border-dark-border p-5 space-y-3 hidden">
-            <div class="flex justify-between text-sm text-gray-400">
-                <span>Subtotal</span>
-                <span id="cartSubtotal" class="text-white font-semibold">$0.00</span>
-            </div>
-            <div class="flex justify-between text-sm text-gray-400">
-                <span>Shipping</span>
-                <span class="text-neon-green">FREE</span>
-            </div>
-            <div class="flex justify-between text-sm text-gray-400">
-                <span>Tax</span>
-                <span id="cartTax">$0.00</span>
-            </div>
-            <div class="flex justify-between text-lg font-bold text-white pt-2 border-t border-dark-border">
-                <span>Total</span>
-                <span id="cartTotal" class="text-neon-blue neon-text-blue">$0.00</span>
-            </div>
-            <button onclick="openCheckout()" class="btn-glow-blue w-full bg-neon-blue text-dark-bg font-bold py-3.5 rounded-full font-orbitron tracking-wider hover:scale-105 transition-transform duration-300 text-base">
-                CHECKOUT <i class="fa-solid fa-lock ml-2"></i>
-            </button>
-            <div class="flex justify-center gap-3 text-xs text-gray-500 pt-1">
-                <span>💳 Card</span><span>📱 UPI</span><span>🏦 Net Banking</span><span>💰 Klarna</span>
-            </div>
-        </div>
+  <!-- Cart Drawer -->
+  <aside id="cartDrawer" class="drawer fixed right-0 top-0 h-full w-full max-w-md bg-[#071022] border-l border-white/6 p-6 z-50">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-lg font-bold neon">Your Cart</h3>
+      <button id="closeCart" class="text-gray-300 hover:text-white">&times;</button>
     </div>
 
-    <!-- ==================== CHECKOUT MODAL ==================== -->
-    <div id="checkoutOverlay" class="overlay fixed inset-0 z-[120] hidden flex items-center justify-center p-4" onclick="closeCheckout()">
-        <div id="checkoutModal" class="bg-dark-card2 border border-dark-border rounded-2xl w-full max-w-lg p-6 sm:p-8 shadow-2xl shadow-black/60 max-h-[90vh] overflow-y-auto relative" onclick="event.stopPropagation()">
-            <button onclick="closeCheckout()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-dark-border flex items-center justify-center text-gray-400 hover:text-white transition-all">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <h3 class="font-orbitron text-xl font-bold text-white mb-6">💳 CHECKOUT</h3>
+    <div id="cartList" class="space-y-4 overflow-auto max-h-[60vh] pr-2"></div>
 
-            <!-- Order summary -->
-            <div class="bg-dark-card border border-dark-border rounded-xl p-4 mb-5">
-                <h4 class="text-sm font-semibold text-gray-300 mb-2">Order Summary</h4>
-                <div id="checkoutSummary" class="text-xs text-gray-400 space-y-1"></div>
-                <div class="flex justify-between font-bold text-white mt-3 pt-3 border-t border-dark-border">
-                    <span>Total</span>
-                    <span id="checkoutTotal" class="text-neon-blue">$0.00</span>
-                </div>
-            </div>
-
-            <!-- Payment method -->
-            <h4 class="text-sm font-semibold text-gray-300 mb-3">Payment Method</h4>
-            <div class="grid grid-cols-2 gap-2 mb-4" id="paymentMethods">
-                <button class="payment-method-btn border-2 border-neon-blue/40 bg-neon-blue/10 rounded-xl p-3 text-sm font-medium text-neon-blue flex items-center gap-2 justify-center transition-all" data-method="card">
-                    <i class="fa-regular fa-credit-card"></i> Credit/Debit Card
-                </button>
-                <button class="payment-method-btn border-2 border-dark-border rounded-xl p-3 text-sm font-medium text-gray-400 flex items-center gap-2 justify-center hover:border-neon-purple/40 transition-all" data-method="upi">
-                    <i class="fa-solid fa-mobile-screen"></i> UPI
-                </button>
-                <button class="payment-method-btn border-2 border-dark-border rounded-xl p-3 text-sm font-medium text-gray-400 flex items-center gap-2 justify-center hover:border-neon-green/40 transition-all" data-method="netbanking">
-                    <i class="fa-solid fa-building-columns"></i> Net Banking
-                </button>
-                <button class="payment-method-btn border-2 border-dark-border rounded-xl p-3 text-sm font-medium text-gray-400 flex items-center gap-2 justify-center hover:border-neon-pink/40 transition-all" data-method="bnpl">
-                    <i class="fa-solid fa-clock"></i> Klarna / Afterpay
-                </button>
-            </div>
-
-            <!-- Card form -->
-            <div id="cardForm" class="space-y-3">
-                <div>
-                    <label class="text-xs text-gray-500 block mb-1">Card Number</label>
-                    <input type="text" placeholder="1234 5678 9012 3456" class="w-full bg-dark-bg border border-dark-border rounded-lg py-2.5 px-4 text-sm text-gray-200 placeholder-gray-600 focus:border-neon-blue transition-all">
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="text-xs text-gray-500 block mb-1">Expiry</label>
-                        <input type="text" placeholder="MM/YY" class="w-full bg-dark-bg border border-dark-border rounded-lg py-2.5 px-4 text-sm text-gray-200 placeholder-gray-600 focus:border-neon-blue transition-all">
-                    </div>
-                    <div>
-                        <label class="text-xs text-gray-500 block mb-1">CVV</label>
-                        <input type="text" placeholder="123" class="w-full bg-dark-bg border border-dark-border rounded-lg py-2.5 px-4 text-sm text-gray-200 placeholder-gray-600 focus:border-neon-blue transition-all">
-                    </div>
-                </div>
-            </div>
-
-            <!-- UPI form -->
-            <div id="upiForm" class="space-y-3 hidden">
-                <label class="text-xs text-gray-500 block">UPI ID</label>
-                <input type="text" placeholder="yourname@upi" class="w-full bg-dark-bg border border-dark-border rounded-lg py-2.5 px-4 text-sm text-gray-200 placeholder-gray-600 focus:border-neon-purple transition-all">
-            </div>
-
-            <!-- Net Banking form -->
-            <div id="netbankingForm" class="space-y-3 hidden">
-                <label class="text-xs text-gray-500 block">Select Bank</label>
-                <select class="w-full bg-dark-bg border border-dark-border rounded-lg py-2.5 px-4 text-sm text-gray-200 focus:border-neon-green transition-all">
-                    <option>HDFC Bank</option>
-                    <option>ICICI Bank</option>
-                    <option>SBI</option>
-                    <option>Axis Bank</option>
-                    <option>Kotak Mahindra</option>
-                </select>
-            </div>
-
-            <!-- BNPL form -->
-            <div id="bnplForm" class="space-y-3 hidden">
-                <p class="text-sm text-gray-400">Choose your pay-later provider:</p>
-                <div class="flex gap-3">
-                    <button class="flex-1 border-2 border-dark-border rounded-xl p-3 text-sm font-bold text-gray-300 hover:border-neon-pink/40 transition-all">Klarna</button>
-                    <button class="flex-1 border-2 border-dark-border rounded-xl p-3 text-sm font-bold text-gray-300 hover:border-neon-green/40 transition-all">Afterpay</button>
-                </div>
-                <p class="text-xs text-gray-500">4 interest-free payments of <span id="bnplAmount">$0.00</span></p>
-            </div>
-
-            <button onclick="placeOrder()" class="btn-glow-purple w-full bg-neon-purple text-white font-bold py-3.5 rounded-full font-orbitron tracking-wider hover:scale-105 transition-transform duration-300 text-base mt-5">
-                PLACE ORDER <i class="fa-solid fa-check ml-2"></i>
-            </button>
-            <p class="text-xs text-gray-500 text-center mt-3">🔒 Secure checkout • 256-bit SSL encrypted</p>
-        </div>
+    <div class="mt-6 border-t border-white/6 pt-4">
+      <div class="flex items-center justify-between text-gray-300 mb-2">
+        <span>Subtotal</span>
+        <span id="subtotal">$0.00</span>
+      </div>
+      <div class="flex items-center justify-between text-gray-300 mb-4">
+        <span>Shipping</span>
+        <span id="shipping">$0.00</span>
+      </div>
+      <div class="flex items-center justify-between text-xl font-bold neon mb-4">
+        <span>Total</span>
+        <span id="grandTotal">$0.00</span>
+      </div>
+      <div class="flex gap-3">
+        <button id="checkoutOpen" class="flex-1 px-4 py-3 rounded-md bg-gradient-to-r from-[#00d0ff] to-[#9b5cff] text-black font-semibold">Checkout</button>
+        <button id="clearCart" class="px-4 py-3 rounded-md border border-white/6 text-gray-200">Clear</button>
+      </div>
     </div>
+  </aside>
 
-    <!-- ==================== TOAST CONTAINER ==================== -->
-    <div id="toastContainer"></div>
+  <!-- Checkout Modal -->
+  <div id="checkoutModal" class="modal fixed inset-0 items-center justify-center z-60 bg-black/70">
+    <div class="w-full max-w-lg p-6 glass rounded-xl border border-white/6">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-xl font-bold neon">Secure Checkout</h3>
+        <button id="closeModal" class="text-gray-300">&times;</button>
+      </div>
 
-    <script>
-        // ==================== PRODUCT DATA ====================
-        const allProducts = [
-            { id: 1, name: 'Nexus Phantom X Gaming PC', category: 'gaming-pcs', price: 2499, originalPrice: 2799,
-                rating: 4.9, reviews: 128, image: '🖥️', badge: 'BESTSELLER', badgeColor: 'neon-blue',
-                tag: 'RTX 4090 • i9-14900K • 64GB DDR5', inStock: true },
-            { id: 2, name: 'Nexus Stealth SFF PC', category: 'gaming-pcs', price: 1899, originalPrice: 2099, rating: 4.7,
-                reviews: 89, image: '💻', badge: 'COMPACT', badgeColor: 'neon-purple',
-                tag: 'RTX 4070 Ti • i7-14700K • 32GB', inStock: true },
-            { id: 3, name: 'Radeon RX 7900 XTX GPU', category: 'components', price: 999, originalPrice: 1099, rating: 4.8,
-                reviews: 256, image: '🎯', badge: 'HOT', badgeColor: 'neon-pink', tag: '24GB GDDR6 • RDNA 3',
-                inStock: true },
-            { id: 4, name: 'Dominator RGB DDR5 64GB', category: 'components', price: 249, originalPrice: 299, rating: 4.6,
-                reviews: 178, image: '🧩', badge: 'SALE', badgeColor: 'neon-green', tag: '6400MHz • CL32 • RGB Sync',
-                inStock: true },
-            { id: 5, name: 'Nexus UltraWide 34" Monitor', category: 'monitors', price: 799, originalPrice: 949, rating: 4.7,
-                reviews: 94, image: '🖥️', badge: 'NEW', badgeColor: 'neon-blue', tag: '3440×1440 • 175Hz • OLED',
-                inStock: true },
-            { id: 6, name: 'Nexus MechK70 Keyboard', category: 'keyboards', price: 179, originalPrice: 219, rating: 4.5,
-                reviews: 312, image: '⌨️', badge: 'SALE', badgeColor: 'neon-green', tag: 'Hot-Swappable • RGB • Wireless',
-                inStock: true },
-            { id: 7, name: 'Nexus Viper V3 Pro Mouse', category: 'mice', price: 129, originalPrice: 149, rating: 4.8,
-                reviews: 445, image: '🖱️', badge: 'TOP RATED', badgeColor: 'neon-purple',
-                tag: '26K DPI • 55g • Wireless', inStock: true },
-            { id: 8, name: 'Nexus Immerse Pro Headset', category: 'headsets', price: 199, originalPrice: 249, rating: 4.6,
-                reviews: 201, image: '🎧', badge: 'SALE', badgeColor: 'neon-pink', tag: 'Spatial Audio • ANC • 40h Batt',
-                inStock: true },
-            { id: 9, name: 'Nexus ForcePad Controller', category: 'controllers', price: 89, originalPrice: 109, rating: 4.4,
-                reviews: 167, image: '🎮', badge: 'VALUE', badgeColor: 'neon-green', tag: 'Hall Effect • Paddles • PC/PS5',
-                inStock: true },
-            { id: 10, name: 'Nexus Blade 16 Laptop', category: 'laptops', price: 2699, originalPrice: 2999, rating: 4.9,
-                reviews: 73, image: '💻', badge: 'PREMIUM', badgeColor: 'neon-blue', tag: 'RTX 4090 • 240Hz • 32GB',
-                inStock: true },
-            { id: 11, name: 'Samsung 990 Pro 2TB NVMe', category: 'components', price: 159, originalPrice: 189, rating: 4.8,
-                reviews: 520, image: '💾', badge: 'FAST', badgeColor: 'neon-blue', tag: '7450MB/s • PCIe 4.0 • M.2',
-                inStock: true },
-            { id: 12, name: 'Nexus RGB Mousepad XL', category: 'mice', price: 49, originalPrice: 69, rating: 4.3,
-                reviews: 389, image: '🟦', badge: 'SALE', badgeColor: 'neon-pink', tag: '900×400mm • RGB Edge • Micro',
-                inStock: false },
-        ];
+      <form id="checkoutForm" class="space-y-4">
+        <div>
+          <label class="text-sm text-gray-300">Payment Method</label>
+          <select id="payMethod" class="w-full mt-2 p-3 bg-[#071022] border border-white/6 rounded">
+            <option value="">Choose</option>
+            <option value="card">Card</option>
+            <option value="upi">UPI</option>
+            <option value="bnpl">Buy Now Pay Later</option>
+          </select>
+        </div>
 
-        // ==================== CART STATE ====================
-        let cart = [];
-        let currentPaymentMethod = 'card';
+        <div id="paymentFields" class="space-y-3"></div>
 
-        // Load cart from localStorage
-        function loadCart() {
-            const saved = localStorage.getItem('nexusGearCart');
-            if (saved) {
-                try { cart = JSON.parse(saved); } catch (e) { cart = []; }
-            }
+        <div class="flex items-center gap-3">
+          <input id="agree" type="checkbox" class="h-4 w-4" />
+          <label class="text-sm text-gray-300">I agree to the terms and confirm this is a mock payment for demo purposes.</label>
+        </div>
+
+        <div class="flex gap-3">
+          <button type="submit" class="flex-1 px-4 py-3 rounded-md bg-gradient-to-r from-[#00d0ff] to-[#9b5cff] text-black font-semibold">Pay Now</button>
+          <button type="button" id="cancelPay" class="px-4 py-3 rounded-md border border-white/6 text-gray-200">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-6 right-6 bg-[#071022] border border-white/6 px-4 py-3 rounded-md shadow-lg hidden z-70">
+    <div id="toastMsg" class="text-sm"></div>
+  </div>
+
+  <script>
+    /* -------------------------
+       Product Data (real images)
+       ------------------------- */
+    const PRODUCTS = [
+      // Prebuilt Gaming PCs (modeled after typical listings)
+      {
+        id: 'pc-1',
+        title: 'VORTEX Nova R1 - Ryzen 9 7900X / RTX 4090',
+        category: 'prebuilt',
+        price: 3999.00,
+        oldPrice: 4499.00,
+        discount: 11,
+        rating: 4.9,
+        img: 'https://images.unsplash.com/photo-1612831455544-9f6b6b6b6b6b?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=1',
+        tags: ['Best Seller','Prebuilt']
+      },
+      {
+        id: 'pc-2',
+        title: 'VORTEX Striker S - Intel i9-13900K / RTX 4080',
+        category: 'prebuilt',
+        price: 2799.00,
+        oldPrice: 3099.00,
+        discount: 9,
+        rating: 4.8,
+        img: 'https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=2',
+        tags: ['New']
+      },
+      {
+        id: 'pc-3',
+        title: 'VORTEX Stealth X - Ryzen 7 7800X / RTX 4070 Ti',
+        category: 'prebuilt',
+        price: 1899.00,
+        oldPrice: 2099.00,
+        discount: 10,
+        rating: 4.7,
+        img: 'https://images.unsplash.com/photo-1611078481239-7f2b0b9b6b6b?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=3',
+        tags: []
+      },
+
+      // Graphics Cards
+      {
+        id: 'gpu-1',
+        title: 'NVIDIA GeForce RTX 4090 Founders Edition',
+        category: 'graphics',
+        price: 1599.00,
+        oldPrice: 1799.00,
+        discount: 11,
+        rating: 4.9,
+        img: 'https://images.unsplash.com/photo-1611078481239-7f2b0b9b6b6b?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=4',
+        tags: ['Hot']
+      },
+      {
+        id: 'gpu-2',
+        title: 'AMD Radeon RX 7900 XTX',
+        category: 'graphics',
+        price: 999.00,
+        oldPrice: 1199.00,
+        discount: 16,
+        rating: 4.6,
+        img: 'https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=5',
+        tags: []
+      },
+
+      // Desktop Memory
+      {
+        id: 'ram-1',
+        title: 'Corsair Vengeance RGB Pro 32GB (2x16GB) DDR5 6000MHz',
+        category: 'memory',
+        price: 199.00,
+        oldPrice: 229.00,
+        discount: 13,
+        rating: 4.8,
+        img: 'https://images.unsplash.com/photo-1587202372775-6f6b6b6b6b6b?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=6',
+        tags: []
+      },
+
+      // Gaming Laptops
+      {
+        id: 'laptop-1',
+        title: 'VORTEX Blade 17 - RTX 4080 / i9 / 32GB',
+        category: 'laptops',
+        price: 2499.00,
+        oldPrice: 2699.00,
+        discount: 7,
+        rating: 4.7,
+        img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=7',
+        tags: ['Portable']
+      },
+
+      // Headsets, Keyboards, Controllers, Monitors, Mouse, Microphones, Parts
+      {
+        id: 'headset-1',
+        title: 'SteelSeries Arctis Nova Pro Wireless',
+        category: 'headsets',
+        price: 329.00,
+        oldPrice: 379.00,
+        discount: 13,
+        rating: 4.6,
+        img: 'https://images.unsplash.com/photo-1585386959984-a415522b6f3b?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=8',
+        tags: []
+      },
+      {
+        id: 'kb-1',
+        title: 'Razer Huntsman V2 Analog',
+        category: 'keyboards',
+        price: 199.00,
+        oldPrice: 229.00,
+        discount: 13,
+        rating: 4.5,
+        img: 'https://images.unsplash.com/photo-1611078481239-7f2b0b9b6b6b?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=9',
+        tags: []
+      },
+      {
+        id: 'mouse-1',
+        title: 'Logitech G Pro X Superlight',
+        category: 'mouse',
+        price: 149.00,
+        oldPrice: 169.00,
+        discount: 11,
+        rating: 4.8,
+        img: 'https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=10',
+        tags: []
+      },
+      {
+        id: 'mic-1',
+        title: 'Blue Yeti X USB Microphone',
+        category: 'microphones',
+        price: 129.00,
+        oldPrice: 149.00,
+        discount: 13,
+        rating: 4.6,
+        img: 'https://images.unsplash.com/photo-1585386959984-a415522b6f3b?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=11',
+        tags: []
+      },
+      {
+        id: 'monitor-1',
+        title: 'Alienware 34" Curved 144Hz WQHD',
+        category: 'monitors',
+        price: 799.00,
+        oldPrice: 899.00,
+        discount: 11,
+        rating: 4.7,
+        img: 'https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=12',
+        tags: []
+      },
+      {
+        id: 'part-1',
+        title: 'NZXT Kraken Z73 360mm AIO Cooler',
+        category: 'parts',
+        price: 229.00,
+        oldPrice: 259.00,
+        discount: 11,
+        rating: 4.6,
+        img: 'https://images.unsplash.com/photo-1612831455544-9f6b6b6b6b6b?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=13',
+        tags: []
+      }
+    ];
+
+    /* -------------------------
+       State
+       ------------------------- */
+    let CART = {}; // { productId: { qty, product } }
+
+    /* -------------------------
+       Utilities
+       ------------------------- */
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+    const format = (n) => n.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+
+    /* -------------------------
+       Render functions
+       ------------------------- */
+    function createProductCard(p){
+      const card = document.createElement('article');
+      card.className = 'prod-card glass p-4 rounded-xl border border-white/5 flex flex-col';
+      card.innerHTML = `
+        <div class="relative overflow-hidden rounded-md">
+          <img src="${p.img}" alt="${escapeHtml(p.title)}" class="prod-img w-full h-48 object-cover rounded-md">
+          ${p.discount ? `<div class="absolute top-3 left-3 badge">${p.discount}% OFF</div>` : ''}
+          ${p.tags && p.tags.length ? `<div class="absolute top-3 right-3 flex gap-2">${p.tags.map(t=>`<span class="text-xs px-2 py-1 bg-white/5 rounded">${t}</span>`).join('')}</div>` : ''}
+        </div>
+        <div class="mt-3 flex-1">
+          <h4 class="font-semibold text-sm">${escapeHtml(p.title)}</h4>
+          <div class="flex items-center gap-2 mt-2">
+            <div class="flex items-center">
+              ${renderStars(p.rating)}
+            </div>
+            <div class="text-xs text-gray-400 ml-auto">${p.rating.toFixed(1)}</div>
+          </div>
+          <div class="mt-3 flex items-baseline gap-3">
+            <div class="text-lg font-bold neon">$${format(p.price)}</div>
+            ${p.oldPrice ? `<div class="text-sm text-gray-400 line-through">$${format(p.oldPrice)}</div>` : ''}
+          </div>
+        </div>
+        <div class="mt-4 flex gap-2">
+          <button class="add-cart flex-1 px-3 py-2 rounded-md bg-gradient-to-r from-[#00d0ff] to-[#9b5cff] text-black font-semibold" data-id="${p.id}">Add to Cart</button>
+          <button class="view-btn px-3 py-2 rounded-md border border-white/6 text-gray-200" data-id="${p.id}">View</button>
+        </div>
+      `;
+      return card;
+    }
+
+    function renderStars(rating){
+      const full = Math.floor(rating);
+      const half = rating - full >= 0.5;
+      let html = '';
+      for(let i=0;i<full;i++) html += '<svg class="star h-4 w-4 inline-block" viewBox="0 0 20 20" fill="#ffd166" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.176 0l-3.37 2.448c-.784.57-1.838-.197-1.539-1.118l1.286-3.957a1 1 0 00-.364-1.118L2.063 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.957z"/></svg>';
+      if(half) html += '<svg class="star h-4 w-4 inline-block" viewBox="0 0 20 20" fill="#ffd166" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g"><stop offset="50%" stop-color="#ffd166"/><stop offset="50%" stop-color="#444"/></linearGradient></defs><path fill="url(#g)" d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.176 0l-3.37 2.448c-.784.57-1.838-.197-1.539-1.118l1.286-3.957a1 1 0 00-.364-1.118L2.063 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.957z"/></svg>';
+      for(let i=full + (half?1:0); i<5; i++) html += '<svg class="h-4 w-4 inline-block text-gray-600" viewBox="0 0 20 20" fill="#2b2f36" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.176 0l-3.37 2.448c-.784.57-1.838-.197-1.539-1.118l1.286-3.957a1 1 0 00-.364-1.118L2.063 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.957z"/></svg>';
+      return html;
+    }
+
+    function escapeHtml(text){
+      return text.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+    }
+
+    function populateGrids(){
+      const newGrid = $('#gridNew');
+      const offersGrid = $('#gridOffers');
+      newGrid.innerHTML = '';
+      offersGrid.innerHTML = '';
+
+      // New Arrivals: show prebuilt, laptops, headsets, keyboards
+      const newArrivals = PRODUCTS.filter(p => ['prebuilt','laptops','headsets','keyboards'].includes(p.category)).slice(0,8);
+      newArrivals.forEach(p => newGrid.appendChild(createProductCard(p)));
+
+      // Offers: show items with discount or parts
+      const offers = PRODUCTS.filter(p => p.discount && p.discount >= 10).slice(0,8);
+      offers.forEach(p => offersGrid.appendChild(createProductCard(p)));
+    }
+
+    /* -------------------------
+       Cart logic
+       ------------------------- */
+    function updateCartCount(){
+      const count = Object.values(CART).reduce((s,i)=>s+i.qty,0);
+      $('#cartCount').textContent = count;
+    }
+
+    function recalcTotals(){
+      const subtotal = Object.values(CART).reduce((s,i)=>s + i.qty * i.product.price, 0);
+      const shipping = subtotal > 0 ? 29.00 : 0.00;
+      const grand = subtotal + shipping;
+      $('#subtotal').textContent = `$${format(subtotal)}`;
+      $('#shipping').textContent = `$${format(shipping)}`;
+      $('#grandTotal').textContent = `$${format(grand)}`;
+    }
+
+    function renderCart(){
+      const list = $('#cartList');
+      list.innerHTML = '';
+      if(Object.keys(CART).length === 0){
+        list.innerHTML = '<div class="text-center text-gray-400 py-12">Your cart is empty. Add items to get started.</div>';
+        recalcTotals();
+        updateCartCount();
+        return;
+      }
+      for(const [id,entry] of Object.entries(CART)){
+        const p = entry.product;
+        const row = document.createElement('div');
+        row.className = 'flex items-center gap-3';
+        row.innerHTML = `
+          <img src="${p.img}" alt="${escapeHtml(p.title)}" class="w-16 h-12 object-cover rounded-md">
+          <div class="flex-1">
+            <div class="text-sm font-semibold">${escapeHtml(p.title)}</div>
+            <div class="text-xs text-gray-400">$${format(p.price)} each</div>
+            <div class="mt-2 flex items-center gap-2">
+              <button class="qty-btn px-2 py-1 rounded-md bg-white/5" data-id="${id}" data-op="dec">-</button>
+              <div class="px-3 py-1 bg-white/3 rounded-md">${entry.qty}</div>
+              <button class="qty-btn px-2 py-1 rounded-md bg-white/5" data-id="${id}" data-op="inc">+</button>
+              <button class="remove-btn ml-auto text-sm text-red-400" data-id="${id}">Remove</button>
+            </div>
+          </div>
+        `;
+        list.appendChild(row);
+      }
+      recalcTotals();
+      updateCartCount();
+    }
+
+    function addToCart(productId, qty=1){
+      const product = PRODUCTS.find(p=>p.id===productId);
+      if(!product) return;
+      if(CART[productId]) CART[productId].qty += qty;
+      else CART[productId] = { qty, product };
+      renderCart();
+      showToast(`${product.title} added to cart`);
+      openCart();
+    }
+
+    function removeFromCart(productId){
+      delete CART[productId];
+      renderCart();
+    }
+
+    function clearCart(){
+      CART = {};
+      renderCart();
+    }
+
+    /* -------------------------
+       UI interactions
+       ------------------------- */
+    document.addEventListener('click', (e)=>{
+      // Add to cart
+      if(e.target.closest('.add-cart')){
+        const id = e.target.closest('.add-cart').dataset.id;
+        addToCart(id,1);
+      }
+      // View (simple quick modal)
+      if(e.target.closest('.view-btn')){
+        const id = e.target.closest('.view-btn').dataset.id;
+        const p = PRODUCTS.find(x=>x.id===id);
+        if(p) {
+          showToast(`${p.title} — $${format(p.price)}`);
         }
-
-        function saveCart() {
-            localStorage.setItem('nexusGearCart', JSON.stringify(cart));
-            updateCartUI();
+      }
+      // Open cart
+      if(e.target.closest('#cartBtn')){
+        openCart();
+      }
+      // Close cart
+      if(e.target.closest('#closeCart')){
+        closeCart();
+      }
+      // Qty buttons
+      if(e.target.closest('.qty-btn')){
+        const btn = e.target.closest('.qty-btn');
+        const id = btn.dataset.id;
+        const op = btn.dataset.op;
+        if(CART[id]){
+          if(op==='inc') CART[id].qty += 1;
+          else CART[id].qty = Math.max(1, CART[id].qty - 1);
+          renderCart();
         }
+      }
+      // Remove
+      if(e.target.closest('.remove-btn')){
+        const id = e.target.closest('.remove-btn').dataset.id;
+        removeFromCart(id);
+      }
+      // Clear cart
+      if(e.target.closest('#clearCart')){
+        clearCart();
+      }
+      // Checkout open
+      if(e.target.closest('#checkoutOpen')){
+        openCheckout();
+      }
+      // Close modal
+      if(e.target.closest('#closeModal') || e.target.closest('#cancelPay')){
+        closeCheckout();
+      }
+      // Hero Shop Now
+      if(e.target.closest('#heroShop')){
+        document.querySelector('#new-arrivals').scrollIntoView({behavior:'smooth'});
+      }
+    });
 
-        function addToCart(productId) {
-            const product = allProducts.find(p => p.id === productId);
-            if (!product || !product.inStock) return;
-            const existing = cart.find(item => item.id === productId);
-            if (existing) {
-                existing.quantity += 1;
-            } else {
-                cart.push({ id: product.id, name: product.name, price: product.price, image: product.image,
-                    quantity: 1, inStock: product.inStock });
-            }
-            saveCart();
-            showToast(`✅ Added "${product.name}" to cart!`);
-            // Animate cart badge
-            const countEl = document.getElementById('cartCount');
-            countEl.classList.remove('cart-badge-pop');
-            void countEl.offsetWidth;
-            countEl.classList.add('cart-badge-pop');
+    // Search
+    $('#searchBtn').addEventListener('click', ()=>{
+      const q = $('#searchInput').value.trim().toLowerCase();
+      if(!q) {
+        populateGrids();
+        showToast('Showing all products');
+        return;
+      }
+      const results = PRODUCTS.filter(p => (p.title + ' ' + (p.tags||[]).join(' ')).toLowerCase().includes(q));
+      const grid = $('#gridNew');
+      grid.innerHTML = '';
+      if(results.length === 0){
+        grid.innerHTML = '<div class="text-gray-400">No products found.</div>';
+      } else {
+        results.forEach(p => grid.appendChild(createProductCard(p)));
+      }
+      showToast(`${results.length} result(s) for "${q}"`);
+    });
+
+    // Category filter
+    $$('.cat-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const cat = btn.dataset.cat;
+        if(cat === 'all'){
+          populateGrids();
+          showToast('Showing all products');
+          return;
         }
+        const filtered = PRODUCTS.filter(p => p.category === cat);
+        const grid = $('#gridNew');
+        grid.innerHTML = '';
+        if(filtered.length === 0) grid.innerHTML = '<div class="text-gray-400">No products in this category.</div>';
+        else filtered.forEach(p => grid.appendChild(createProductCard(p)));
+        showToast(`Filtered: ${btn.textContent.trim()}`);
+      });
+    });
 
-        function removeFromCart(productId) {
-            cart = cart.filter(item => item.id !== productId);
-            saveCart();
+    // Cart drawer open/close
+    function openCart(){
+      $('#cartDrawer').classList.add('open');
+      renderCart();
+    }
+    function closeCart(){
+      $('#cartDrawer').classList.remove('open');
+    }
+
+    // Checkout modal
+    function openCheckout(){
+      if(Object.keys(CART).length === 0){
+        showToast('Your cart is empty');
+        return;
+      }
+      $('#checkoutModal').classList.add('open');
+      $('#checkoutModal').style.display = 'flex';
+      populatePaymentFields();
+    }
+    function closeCheckout(){
+      $('#checkoutModal').classList.remove('open');
+      $('#checkoutModal').style.display = 'none';
+    }
+
+    // Payment fields dynamic
+    function populatePaymentFields(){
+      const container = $('#paymentFields');
+      container.innerHTML = '';
+      const method = $('#payMethod').value;
+      if(method === 'card'){
+        container.innerHTML = `
+          <div>
+            <label class="text-sm text-gray-300">Cardholder Name</label>
+            <input id="cardName" class="w-full mt-2 p-3 bg-[#071022] border border-white/6 rounded" placeholder="Name on card" />
+          </div>
+          <div>
+            <label class="text-sm text-gray-300">Card Number</label>
+            <input id="cardNumber" maxlength="19" class="w-full mt-2 p-3 bg-[#071022] border border-white/6 rounded" placeholder="1234 5678 9012 3456" />
+          </div>
+          <div class="flex gap-2">
+            <input id="cardExp" class="w-1/2 mt-2 p-3 bg-[#071022] border border-white/6 rounded" placeholder="MM/YY" />
+            <input id="cardCvv" class="w-1/2 mt-2 p-3 bg-[#071022] border border-white/6 rounded" placeholder="CVV" />
+          </div>
+        `;
+      } else if(method === 'upi'){
+        container.innerHTML = `
+          <div>
+            <label class="text-sm text-gray-300">UPI ID</label>
+            <input id="upiId" class="w-full mt-2 p-3 bg-[#071022] border border-white/6 rounded" placeholder="example@upi" />
+          </div>
+        `;
+      } else if(method === 'bnpl'){
+        container.innerHTML = `
+          <div>
+            <label class="text-sm text-gray-300">BNPL Provider</label>
+            <select id="bnplProvider" class="w-full mt-2 p-3 bg-[#071022] border border-white/6 rounded">
+              <option value="">Select Provider</option>
+              <option value="paylater">PayLater</option>
+              <option value="slice">Slice</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-sm text-gray-300">Mobile Number</label>
+            <input id="bnplPhone" class="w-full mt-2 p-3 bg-[#071022] border border-white/6 rounded" placeholder="+1 555 555 5555" />
+          </div>
+        `;
+      } else {
+        container.innerHTML = '<div class="text-sm text-gray-400">Select a payment method to continue.</div>';
+      }
+    }
+
+    $('#payMethod').addEventListener('change', populatePaymentFields);
+
+    // Checkout submit
+    $('#checkoutForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const method = $('#payMethod').value;
+      if(!method){
+        showToast('Please select a payment method');
+        return;
+      }
+      if(!$('#agree').checked){
+        showToast('Please agree to the terms');
+        return;
+      }
+      // Basic validation
+      if(method === 'card'){
+        const name = $('#cardName').value.trim();
+        const number = $('#cardNumber').value.replaceAll(' ','').trim();
+        const exp = $('#cardExp').value.trim();
+        const cvv = $('#cardCvv').value.trim();
+        if(!name || number.length < 12 || !exp || cvv.length < 3){
+          showToast('Please enter valid card details');
+          return;
         }
-
-        function updateQuantity(productId, delta) {
-            const item = cart.find(i => i.id === productId);
-            if (!item) return;
-            item.quantity += delta;
-            if (item.quantity <= 0) {
-                removeFromCart(productId);
-                return;
-            }
-            saveCart();
+      } else if(method === 'upi'){
+        const upi = $('#upiId').value.trim();
+        if(!upi || !upi.includes('@')){
+          showToast('Please enter a valid UPI ID');
+          return;
         }
-
-        function getCartTotal() {
-            return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      } else if(method === 'bnpl'){
+        const prov = $('#bnplProvider').value;
+        const phone = $('#bnplPhone').value.trim();
+        if(!prov || phone.length < 8){
+          showToast('Please complete BNPL details');
+          return;
         }
+      }
 
-        function getCartCount() {
-            return cart.reduce((sum, item) => sum + item.quantity, 0);
-        }
+      // Mock processing
+      showToast('Processing payment...', 2000);
+      setTimeout(()=>{
+        // success
+        const orderId = 'VX' + Math.floor(Math.random()*900000 + 100000);
+        showToast(`Payment successful — Order ${orderId}`, 5000);
+        clearCart();
+        closeCheckout();
+        closeCart();
+      }, 1600);
+    });
 
-        function updateCartUI() {
-            const count = getCartCount();
-            const countEl = document.getElementById('cartCount');
-            const drawerCountEl = document.getElementById('cartDrawerCount');
-            const cartFooter = document.getElementById('cartFooter');
-            const cartItemsContainer = document.getElementById('cartItemsContainer');
+    // Toast helper
+    let toastTimer;
+    function showToast(msg, duration=2200){
+      clearTimeout(toastTimer);
+      $('#toastMsg').textContent = msg;
+      $('#toast').classList.remove('hidden');
+      $('#toast').classList.add('block');
+      toastTimer = setTimeout(()=> {
+        $('#toast').classList.add('hidden');
+        $('#toast').classList.remove('block');
+      }, duration);
+    }
 
-            if (count > 0) {
-                countEl.textContent = count;
-                countEl.classList.remove('hidden');
-                drawerCountEl.textContent = `(${count})`;
-                cartFooter.classList.remove('hidden');
-            } else {
-                countEl.classList.add('hidden');
-                drawerCountEl.textContent = '(0)';
-                cartFooter.classList.add('hidden');
-            }
-
-            // Update cart drawer items
-            if (cart.length === 0) {
-                cartItemsContainer.innerHTML = `
-                    <div class="text-center py-16 text-gray-500">
-                        <i class="fa-solid fa-cart-shopping text-5xl mb-4 opacity-30"></i>
-                        <p class="text-lg font-medium">Your cart is empty</p>
-                        <p class="text-sm mt-1">Add some epic gear to get started!</p>
-                    </div>`;
-            } else {
-                cartItemsContainer.innerHTML = cart.map(item => `
-                    <div class="flex gap-3 bg-dark-card border border-dark-border rounded-xl p-3 group hover:border-neon-blue/30 transition-all">
-                        <div class="w-16 h-16 bg-dark-bg rounded-lg flex items-center justify-center text-3xl flex-shrink-0">${item.image}</div>
-                        <div class="flex-1 min-w-0">
-                            <h4 class="text-sm font-semibold text-white truncate">${item.name}</h4>
-                            <p class="text-neon-blue font-bold text-sm">$${item.price.toFixed(2)}</p>
-                            <div class="flex items-center gap-2 mt-1.5">
-                                <button onclick="updateQuantity(${item.id}, -1)" class="w-7 h-7 bg-dark-border rounded-full flex items-center justify-center text-xs text-gray-400 hover:text-white hover:bg-neon-pink/20 transition-all">−</button>
-                                <span class="text-sm font-bold text-white w-6 text-center">${item.quantity}</span>
-                                <button onclick="updateQuantity(${item.id}, 1)" class="w-7 h-7 bg-dark-border rounded-full flex items-center justify-center text-xs text-gray-400 hover:text-white hover:bg-neon-blue/20 transition-all">+</button>
-                            </div>
-                        </div>
-                        <button onclick="removeFromCart(${item.id})" class="text-gray-600 hover:text-neon-pink transition-colors self-start mt-1">
-                            <i class="fa-solid fa-trash-can text-sm"></i>
-                        </button>
-                    </div>
-                `).join('');
-            }
-
-            // Update totals
-            const subtotal = getCartTotal();
-            const tax = subtotal * 0.08;
-            const total = subtotal + tax;
-            document.getElementById('cartSubtotal').textContent = `$${subtotal.toFixed(2)}`;
-            document.getElementById('cartTax').textContent = `$${tax.toFixed(2)}`;
-            document.getElementById('cartTotal').textContent = `$${total.toFixed(2)}`;
-            document.getElementById('checkoutTotal').textContent = `$${total.toFixed(2)}`;
-            document.getElementById('bnplAmount').textContent = `$${(total / 4).toFixed(2)}`;
-
-            // Update checkout summary
-            const summaryEl = document.getElementById('checkoutSummary');
-            if (cart.length > 0) {
-                summaryEl.innerHTML = cart.map(item =>
-                    `<div class="flex justify-between"><span>${item.name} ×${item.quantity}</span><span>$${(item.price * item.quantity).toFixed(2)}</span></div>`
-                    ).join('');
-            }
-        }
-
-        // ==================== CART DRAWER ====================
-        function openCart() {
-            document.getElementById('cartDrawer').classList.remove('translate-x-full');
-            document.getElementById('cartOverlay').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-            updateCartUI();
-        }
-
-        function closeCart() {
-            document.getElementById('cartDrawer').classList.add('translate-x-full');
-            document.getElementById('cartOverlay').classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-
-        document.getElementById('cartBtn').addEventListener('click', openCart);
-        document.getElementById('cartOverlay').addEventListener('click', closeCart);
-
-        // ==================== CHECKOUT MODAL ====================
-        function openCheckout() {
-            updateCartUI();
-            document.getElementById('checkoutOverlay').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-            switchPaymentMethod('card');
-        }
-
-        function closeCheckout() {
-            document.getElementById('checkoutOverlay').classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-
-        function switchPaymentMethod(method) {
-            currentPaymentMethod = method;
-            document.querySelectorAll('.payment-method-btn').forEach(btn => {
-                btn.classList.remove('border-neon-blue/40', 'bg-neon-blue/10', 'text-neon-blue',
-                    'border-neon-purple/40', 'bg-neon-purple/10', 'text-neon-purple',
-                    'border-neon-green/40', 'bg-neon-green/10', 'text-neon-green',
-                    'border-neon-pink/40', 'bg-neon-pink/10', 'text-neon-pink');
-                btn.classList.add('border-dark-border', 'text-gray-400');
-            });
-            const activeBtn = document.querySelector(`[data-method="${method}"]`);
-            const colorMap = { card: 'neon-blue', upi: 'neon-purple', netbanking: 'neon-green', bnpl: 'neon-pink' };
-            const color = colorMap[method];
-            activeBtn.classList.remove('border-dark-border', 'text-gray-400');
-            activeBtn.classList.add(`border-${color}/40`, `bg-${color}/10`, `text-${color}`);
-
-            document.getElementById('cardForm').classList.add('hidden');
-            document.getElementById('upiForm').classList.add('hidden');
-            document.getElementById('netbankingForm').classList.add('hidden');
-            document.getElementById('bnplForm').classList.add('hidden');
-            if (method === 'card') document.getElementById('cardForm').classList.remove('hidden');
-            if (method === 'upi') document.getElementById('upiForm').classList.remove('hidden');
-            if (method === 'netbanking') document.getElementById('netbankingForm').classList.remove('hidden');
-            if (method === 'bnpl') document.getElementById('bnplForm').classList.remove('hidden');
-        }
-
-        document.querySelectorAll('.payment-method-btn').forEach(btn => {
-            btn.addEventListener('click', () => switchPaymentMethod(btn.dataset.method));
+    // Init
+    (function init(){
+      populateGrids();
+      renderCart();
+      // menu toggle for mobile: show sidebar as overlay
+      $('#menu-toggle').addEventListener('click', ()=>{
+        const sb = document.createElement('div');
+        sb.className = 'fixed inset-0 z-60 bg-black/70 flex';
+        sb.innerHTML = `<aside class="w-72 bg-[#071022] p-4 glass border-r border-white/6 overflow-auto">
+          <div class="flex items-center justify-between mb-4">
+            <div class="font-bold neon">VORTEX</div>
+            <button id="closeMobileMenu" class="text-gray-300">&times;</button>
+          </div>
+          <div class="space-y-2">
+            ${Array.from(document.querySelectorAll('.cat-btn')).map(b=>`<button class="mobile-cat w-full text-left py-2 px-3 rounded-md hover:bg-white/2" data-cat="${b.dataset.cat}">${b.textContent.trim()}</button>`).join('')}
+          </div>
+        </aside>`;
+        document.body.appendChild(sb);
+        sb.querySelector('#closeMobileMenu').addEventListener('click', ()=> sb.remove());
+        sb.querySelectorAll('.mobile-cat').forEach(btn=>{
+          btn.addEventListener('click', ()=>{
+            const cat = btn.dataset.cat;
+            document.body.removeChild(sb);
+            document.querySelector(`.cat-btn[data-cat="${cat}"]`).click();
+          });
         });
+      });
 
-        function placeOrder() {
-            if (cart.length === 0) {
-                showToast('⚠️ Your cart is empty!');
-                return;
-            }
-            const total = getCartTotal() + getCartTotal() * 0.08;
-            showToast(`🎉 Order placed successfully! Total: $${total.toFixed(2)}`);
-            cart = [];
-            saveCart();
-            updateCartUI();
-            closeCheckout();
-            closeCart();
+      // close cart when clicking outside on small screens
+      document.addEventListener('click', (e)=>{
+        if(!e.target.closest('#cartDrawer') && !e.target.closest('#cartBtn') && window.innerWidth < 1024){
+          closeCart();
         }
+      });
+    })();
 
-        // ==================== TOAST ====================
-        function showToast(message) {
-            const container = document.getElementById('toastContainer');
-            const toast = document.createElement('div');
-            toast.className =
-                'toast bg-dark-card2 border border-neon-blue/30 rounded-xl px-5 py-3 shadow-2xl shadow-black/50 text-sm font-medium text-gray-200 flex items-center gap-2';
-            toast.innerHTML = message;
-            container.appendChild(toast);
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateX(50px)';
-                toast.style.transition = 'all 0.3s ease-in';
-                setTimeout(() => toast.remove(), 300);
-            }, 2500);
-        }
-
-        // ==================== PRODUCT CARD RENDERER ====================
-        function createProductCard(product) {
-            const discount = product.originalPrice ?
-                Math.round((1 - product.price / product.originalPrice) * 100) : 0;
-            const starsHtml = Array.from({ length: 5 }, (_, i) =>
-                i < Math.floor(product.rating) ?
-                '<i class="fa-solid fa-star text-yellow-400 text-xs"></i>' :
-                '<i class="fa-solid fa-star text-gray-600 text-xs"></i>'
-            ).join('');
-
-            const badgeColorMap = {
-                'neon-blue': 'bg-neon-blue/20 text-neon-blue border-neon-blue/30',
-                'neon-purple': 'bg-neon-purple/20 text-neon-purple border-neon-purple/30',
-                'neon-green': 'bg-neon-green/20 text-neon-green border-neon-green/30',
-                'neon-pink': 'bg-neon-pink/20 text-neon-pink border-neon-pink/30',
-            };
-
-            return `
-            <div class="card-hover bg-dark-card2 border border-dark-border rounded-2xl overflow-hidden group flex flex-col">
-                <div class="relative h-52 bg-gradient-to-br from-dark-card to-dark-bg flex items-center justify-center overflow-hidden">
-                    <span class="text-7xl group-hover:scale-110 transition-transform duration-500">${product.image}</span>
-                    ${product.badge ? `<span class="absolute top-3 left-3 border ${badgeColorMap[product.badgeColor] || badgeColorMap['neon-blue']} text-[10px] font-bold px-2.5 py-1 rounded-full tracking-wider">${product.badge}</span>` : ''}
-                    ${discount > 0 ? `<span class="absolute top-3 right-3 bg-neon-pink text-white text-[10px] font-bold px-2 py-1 rounded-full">-${discount}%</span>` : ''}
-                    ${!product.inStock ? '<div class="absolute inset-0 bg-black/60 flex items-center justify-center"><span class="bg-dark-bg/80 text-gray-400 px-4 py-2 rounded-full text-sm font-bold">OUT OF STOCK</span></div>' : ''}
-                </div>
-                <div class="p-4 flex flex-col flex-1">
-                    <p class="text-[10px] text-gray-500 uppercase tracking-wider mb-1">${product.category.replace('-', ' ')}</p>
-                    <h3 class="font-semibold text-white text-sm leading-tight group-hover:text-neon-blue transition-colors line-clamp-2">${product.name}</h3>
-                    <p class="text-xs text-gray-500 mt-1">${product.tag}</p>
-                    <div class="flex items-center gap-1 mt-2">${starsHtml}<span class="text-xs text-gray-500 ml-1">(${product.reviews})</span></div>
-                    <div class="mt-auto pt-3 flex items-center justify-between">
-                        <div>
-                            <span class="text-lg font-bold text-white">$${product.price}</span>
-                            ${product.originalPrice ? `<span class="text-xs text-gray-500 line-through ml-1.5">$${product.originalPrice}</span>` : ''}
-                        </div>
-                        ${product.inStock ? `
-                            <button onclick="addToCart(${product.id})" class="w-9 h-9 bg-neon-blue/15 hover:bg-neon-blue/30 border border-neon-blue/30 rounded-full flex items-center justify-center text-neon-blue hover:text-white transition-all duration-300 hover:shadow-lg hover:shadow-neon-blue/20 flex-shrink-0" title="Add to Cart">
-                                <i class="fa-solid fa-plus text-sm"></i>
-                            </button>
-                        ` : `
-                            <span class="text-xs text-gray-600 font-semibold px-3 py-1.5 bg-dark-border rounded-full">UNAVAILABLE</span>
-                        `}
-                    </div>
-                </div>
-            </div>`;
-        }
-
-        // ==================== POPULATE GRIDS ====================
-        function populateGrids() {
-            const newArrivals = allProducts.filter(p => [1, 5, 7, 10].includes(p.id));
-            const specialOffers = allProducts.filter(p => [3, 4, 6, 8].includes(p.id));
-            const components = allProducts.filter(p => p.category === 'components');
-            const gamingGear = allProducts.filter(p => ['keyboards', 'mice', 'headsets', 'controllers'].includes(p
-                .category));
-
-            document.getElementById('newArrivalsGrid').innerHTML = newArrivals.map(createProductCard).join('');
-            document.getElementById('specialOffersGrid').innerHTML = specialOffers.map(createProductCard).join('');
-            document.getElementById('componentsGrid').innerHTML = components.map(createProductCard).join('');
-            document.getElementById('gamingGearGrid').innerHTML = gamingGear.map(createProductCard).join('');
-        }
-
-        // ==================== SEARCH ====================
-        const searchInput = document.getElementById('searchInput');
-        const searchDropdown = document.getElementById('searchDropdown');
-
-        searchInput.addEventListener('input', function() {
-            const query = this.value.toLowerCase().trim();
-            if (query.length < 2) {
-                searchDropdown.classList.add('hidden');
-                return;
-            }
-            const results = allProducts.filter(p =>
-                p.name.toLowerCase().includes(query) ||
-                p.category.toLowerCase().includes(query) ||
-                p.tag.toLowerCase().includes(query)
-            );
-            if (results.length === 0) {
-                searchDropdown.innerHTML =
-                    '<div class="p-4 text-sm text-gray-500 text-center">No results found</div>';
-            } else {
-                searchDropdown.innerHTML = results.map(p => `
-                    <div class="flex items-center gap-3 p-3 hover:bg-dark-hover cursor-pointer border-b border-dark-border/50 transition-colors" onclick="addToCart(${p.id}); searchDropdown.classList.add('hidden'); searchInput.value='';">
-                        <span class="text-2xl">${p.image}</span>
-                        <div class="flex-1">
-                            <p class="text-sm font-medium text-white">${p.name}</p>
-                            <p class="text-xs text-gray-500">${p.tag}</p>
-                        </div>
-                        <span class="text-neon-blue font-bold text-sm">$${p.price}</span>
-                    </div>
-                `).join('');
-            }
-            searchDropdown.classList.remove('hidden');
-        });
-
-        document.addEventListener('click', function(e) {
-            if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
-                searchDropdown.classList.add('hidden');
-            }
-        });
-
-        // ==================== MOBILE MENU ====================
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // ==================== NEWSLETTER ====================
-        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const msg = document.getElementById('newsletterMsg');
-            msg.classList.remove('hidden');
-            this.querySelector('input').value = '';
-            setTimeout(() => msg.classList.add('hidden'), 4000);
-            showToast('📧 Subscribed! Check your inbox for deals.');
-        });
-
-        // ==================== CURRENCY DISPLAY (visual only) ====================
-        document.getElementById('currencySelect').addEventListener('change', function() {
-            showToast(`🌐 Currency changed to ${this.value}`);
-        });
-
-        // ==================== INIT ====================
-        function init() {
-            loadCart();
-            populateGrids();
-            updateCartUI();
-        }
-
-        // Keyboard shortcut to open cart
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'c' && e.ctrlKey && !e.target.closest('input, textarea, select')) {
-                e.preventDefault();
-                openCart();
-            }
-            if (e.key === 'Escape') {
-                closeCart();
-                closeCheckout();
-                searchDropdown.classList.add('hidden');
-                mobileMenu.classList.add('hidden');
-            }
-        });
-
-        init();
-        console.log('🚀 NEXUS GEAR E-Commerce Ready!');
-        console.log('💡 Tip: Press Ctrl+C to open cart | Esc to close modals');
-        console.log('🛒 Cart is persisted in localStorage');
-    </script>
+    // small helper to escape HTML in template strings
+    function escapeHtml(s){ return (s+'').replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
+  </script>
 </body>
 </html>
