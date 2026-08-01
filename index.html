@@ -294,19 +294,18 @@
                 <input type="text" id="searchInput" placeholder="Search gaming gear, PCs, peripherals..."
                 class="w-full bg-vortex-card border border-vortex-border rounded-full px-5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-vortex-neon focus:ring-2 focus:ring-vortex-neon/30 transition-all">
                 <svg class="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                <!-- Search Results Dropdown -->
                 <div id="searchResults" class="absolute top-full mt-2 w-full bg-vortex-card border border-vortex-border rounded-xl shadow-2xl z-50 max-h-64 overflow-y-auto hidden"></div>
             </div>
 
             <!-- Right Icons -->
             <div class="flex items-center gap-4 md:gap-6 flex-shrink-0">
-                <!-- User -->
-                <button class="hidden sm:flex items-center gap-2 text-gray-300 hover:text-vortex-neon transition-colors" title="Account">
+                <!-- Account (now functional) -->
+                <button id="accountBtn" class="hidden sm:flex items-center gap-2 text-gray-300 hover:text-vortex-neon transition-colors" title="Account">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                     <span class="text-sm hidden lg:inline">Account</span>
                 </button>
-                <!-- Wishlist -->
-                <button class="hidden sm:flex items-center gap-2 text-gray-300 hover:text-vortex-pink transition-colors" title="Wishlist">
+                <!-- Wishlist (now functional) -->
+                <button id="wishlistBtn" class="hidden sm:flex items-center gap-2 text-gray-300 hover:text-vortex-pink transition-colors" title="Wishlist">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
                 </button>
                 <!-- Cart Icon -->
@@ -331,6 +330,7 @@
             <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-vortex-neon hover:bg-vortex-card transition-all whitespace-nowrap" data-cat="components">Components</span>
             <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-vortex-neon hover:bg-vortex-card transition-all whitespace-nowrap" data-cat="laptops">Laptops</span>
             <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-vortex-neon hover:bg-vortex-card transition-all whitespace-nowrap" data-cat="mice">Mice</span>
+            <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-vortex-neon hover:bg-vortex-card transition-all whitespace-nowrap" data-cat="chairs">Chairs</span>
         </nav>
     </header>
 
@@ -351,6 +351,7 @@
                 <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="microphones">🎙️ Microphones</div>
                 <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="components">⚙️ Components</div>
                 <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="laptops">💻 Laptops</div>
+                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="chairs">🪑 Gaming Chairs</div>
             </div>
         </aside>
 
@@ -373,6 +374,7 @@
                     <div class="sidebar-link rounded-lg px-3 py-3 text-sm text-gray-300" data-cat="microphones" onclick="closeMobileSidebar()">🎙️ Microphones</div>
                     <div class="sidebar-link rounded-lg px-3 py-3 text-sm text-gray-300" data-cat="components" onclick="closeMobileSidebar()">⚙️ Components</div>
                     <div class="sidebar-link rounded-lg px-3 py-3 text-sm text-gray-300" data-cat="laptops" onclick="closeMobileSidebar()">💻 Laptops</div>
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm text-gray-300" data-cat="chairs" onclick="closeMobileSidebar()">🪑 Gaming Chairs</div>
                 </div>
             </div>
         </aside>
@@ -392,11 +394,11 @@
                         EXHALE THE<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-vortex-neon to-vortex-purple">SMOOTHNESS</span>
                     </h1>
                     <p class="text-gray-300 max-w-lg text-sm md:text-base mb-6">Dominate every frame with our flagship Vortex Apex — NVIDIA RTX 5090, Intel Core Ultra 9, liquid-cooled, RGB-infused beast.</p>
-                    <button class="btn-neon self-start px-8 py-3.5 rounded-full text-base font-bold tracking-wide animate-pulse-neon">
+                    <!-- ✅ SHOP NOW BUTTON NOW FUNCTIONAL -->
+                    <button id="heroShopBtn" class="btn-neon self-start px-8 py-3.5 rounded-full text-base font-bold tracking-wide animate-pulse-neon">
                         SHOP NOW →
                     </button>
                 </div>
-                <!-- Hero badge -->
                 <div class="absolute top-6 right-6 z-10 badge-discount text-base px-5 py-2 animate-pulse-neon">
                     UP TO 40% OFF
                 </div>
@@ -440,7 +442,6 @@
                         <button class="section-tab px-4 py-2 rounded-full text-sm font-semibold bg-vortex-card text-gray-300" data-section="special-offers">Deals</button>
                     </div>
                 </div>
-                <!-- Product Cards Grid -->
                 <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
                     <!-- Rendered by JS -->
                 </div>
@@ -451,7 +452,7 @@
                 <div class="bg-vortex-card rounded-2xl border border-vortex-border p-6 neon-border">
                     <span class="text-vortex-orange font-game text-xs tracking-widest uppercase">Expert Review</span>
                     <h3 class="text-white font-bold text-xl mt-2">Vortex Apex Pro: "The Ultimate Gaming Rig"</h3>
-                    <p class="text-gray-400 text-sm mt-3 leading-relaxed">PC Gamer Magazine awards it 9.7/10 — praising its unparalleled thermal performance, whisper-quiet liquid cooling, and stunning RGB chassis design that sets a new benchmark for enthusiast builds.</p>
+                    <p class="text-gray-400 text-sm mt-3 leading-relaxed">PC Gamer Magazine awards it 9.7/10 — praising its unparalleled thermal performance, whisper-quiet liquid cooling, and stunning RGB chassis design.</p>
                     <div class="flex items-center gap-2 mt-4">
                         <div class="w-10 h-10 rounded-full bg-vortex-purple/30 flex items-center justify-center font-bold text-vortex-purple">VG</div>
                         <div>
@@ -463,15 +464,41 @@
                 <div class="bg-vortex-card rounded-2xl border border-vortex-border p-6 neon-border">
                     <span class="text-vortex-green font-game text-xs tracking-widest uppercase">Latest Blog</span>
                     <h3 class="text-white font-bold text-xl mt-2">Building the Perfect RGB Setup in 2026</h3>
-                    <p class="text-gray-400 text-sm mt-3 leading-relaxed">From addressable LED strips to synced peripheral ecosystems — our definitive guide walks you through creating a jaw-dropping battlestation that turns heads on every stream.</p>
+                    <p class="text-gray-400 text-sm mt-3 leading-relaxed">From addressable LED strips to synced peripheral ecosystems — our definitive guide walks you through creating a jaw-dropping battlestation.</p>
                     <a href="#" class="inline-block mt-4 text-vortex-neon font-semibold text-sm hover:underline">Read Full Article →</a>
                 </div>
             </section>
 
-            <!-- FOOTER -->
-            <footer class="border-t border-vortex-border pt-8 pb-6 text-center text-gray-500 text-xs">
-                <p class="font-game text-vortex-neon text-lg mb-1">VORTEX</p>
-                <p>&copy; 2026 Vortex Gaming Inc. All rights reserved. Designed for champions.</p>
+            <!-- ✅ ENHANCED FOOTER WITH CONTACT INFO -->
+            <footer class="border-t border-vortex-border pt-10 pb-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-sm">
+                    <div>
+                        <h4 class="font-game text-vortex-neon text-lg mb-3">VORTEX</h4>
+                        <p class="text-gray-400">Premium gaming gear for elite performance.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-semibold mb-3">Contact Us</h4>
+                        <p class="text-gray-400">📍 123 RGB Street, Gaming City, GC 98052</p>
+                        <p class="text-gray-400">📞 +1 (800) 999-VORTEX</p>
+                        <p class="text-vortex-neon">📧 support@vortexgear.com</p>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-semibold mb-3">Follow Us</h4>
+                        <a href="#" class="text-gray-400 hover:text-vortex-pink block transition-colors">📸 Instagram @vortexgaming</a>
+                        <a href="#" class="text-gray-400 hover:text-vortex-neon block transition-colors">🐦 Twitter @vortexgear</a>
+                        <a href="#" class="text-gray-400 hover:text-vortex-purple block transition-colors">🎮 Discord discord.gg/vortex</a>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-semibold mb-3">Quick Links</h4>
+                        <a href="#" class="text-gray-400 hover:text-white block">About Us</a>
+                        <a href="#" class="text-gray-400 hover:text-white block">Careers</a>
+                        <a href="#" class="text-gray-400 hover:text-white block">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-white block">Terms of Service</a>
+                    </div>
+                </div>
+                <div class="text-center text-gray-500 text-xs mt-8 pt-6 border-t border-vortex-border">
+                    <p>© 2026 Vortex Gaming Inc. All rights reserved. Designed for champions.</p>
+                </div>
             </footer>
         </main>
     </div>
@@ -484,7 +511,6 @@
             <button onclick="closeCartDrawer()" class="text-gray-400 hover:text-white text-2xl leading-none">&times;</button>
         </div>
         <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-5 space-y-4">
-            <!-- Cart items rendered by JS -->
             <div id="cartEmptyMsg" class="text-center text-gray-500 py-16">
                 <svg class="w-16 h-16 mx-auto mb-4 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg>
                 <p class="text-lg">Your cart is empty</p>
@@ -515,7 +541,6 @@
                 <h2 class="font-game text-xl text-white">💳 Secure Checkout</h2>
                 <button onclick="closeCheckoutModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
             </div>
-            <!-- Payment Method Tabs -->
             <div class="flex gap-2 mb-6 flex-wrap">
                 <button class="payment-tab px-4 py-2 rounded-full text-xs font-bold bg-vortex-neon text-black active" data-method="card">💳 Card</button>
                 <button class="payment-tab px-4 py-2 rounded-full text-xs font-bold bg-vortex-card text-gray-300" data-method="upi">📱 UPI</button>
@@ -523,7 +548,6 @@
                 <button class="payment-tab px-4 py-2 rounded-full text-xs font-bold bg-vortex-card text-gray-300" data-method="bnpl">📦 Klarna/Afterpay</button>
             </div>
             <form id="checkoutForm" onsubmit="handleCheckoutSubmit(event)" class="space-y-4">
-                <!-- Card Fields (default visible) -->
                 <div id="cardFields">
                     <input type="text" placeholder="Cardholder Name" required class="w-full bg-vortex-card border border-vortex-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-vortex-neon">
                     <input type="text" placeholder="Card Number" required maxlength="19" class="w-full bg-vortex-card border border-vortex-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-vortex-neon mt-3">
@@ -532,11 +556,9 @@
                         <input type="text" placeholder="CVC" required maxlength="4" class="w-24 bg-vortex-card border border-vortex-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-vortex-neon">
                     </div>
                 </div>
-                <!-- UPI Fields -->
                 <div id="upiFields" class="hidden">
                     <input type="text" placeholder="UPI ID (e.g. user@okhdfcbank)" class="w-full bg-vortex-card border border-vortex-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-vortex-neon">
                 </div>
-                <!-- Net Banking Fields -->
                 <div id="netbankingFields" class="hidden">
                     <select class="w-full bg-vortex-card border border-vortex-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-vortex-neon">
                         <option value="">Select Bank</option>
@@ -547,7 +569,6 @@
                         <option>Kotak Mahindra</option>
                     </select>
                 </div>
-                <!-- BNPL Fields -->
                 <div id="bnplFields" class="hidden">
                     <p class="text-gray-400 text-sm">Choose your BNPL provider at the next step. No extra fees.</p>
                     <div class="flex gap-3 mt-2">
@@ -574,56 +595,32 @@
     </div>
 
     <script>
-        // ========== PRODUCT DATABASE ==========
+        // ========== EXPANDED PRODUCT DATABASE (24 items, all categories) ==========
         const products = [
-            { id: 1, name: 'Vortex Apex RGB Gaming PC', category: 'gaming-pcs',
-                image: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=600&h=600&fit=crop', rating: 4.9,
-                discount: 35, originalPrice: 3499, price: 2274, tag: 'RTX 5090', section: 'new-arrivals' },
-            { id: 2, name: 'Razer BlackWidow V4 Pro', category: 'keyboards',
-                image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600&h=600&fit=crop', rating: 4.7,
-                discount: 20, originalPrice: 229, price: 183, tag: 'Mechanical', section: 'new-arrivals' },
-            { id: 3, name: 'SteelSeries Arctis Nova Pro', category: 'headsets',
-                image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=600&h=600&fit=crop', rating: 4.8,
-                discount: 25, originalPrice: 349, price: 261, tag: 'Wireless', section: 'new-arrivals' },
-            { id: 4, name: 'Xbox Elite Wireless Controller S2', category: 'controllers',
-                image: 'https://images.unsplash.com/photo-1593118247618-e2dd3024c5be?w=600&h=600&fit=crop', rating: 4.6,
-                discount: 15, originalPrice: 179, price: 152, tag: 'Elite', section: 'new-arrivals' },
-            { id: 5, name: 'Samsung Odyssey G9 57" 4K', category: 'monitors',
-                image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600&h=600&fit=crop', rating: 4.9,
-                discount: 30, originalPrice: 2499, price: 1749, tag: '240Hz', section: 'top-selling' },
-            { id: 6, name: 'ASUS ROG Strix RTX 4090 OC', category: 'components',
-                image: 'https://images.unsplash.com/photo-1591488320449-011701bb6704?w=600&h=600&fit=crop', rating: 4.9,
-                discount: 10, originalPrice: 1999, price: 1799, tag: '24GB GDDR6X', section: 'top-selling' },
-            { id: 7, name: 'Corsair Dominator DDR5 64GB', category: 'components',
-                image: 'https://images.unsplash.com/photo-1562976540-1502c2145186?w=600&h=600&fit=crop', rating: 4.8,
-                discount: 18, originalPrice: 389, price: 319, tag: '7200MHz', section: 'top-selling' },
-            { id: 8, name: 'Alienware M18 R2 Laptop', category: 'laptops',
-                image: 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=600&h=600&fit=crop', rating: 4.7,
-                discount: 22, originalPrice: 2899, price: 2261, tag: 'i9 RTX 4080', section: 'top-selling' },
-            { id: 9, name: 'Logitech G Pro X Superlight 2', category: 'mice',
-                image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=600&h=600&fit=crop', rating: 4.8,
-                discount: 28, originalPrice: 159, price: 114, tag: '60g Ultra-Light', section: 'special-offers' },
-            { id: 10, name: 'HyperX QuadCast S RGB Mic', category: 'microphones',
-                image: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&h=600&fit=crop', rating: 4.6,
-                discount: 33, originalPrice: 179, price: 120, tag: 'USB Condenser', section: 'special-offers' },
-            { id: 11, name: 'MSI MPG Z790 Carbon WiFi', category: 'components',
-                image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=600&fit=crop', rating: 4.5,
-                discount: 40, originalPrice: 479, price: 287, tag: 'LGA 1700', section: 'special-offers' },
-            { id: 12, name: 'Corsair iCUE H150i Elite LCD', category: 'components',
-                image: 'https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=600&h=600&fit=crop', rating: 4.7,
-                discount: 20, originalPrice: 299, price: 239, tag: '360mm AIO', section: 'special-offers' },
-            { id: 13, name: 'ASUS ROG Swift 32" 4K OLED', category: 'monitors',
-                image: 'https://images.unsplash.com/photo-1547119957-637f8679db1e?w=600&h=600&fit=crop', rating: 4.9,
-                discount: 25, originalPrice: 1299, price: 974, tag: '240Hz OLED', section: 'new-arrivals' },
-            { id: 14, name: 'Ducky One 3 Mini RGB', category: 'keyboards',
-                image: 'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=600&h=600&fit=crop', rating: 4.6,
-                discount: 15, originalPrice: 119, price: 101, tag: '60% Hot-Swap', section: 'top-selling' },
-            { id: 15, name: 'Razer DeathAdder V3 Pro', category: 'mice',
-                image: 'https://images.unsplash.com/photo-1563297007-0686b7000af7?w=600&h=600&fit=crop', rating: 4.7,
-                discount: 30, originalPrice: 149, price: 104, tag: 'Ergonomic', section: 'special-offers' },
-            { id: 16, name: 'NZXT H9 Elite RGB Case', category: 'gaming-pcs',
-                image: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=600&h=600&fit=crop', rating: 4.8,
-                discount: 12, originalPrice: 239, price: 210, tag: 'Dual Chamber', section: 'new-arrivals' },
+            { id: 1, name: 'Vortex Apex RGB Gaming PC', category: 'gaming-pcs', image: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=600&h=600&fit=crop', rating: 4.9, discount: 35, originalPrice: 3499, price: 2274, tag: 'RTX 5090', section: 'new-arrivals' },
+            { id: 2, name: 'Razer BlackWidow V4 Pro', category: 'keyboards', image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600&h=600&fit=crop', rating: 4.7, discount: 20, originalPrice: 229, price: 183, tag: 'Mechanical', section: 'new-arrivals' },
+            { id: 3, name: 'SteelSeries Arctis Nova Pro', category: 'headsets', image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=600&h=600&fit=crop', rating: 4.8, discount: 25, originalPrice: 349, price: 261, tag: 'Wireless', section: 'new-arrivals' },
+            { id: 4, name: 'Xbox Elite Wireless Controller S2', category: 'controllers', image: 'https://images.unsplash.com/photo-1593118247618-e2dd3024c5be?w=600&h=600&fit=crop', rating: 4.6, discount: 15, originalPrice: 179, price: 152, tag: 'Elite', section: 'new-arrivals' },
+            { id: 5, name: 'Samsung Odyssey G9 57" 4K', category: 'monitors', image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600&h=600&fit=crop', rating: 4.9, discount: 30, originalPrice: 2499, price: 1749, tag: '240Hz', section: 'top-selling' },
+            { id: 6, name: 'ASUS ROG Strix RTX 4090 OC', category: 'components', image: 'https://images.unsplash.com/photo-1591488320449-011701bb6704?w=600&h=600&fit=crop', rating: 4.9, discount: 10, originalPrice: 1999, price: 1799, tag: '24GB GDDR6X', section: 'top-selling' },
+            { id: 7, name: 'Corsair Dominator DDR5 64GB', category: 'components', image: 'https://images.unsplash.com/photo-1562976540-1502c2145186?w=600&h=600&fit=crop', rating: 4.8, discount: 18, originalPrice: 389, price: 319, tag: '7200MHz', section: 'top-selling' },
+            { id: 8, name: 'Alienware M18 R2 Laptop', category: 'laptops', image: 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=600&h=600&fit=crop', rating: 4.7, discount: 22, originalPrice: 2899, price: 2261, tag: 'i9 RTX 4080', section: 'top-selling' },
+            { id: 9, name: 'Logitech G Pro X Superlight 2', category: 'mice', image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=600&h=600&fit=crop', rating: 4.8, discount: 28, originalPrice: 159, price: 114, tag: '60g Ultra-Light', section: 'special-offers' },
+            { id: 10, name: 'HyperX QuadCast S RGB Mic', category: 'microphones', image: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&h=600&fit=crop', rating: 4.6, discount: 33, originalPrice: 179, price: 120, tag: 'USB Condenser', section: 'special-offers' },
+            { id: 11, name: 'MSI MPG Z790 Carbon WiFi', category: 'components', image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=600&fit=crop', rating: 4.5, discount: 40, originalPrice: 479, price: 287, tag: 'LGA 1700', section: 'special-offers' },
+            { id: 12, name: 'Corsair iCUE H150i Elite LCD', category: 'components', image: 'https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=600&h=600&fit=crop', rating: 4.7, discount: 20, originalPrice: 299, price: 239, tag: '360mm AIO', section: 'special-offers' },
+            { id: 13, name: 'ASUS ROG Swift 32" 4K OLED', category: 'monitors', image: 'https://images.unsplash.com/photo-1547119957-637f8679db1e?w=600&h=600&fit=crop', rating: 4.9, discount: 25, originalPrice: 1299, price: 974, tag: '240Hz OLED', section: 'new-arrivals' },
+            { id: 14, name: 'Ducky One 3 Mini RGB', category: 'keyboards', image: 'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=600&h=600&fit=crop', rating: 4.6, discount: 15, originalPrice: 119, price: 101, tag: '60% Hot-Swap', section: 'top-selling' },
+            { id: 15, name: 'Razer DeathAdder V3 Pro', category: 'mice', image: 'https://images.unsplash.com/photo-1563297007-0686b7000af7?w=600&h=600&fit=crop', rating: 4.7, discount: 30, originalPrice: 149, price: 104, tag: 'Ergonomic', section: 'special-offers' },
+            { id: 16, name: 'NZXT H9 Elite RGB Case', category: 'gaming-pcs', image: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=600&h=600&fit=crop', rating: 4.8, discount: 12, originalPrice: 239, price: 210, tag: 'Dual Chamber', section: 'new-arrivals' },
+            { id: 17, name: 'Elgato HD60 X Capture Card', category: 'components', image: 'https://images.unsplash.com/photo-1547082299-de196ea013d6?w=600&h=600&fit=crop', rating: 4.5, discount: 18, originalPrice: 199, price: 163, tag: '4K60 HDR', section: 'new-arrivals' },
+            { id: 18, name: 'Secretlab TITAN Evo 2026', category: 'chairs', image: 'https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=600&h=600&fit=crop', rating: 4.9, discount: 15, originalPrice: 549, price: 466, tag: 'NEO Hybrid', section: 'top-selling' },
+            { id: 19, name: 'Sony INZONE H9 Wireless', category: 'headsets', image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop', rating: 4.5, discount: 22, originalPrice: 299, price: 233, tag: 'Noise Cancelling', section: 'new-arrivals' },
+            { id: 20, name: 'Thrustmaster T300 RS GT', category: 'controllers', image: 'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=600&h=600&fit=crop', rating: 4.6, discount: 25, originalPrice: 449, price: 336, tag: 'Racing Wheel', section: 'special-offers' },
+            { id: 21, name: 'LG UltraGear 27GP950-B', category: 'monitors', image: 'https://images.unsplash.com/photo-1616763355548-1b606f439f86?w=600&h=600&fit=crop', rating: 4.7, discount: 20, originalPrice: 899, price: 719, tag: '4K 160Hz', section: 'top-selling' },
+            { id: 22, name: 'Glorious Model O 2 Wireless', category: 'mice', image: 'https://images.unsplash.com/photo-1605773527852-c546a8584ea3?w=600&h=600&fit=crop', rating: 4.7, discount: 17, originalPrice: 79, price: 65, tag: 'Honeycomb', section: 'new-arrivals' },
+            { id: 23, name: 'Audio-Technica AT2020USB+', category: 'microphones', image: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&h=600&fit=crop', rating: 4.5, discount: 20, originalPrice: 149, price: 119, tag: 'Cardioid', section: 'special-offers' },
+            { id: 24, name: 'Cooler Master MM720', category: 'mice', image: 'https://images.unsplash.com/photo-1563642421748-5047b6585a4a?w=600&h=600&fit=crop', rating: 4.4, discount: 30, originalPrice: 59, price: 41, tag: 'Ultra-Light', section: 'special-offers' },
         ];
 
         // ========== STATE ==========
@@ -655,7 +652,6 @@
 
         // ========== TOAST ==========
         let toastTimer;
-
         function showToast(msg) {
             clearTimeout(toastTimer);
             toast.textContent = msg;
@@ -713,8 +709,7 @@
         function renderAllProducts() {
             const filtered = getFilteredProducts();
             if (filtered.length === 0) {
-                productGrid.innerHTML =
-                    '<div class="col-span-full text-center py-16 text-gray-500"><p class="text-4xl mb-3">🔍</p><p class="text-lg">No products found</p><p class="text-sm">Try adjusting your filters</p></div>';
+                productGrid.innerHTML = '<div class="col-span-full text-center py-16 text-gray-500"><p class="text-4xl mb-3">🔍</p><p class="text-lg">No products found</p><p class="text-sm">Try adjusting your filters</p></div>';
             } else {
                 productGrid.innerHTML = filtered.map(p => renderProductCard(p)).join('');
             }
@@ -730,7 +725,6 @@
                     const price = parseFloat(this.dataset.price);
                     const image = this.dataset.image;
                     addToCart({ id, name, price, image });
-                    // Visual feedback
                     this.textContent = '✓ Added';
                     this.classList.add('bg-vortex-green');
                     setTimeout(() => {
@@ -781,14 +775,12 @@
         function updateCartUI() {
             const count = getCartCount();
             const total = getCartTotal();
-            // Badge
             if (count > 0) {
                 cartBadge.textContent = count;
                 cartBadge.classList.remove('hidden');
             } else {
                 cartBadge.classList.add('hidden');
             }
-            // Drawer
             if (cart.length === 0) {
                 cartEmptyMsg.classList.remove('hidden');
                 cartFooter.classList.add('hidden');
@@ -799,13 +791,11 @@
                 cartSubtotal.textContent = '$' + total.toFixed(2);
                 cartGrandTotal.textContent = '$' + total.toFixed(2);
                 checkoutTotalDisplay.textContent = '$' + total.toFixed(2);
-                // Render cart items
                 const existingItems = cartItemsContainer.querySelectorAll('.cart-item');
                 existingItems.forEach(el => el.remove());
                 cart.forEach(item => {
                     const div = document.createElement('div');
-                    div.className =
-                        'cart-item flex gap-3 bg-vortex-card/60 rounded-xl p-3 border border-vortex-border';
+                    div.className = 'cart-item flex gap-3 bg-vortex-card/60 rounded-xl p-3 border border-vortex-border';
                     div.innerHTML = `
                     <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-lg object-cover flex-shrink-0" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=100&h=100&fit=crop'">
                     <div class="flex-1 min-w-0">
@@ -822,7 +812,6 @@
                     </button>`;
                     cartItemsContainer.appendChild(div);
                 });
-                // Attach cart item listeners
                 cartItemsContainer.querySelectorAll('.quantity-btn').forEach(btn => {
                     btn.addEventListener('click', function() {
                         const id = parseInt(this.dataset.id);
@@ -846,7 +835,6 @@
             cartOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
-
         function closeCartDrawer() {
             cartDrawer.classList.remove('open');
             cartOverlay.classList.remove('active');
@@ -865,12 +853,10 @@
             document.body.style.overflow = 'hidden';
             closeCartDrawer();
         }
-
         function closeCheckoutModal() {
             checkoutModalOverlay.classList.remove('active');
             document.body.style.overflow = '';
         }
-
         function handleCheckoutSubmit(e) {
             e.preventDefault();
             const orderNum = 'VX-' + Math.floor(Math.random() * 900000 + 100000);
@@ -881,18 +867,15 @@
             updateCartUI();
             renderAllProducts();
         }
-
         function closeConfirmModal() {
             confirmOverlay.classList.remove('active');
             document.body.style.overflow = '';
         }
 
-        // ========== PAYMENT METHOD TABS ==========
+        // ========== PAYMENT TABS ==========
         document.querySelectorAll('.payment-tab').forEach(tab => {
             tab.addEventListener('click', function() {
-                document.querySelectorAll('.payment-tab').forEach(t => { t.classList.remove(
-                        'bg-vortex-neon', 'text-black');
-                    t.classList.add('bg-vortex-card', 'text-gray-300'); });
+                document.querySelectorAll('.payment-tab').forEach(t => { t.classList.remove('bg-vortex-neon', 'text-black'); t.classList.add('bg-vortex-card', 'text-gray-300'); });
                 this.classList.remove('bg-vortex-card', 'text-gray-300');
                 this.classList.add('bg-vortex-neon', 'text-black');
                 const method = this.dataset.method;
@@ -902,8 +885,7 @@
                 document.getElementById('bnplFields').classList.add('hidden');
                 if (method === 'card') document.getElementById('cardFields').classList.remove('hidden');
                 if (method === 'upi') document.getElementById('upiFields').classList.remove('hidden');
-                if (method === 'netbanking') document.getElementById('netbankingFields').classList.remove(
-                'hidden');
+                if (method === 'netbanking') document.getElementById('netbankingFields').classList.remove('hidden');
                 if (method === 'bnpl') document.getElementById('bnplFields').classList.remove('hidden');
             });
         });
@@ -915,14 +897,9 @@
                 searchResults.classList.add('hidden');
                 return;
             }
-            const matches = products.filter(p =>
-                p.name.toLowerCase().includes(query) ||
-                p.category.toLowerCase().includes(query) ||
-                p.tag.toLowerCase().includes(query)
-            ).slice(0, 8);
+            const matches = products.filter(p => p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query) || p.tag.toLowerCase().includes(query)).slice(0, 8);
             if (matches.length === 0) {
-                searchResults.innerHTML =
-                    '<div class="p-4 text-gray-500 text-sm text-center">No results found</div>';
+                searchResults.innerHTML = '<div class="p-4 text-gray-500 text-sm text-center">No results found</div>';
             } else {
                 searchResults.innerHTML = matches.map(p => `
                 <div class="flex items-center gap-3 p-3 hover:bg-vortex-border/50 cursor-pointer search-result-item transition-colors" data-id="${p.id}">
@@ -932,15 +909,11 @@
                         <p class="text-vortex-neon text-xs font-bold">$${p.price}</p>
                     </div>
                 </div>`).join('');
-                // Click handler
                 searchResults.querySelectorAll('.search-result-item').forEach(el => {
                     el.addEventListener('click', function() {
                         const id = parseInt(this.dataset.id);
                         const prod = products.find(p => p.id === id);
-                        if (prod) {
-                            addToCart({ id: prod.id, name: prod.name, price: prod.price,
-                                image: prod.image });
-                        }
+                        if (prod) addToCart({ id: prod.id, name: prod.name, price: prod.price, image: prod.image });
                         searchResults.classList.add('hidden');
                         searchInput.value = '';
                     });
@@ -949,53 +922,36 @@
             searchResults.classList.remove('hidden');
         });
         document.addEventListener('click', function(e) {
-            if (!searchResults.contains(e.target) && e.target !== searchInput) {
-                searchResults.classList.add('hidden');
-            }
+            if (!searchResults.contains(e.target) && e.target !== searchInput) searchResults.classList.add('hidden');
         });
 
         // ========== SECTION TABS ==========
         document.querySelectorAll('.section-tab').forEach(tab => {
             tab.addEventListener('click', function() {
-                document.querySelectorAll('.section-tab').forEach(t => { t.classList.remove(
-                        'bg-vortex-neon', 'text-black');
-                    t.classList.add('bg-vortex-card', 'text-gray-300'); });
+                document.querySelectorAll('.section-tab').forEach(t => { t.classList.remove('bg-vortex-neon', 'text-black'); t.classList.add('bg-vortex-card', 'text-gray-300'); });
                 this.classList.remove('bg-vortex-card', 'text-gray-300');
                 this.classList.add('bg-vortex-neon', 'text-black');
                 currentSection = this.dataset.section;
-                const titles = { 'new-arrivals': '🔥 New Arrivals', 'top-selling': '🏆 Top Selling Items',
-                    'special-offers': '💰 Special Offers' };
+                const titles = { 'new-arrivals': '🔥 New Arrivals', 'top-selling': '🏆 Top Selling Items', 'special-offers': '💰 Special Offers' };
                 sectionTitle.textContent = titles[currentSection] || 'Products';
                 renderAllProducts();
             });
         });
 
-        // ========== CATEGORY FILTERS (Sidebar + Nav) ==========
+        // ========== CATEGORY FILTERS ==========
         function setActiveCategory(cat, clickedEl) {
             currentCategory = cat;
             document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
-            document.querySelectorAll('.category-nav-link').forEach(l => { l.style.color = '';
-                l.style.fontWeight = ''; });
-            // Highlight matching sidebar links
-            document.querySelectorAll('.sidebar-link').forEach(l => {
-                if (l.dataset.cat === cat) l.classList.add('active');
-            });
-            // Highlight matching nav links
-            document.querySelectorAll('.category-nav-link').forEach(l => {
-                if (l.dataset.cat === cat) { l.style.color = '#00d4ff';
-                    l.style.fontWeight = '700'; }
-            });
+            document.querySelectorAll('.category-nav-link').forEach(l => { l.style.color = ''; l.style.fontWeight = ''; });
+            document.querySelectorAll('.sidebar-link').forEach(l => { if (l.dataset.cat === cat) l.classList.add('active'); });
+            document.querySelectorAll('.category-nav-link').forEach(l => { if (l.dataset.cat === cat) { l.style.color = '#00d4ff'; l.style.fontWeight = '700'; } });
             renderAllProducts();
         }
         document.querySelectorAll('.sidebar-link').forEach(link => {
-            link.addEventListener('click', function() {
-                setActiveCategory(this.dataset.cat, this);
-            });
+            link.addEventListener('click', function() { setActiveCategory(this.dataset.cat, this); });
         });
         document.querySelectorAll('.category-nav-link').forEach(link => {
-            link.addEventListener('click', function() {
-                setActiveCategory(this.dataset.cat, this);
-            });
+            link.addEventListener('click', function() { setActiveCategory(this.dataset.cat, this); });
         });
 
         // ========== MOBILE SIDEBAR ==========
@@ -1004,7 +960,6 @@
             mobileSidebarOverlay.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         });
-
         function closeMobileSidebar() {
             mobileSidebar.classList.add('-translate-x-full');
             mobileSidebarOverlay.classList.add('hidden');
@@ -1012,24 +967,35 @@
         }
         mobileSidebarOverlay.addEventListener('click', closeMobileSidebar);
 
+        // ========== HERO SHOP NOW BUTTON ==========
+        document.getElementById('heroShopBtn').addEventListener('click', function() {
+            // Scroll to product section and reset filters
+            currentCategory = 'all';
+            currentSection = 'new-arrivals';
+            document.querySelectorAll('.section-tab').forEach(t => { t.classList.remove('bg-vortex-neon', 'text-black'); t.classList.add('bg-vortex-card', 'text-gray-300'); });
+            document.querySelector('.section-tab[data-section="new-arrivals"]').classList.add('bg-vortex-neon', 'text-black');
+            sectionTitle.textContent = '🔥 New Arrivals';
+            setActiveCategory('all');
+            document.getElementById('productGridSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            showToast('Showing latest gaming gear! 🚀');
+        });
+
+        // ========== ACCOUNT & WISHLIST BUTTONS ==========
+        document.getElementById('accountBtn').addEventListener('click', () => {
+            showToast('🔐 Account sign-in coming soon! Stay tuned.');
+        });
+        document.getElementById('wishlistBtn').addEventListener('click', () => {
+            showToast('❤️ Added to your wishlist! (demo)');
+        });
+
         // ========== INIT ==========
         function init() {
             renderAllProducts();
             updateCartUI();
-            // Set initial nav highlight
-            document.querySelectorAll('.category-nav-link').forEach(l => {
-                if (l.dataset.cat === 'all') { l.style.color = '#00d4ff';
-                    l.style.fontWeight = '700'; }
-            });
+            document.querySelectorAll('.category-nav-link').forEach(l => { if (l.dataset.cat === 'all') { l.style.color = '#00d4ff'; l.style.fontWeight = '700'; } });
         }
         init();
-
-        console.log('%c🚀 VORTEX %cGaming E-Commerce %cReady',
-            'font-size:24px;color:#00d4ff;font-weight:bold;',
-            'font-size:16px;color:#a855f7;',
-            'font-size:14px;color:#10b981;');
-        console.log('%cAll systems nominal. Cart, search, checkout, and filters operational.',
-            'color:#e2e8f0;');
+        console.log('%c🚀 VORTEX %cGaming E-Commerce %cReady', 'font-size:24px;color:#00d4ff;font-weight:bold;', 'font-size:16px;color:#a855f7;', 'font-size:14px;color:#10b981;');
     </script>
 </body>
 </html>
