@@ -1,693 +1,1147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>VORTEX — Exhale The Smoothness | Ultimate Gaming Store</title>
-  <!-- Tailwind via CDN + custom config -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'v-black': '#0a0a0f',
-            'v-dark': '#12121a',
-            'v-card': '#181825',
-            'v-border': '#252536',
-            'neon': '#00d4ff',
-            'purple': '#a855f7',
-            'pink': '#ec4899',
-            'green': '#10b981',
-            'orange': '#f59e0b',
-          },
-          fontFamily: {
-            game: ['Orbitron', 'sans-serif'],
-            body: ['Inter', 'sans-serif'],
-          },
-        },
-      },
-    }
-  </script>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #0a0a0f;
-      color: #e2e8f0;
-      overflow-x: hidden;
-    }
-    .font-game { font-family: 'Orbitron', sans-serif; }
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #12121a; }
-    ::-webkit-scrollbar-thumb { background: #252536; border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: #a855f7; }
-    /* Glass effect */
-    .glass {
-      background: rgba(18, 18, 26, 0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .neon-border {
-      border: 1px solid rgba(0,212,255,0.3);
-      transition: all 0.3s;
-    }
-    .neon-border:hover {
-      border-color: rgba(0,212,255,0.8);
-      box-shadow: 0 0 20px rgba(0,212,255,0.2);
-    }
-    .btn-neon {
-      background: linear-gradient(135deg, #00d4ff, #a855f7);
-      color: white;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 0 15px rgba(0,212,255,0.35);
-    }
-    .btn-neon:hover {
-      box-shadow: 0 0 30px rgba(0,212,255,0.7), 0 0 50px rgba(168,85,247,0.5);
-      transform: translateY(-2px);
-    }
-    .cart-drawer {
-      position: fixed; top:0; right:0; width: 420px; max-width: 92vw; height: 100vh;
-      z-index: 1000; transform: translateX(100%);
-      transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
-      box-shadow: -8px 0 40px rgba(0,0,0,0.8);
-      background: rgba(18,18,26,0.95); backdrop-filter: blur(20px);
-      border-left: 1px solid rgba(255,255,255,0.06);
-      display: flex; flex-direction: column;
-    }
-    .cart-drawer.open { transform: translateX(0); }
-    .cart-overlay {
-      position: fixed; inset:0; background: rgba(0,0,0,0.7); z-index: 999;
-      opacity: 0; pointer-events: none; transition: opacity 0.35s;
-    }
-    .cart-overlay.active { opacity: 1; pointer-events: all; }
-    .modal-overlay {
-      position: fixed; inset:0; background: rgba(0,0,0,0.85); z-index: 1100;
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; pointer-events: none; transition: opacity 0.3s;
-    }
-    .modal-overlay.active { opacity: 1; pointer-events: all; }
-    .product-card {
-      transition: all 0.35s; cursor: pointer;
-    }
-    .product-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 25px rgba(0,212,255,0.15);
-    }
-    .badge-discount {
-      background: linear-gradient(135deg, #ef4444, #ec4899);
-      color: white; font-weight: 700; font-size: 0.7rem; padding: 2px 8px; border-radius: 20px;
-    }
-    .star-rating { color: #f59e0b; letter-spacing: 1px; }
-    .sidebar-link {
-      transition: 0.25s; border-left: 3px solid transparent; cursor: pointer;
-    }
-    .sidebar-link:hover, .sidebar-link.active {
-      background: rgba(168,85,247,0.12); border-left-color: #a855f7; color: #a855f7;
-    }
-    .toast {
-      position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(120px);
-      background: #181825; border: 1px solid #00d4ff; color: white; padding: 12px 28px;
-      border-radius: 30px; z-index: 2000; font-weight: 600; box-shadow: 0 8px 25px rgba(0,212,255,0.4);
-      transition: transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275); pointer-events: none;
-    }
-    .toast.show { transform: translateX(-50%) translateY(0); }
-    .carousel-btn {
-      background: rgba(0,0,0,0.5); color: white; border-radius: 50%; width: 32px; height: 32px;
-      display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s;
-    }
-    .carousel-btn:hover { background: rgba(0,212,255,0.6); }
-    @media (max-width: 768px) {
-      .cart-drawer { width: 100%; max-width: 100vw; }
-    }
-  </style>
-</head>
-<body class="bg-v-black text-gray-200">
-
-  <!-- Toast -->
-  <div id="toast" class="toast"></div>
-
-  <!-- Announcement ticker -->
-  <div class="bg-gradient-to-r from-neon via-purple to-pink text-black font-semibold text-sm py-2 overflow-hidden whitespace-nowrap">
-    <div class="inline-block animate-[ticker_28s_linear_infinite]">
-      <span class="mx-8">🚀 FREE SHIPPING OVER $499</span>
-      <span class="mx-8">💎 30-DAY PRICE MATCH</span>
-      <span class="mx-8">🔄 HASSLE-FREE 60-DAY RETURNS</span>
-      <span class="mx-8">⚡ SAME-DAY DISPATCH</span>
-      <span class="mx-8">🔒 SECURE CHECKOUT</span>
-      <span class="mx-8">🎮 JOIN VORTEX REWARDS</span>
-    </div>
-  </div>
-
-  <!-- Sticky Header -->
-  <header class="sticky top-0 z-50 glass">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-      <a href="#" class="font-game text-3xl md:text-4xl font-extrabold tracking-wider bg-gradient-to-r from-neon to-purple bg-clip-text text-transparent">VORTEX</a>
-      <div class="flex-1 min-w-[200px] max-w-[500px] relative">
-        <input type="text" id="searchInput" placeholder="Search gaming gear..." class="w-full bg-v-card border border-v-border rounded-full px-5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-neon">
-        <div id="searchResults" class="absolute top-full mt-2 w-full bg-v-card border border-v-border rounded-xl shadow-2xl z-50 max-h-64 overflow-y-auto hidden"></div>
-      </div>
-      <div class="flex items-center gap-4 md:gap-6">
-        <button id="accountBtn" class="hidden sm:flex items-center gap-2 text-gray-300 hover:text-neon"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg></button>
-        <button id="wishlistBtn" class="hidden sm:flex items-center gap-2 text-gray-300 hover:text-pink"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg></button>
-        <button id="cartToggleBtn" class="relative text-gray-300 hover:text-neon"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg><span id="cartBadge" class="absolute -top-2 -right-2 bg-gradient-to-r from-neon to-purple text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">0</span></button>
-        <button id="mobileSidebarToggle" class="md:hidden text-gray-300"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
-      </div>
-    </div>
-    <nav class="hidden md:flex max-w-7xl mx-auto px-4 pb-2 gap-1 overflow-x-auto text-sm font-medium text-gray-400">
-      <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon" data-cat="all">All</span>
-      <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon" data-cat="gaming-pcs">PCs</span>
-      <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon" data-cat="keyboards">Keyboards</span>
-      <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon" data-cat="headsets">Headsets</span>
-      <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon" data-cat="controllers">Controllers</span>
-      <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon" data-cat="monitors">Monitors</span>
-      <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon" data-cat="mice">Mice</span>
-      <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon" data-cat="microphones">Mics</span>
-      <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon" data-cat="components">Components</span>
-      <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon" data-cat="laptops">Laptops</span>
-      <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon" data-cat="chairs">Chairs</span>
-    </nav>
-  </header>
-
-  <!-- Main Layout -->
-  <div class="max-w-7xl mx-auto px-4 py-6 flex gap-6">
-    <!-- Desktop Sidebar -->
-    <aside class="sidebar-desktop w-56 flex-shrink-0 hidden md:block">
-      <div class="sticky top-28 bg-v-card rounded-2xl border border-v-border p-4 space-y-1">
-        <h3 class="font-game text-sm text-neon mb-3 uppercase">Categories</h3>
-        <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300 active" data-cat="all">🔥 All Products</div>
-        <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="gaming-pcs">🖥️ Gaming PCs</div>
-        <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="keyboards">⌨️ Keyboards</div>
-        <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="headsets">🎧 Headsets</div>
-        <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="controllers">🎮 Controllers</div>
-        <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="monitors">🖥️ Monitors</div>
-        <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="mice">🖱️ Mice</div>
-        <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="microphones">🎙️ Microphones</div>
-        <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="components">⚙️ Components</div>
-        <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="laptops">💻 Laptops</div>
-        <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="chairs">🪑 Chairs</div>
-      </div>
-    </aside>
-
-    <!-- Mobile Sidebar -->
-    <div id="mobileSidebarOverlay" class="fixed inset-0 bg-black/70 z-40 hidden md:hidden" onclick="closeMobileSidebar()"></div>
-    <aside id="mobileSidebar" class="fixed top-0 left-0 w-72 h-full bg-v-dark border-r border-v-border z-50 transform -translate-x-full transition-transform md:hidden overflow-y-auto">
-      <div class="p-5"><button onclick="closeMobileSidebar()" class="text-gray-400 text-2xl float-right">&times;</button>
-        <div class="space-y-2 mt-8">
-          <div class="sidebar-link rounded-lg px-3 py-3 text-sm active" data-cat="all" onclick="closeMobileSidebar()">🔥 All</div>
-          <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="gaming-pcs" onclick="closeMobileSidebar()">🖥️ PCs</div>
-          <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="keyboards" onclick="closeMobileSidebar()">⌨️ Keyboards</div>
-          <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="headsets" onclick="closeMobileSidebar()">🎧 Headsets</div>
-          <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="controllers" onclick="closeMobileSidebar()">🎮 Controllers</div>
-          <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="monitors" onclick="closeMobileSidebar()">🖥️ Monitors</div>
-          <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="mice" onclick="closeMobileSidebar()">🖱️ Mice</div>
-          <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="microphones" onclick="closeMobileSidebar()">🎙️ Mics</div>
-          <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="components" onclick="closeMobileSidebar()">⚙️ Components</div>
-          <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="laptops" onclick="closeMobileSidebar()">💻 Laptops</div>
-          <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="chairs" onclick="closeMobileSidebar()">🪑 Chairs</div>
-        </div>
-      </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="flex-1 min-w-0">
-      <!-- Hero -->
-      <section class="relative rounded-3xl overflow-hidden mb-8 neon-border min-h-[320px]">
-        <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=1200&h=500&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="hero">
-        <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-transparent"></div>
-        <div class="relative z-10 flex flex-col justify-center h-full min-h-[320px] px-6 md:px-12 py-10">
-          <span class="text-neon font-game text-xs md:text-sm tracking-[0.3em] uppercase mb-3">Next-Gen Performance</span>
-          <h1 class="font-game text-4xl md:text-6xl font-black text-white mb-3">EXHALE THE<br><span class="bg-gradient-to-r from-neon to-purple bg-clip-text text-transparent">SMOOTHNESS</span></h1>
-          <button id="heroShopBtn" class="btn-neon self-start px-8 py-3.5 rounded-full text-base font-bold">SHOP NOW →</button>
-        </div>
-      </section>
-
-      <!-- Product Section -->
-      <section id="productGridSection">
-        <div class="flex items-center justify-between mb-5">
-          <h2 class="font-game text-xl md:text-2xl text-white" id="sectionTitle">🔥 New Arrivals</h2>
-          <div class="flex gap-2">
-            <button class="section-tab px-4 py-2 rounded-full text-sm font-semibold bg-neon text-black active" data-section="new-arrivals">New</button>
-            <button class="section-tab px-4 py-2 rounded-full text-sm font-semibold bg-v-card text-gray-300" data-section="top-selling">Top</button>
-            <button class="section-tab px-4 py-2 rounded-full text-sm font-semibold bg-v-card text-gray-300" data-section="special-offers">Deals</button>
-          </div>
-        </div>
-        <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5"></div>
-      </section>
-
-      <!-- Footer -->
-      <footer class="border-t border-v-border pt-10 pb-6 mt-12">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
-          <div><h4 class="font-game text-neon text-lg mb-3">VORTEX</h4><p class="text-gray-400">Elite gaming gear.</p></div>
-          <div><h4 class="text-white font-semibold mb-3">Company</h4>
-            <a href="#" class="block text-gray-400 hover:text-white page-link" data-page="about">About Us</a>
-            <a href="#" class="block text-gray-400 hover:text-white page-link" data-page="careers">Careers</a>
-            <a href="#" class="block text-gray-400 hover:text-white page-link" data-page="privacy">Privacy Policy</a>
-            <a href="#" class="block text-gray-400 hover:text-white page-link" data-page="terms">Terms of Service</a>
-          </div>
-          <div><h4 class="text-white font-semibold mb-3">Contact</h4><p class="text-gray-400">📍 123 RGB Street</p><p class="text-gray-400">📞 1-800-VORTEX</p><p class="text-neon">📧 support@vortexgear.com</p></div>
-          <div><h4 class="text-white font-semibold mb-3">Follow</h4><a href="#" class="block text-gray-400 hover:text-pink">📸 Instagram</a><a href="#" class="block text-gray-400 hover:text-neon">🐦 Twitter</a><a href="#" class="block text-gray-400 hover:text-purple">🎮 Discord</a></div>
-        </div>
-        <div class="text-center text-gray-500 text-xs mt-8 pt-6 border-t border-v-border">© 2026 Vortex Gaming Inc.</div>
-      </footer>
-    </main>
-  </div>
-
-  <!-- Cart Drawer -->
-  <div id="cartOverlay" class="cart-overlay" onclick="closeCartDrawer()"></div>
-  <div id="cartDrawer" class="cart-drawer"></div>
-
-  <!-- Checkout Modal -->
-  <div id="checkoutModalOverlay" class="modal-overlay" onclick="closeCheckoutModal()">
-    <div class="bg-v-dark border border-v-border rounded-3xl p-6 w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
-      <div class="flex justify-between items-center mb-6"><h2 class="font-game text-xl text-white">💳 Secure Checkout</h2><button onclick="closeCheckoutModal()" class="text-gray-400 text-2xl">&times;</button></div>
-      <form id="checkoutForm" onsubmit="handleCheckout(event)" class="space-y-4">
-        <input type="text" placeholder="Cardholder Name" required class="w-full bg-v-card border border-v-border rounded-xl px-4 py-3 text-white">
-        <input type="text" placeholder="Card Number" required class="w-full bg-v-card border border-v-border rounded-xl px-4 py-3 text-white">
-        <div class="flex gap-3"><input type="text" placeholder="MM/YY" required class="flex-1 bg-v-card border border-v-border rounded-xl px-4 py-3 text-white"><input type="text" placeholder="CVC" required class="w-24 bg-v-card border border-v-border rounded-xl px-4 py-3 text-white"></div>
-        <button type="submit" class="btn-neon w-full py-3.5 rounded-full text-base font-bold">PAY <span id="checkoutTotalDisplay">$0.00</span> SECURELY</button>
-      </form>
-    </div>
-  </div>
-  <!-- Order Confirmation -->
-  <div id="confirmOverlay" class="modal-overlay" onclick="closeConfirmModal()">
-    <div class="bg-v-dark border border-green rounded-3xl p-8 text-center max-w-md mx-4" onclick="event.stopPropagation()">
-      <div class="text-6xl mb-4">✅</div><h2 class="font-game text-2xl text-white">Order Confirmed!</h2><p class="text-gray-400 mb-4">Your gear is on its way.</p><p class="text-green font-bold" id="confirmOrderId">Order #VX-2026</p><button onclick="closeConfirmModal()" class="btn-neon px-8 py-3 rounded-full mt-6">CONTINUE SHOPPING</button>
-    </div>
-  </div>
-
-  <!-- Product Detail Modal -->
-  <div id="productDetailOverlay" class="modal-overlay" onclick="closeProductDetail()">
-    <div class="bg-v-dark border border-v-border rounded-3xl p-6 w-full max-w-4xl mx-4 max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
-      <button onclick="closeProductDetail()" class="text-gray-400 hover:text-white text-2xl float-right">&times;</button>
-      <div class="flex flex-col md:flex-row gap-6 mt-4">
-        <div class="w-full md:w-1/2 relative">
-          <div class="relative overflow-hidden rounded-2xl aspect-square" id="detailCarousel">
-            <div class="flex transition-transform duration-500" id="carouselTrack"></div>
-            <button id="carouselPrev" class="absolute left-2 top-1/2 -translate-y-1/2 carousel-btn">‹</button>
-            <button id="carouselNext" class="absolute right-2 top-1/2 -translate-y-1/2 carousel-btn">›</button>
-            <div id="carouselDots" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2"></div>
-          </div>
-        </div>
-        <div class="w-full md:w-1/2">
-          <h2 class="text-2xl font-bold text-white" id="detailName"></h2>
-          <p class="text-purple text-sm uppercase mt-1" id="detailCategory"></p>
-          <div class="flex items-center gap-2 mt-2" id="detailRating"></div>
-          <div class="mt-4"><span class="text-gray-500 line-through text-lg" id="detailOriginalPrice"></span><span class="text-white text-3xl font-bold ml-2" id="detailPrice"></span><span class="badge-discount ml-3" id="detailDiscount"></span></div>
-          <p class="text-gray-300 mt-4 text-sm" id="detailDescription"></p>
-          <button id="detailAddToCart" class="btn-neon px-8 py-3 rounded-full mt-6 font-bold">ADD TO CART</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Page Modal (About, Careers etc) -->
-  <div id="pageModalOverlay" class="modal-overlay" onclick="closePageModal()">
-    <div class="bg-v-dark border border-v-border rounded-3xl p-8 w-full max-w-2xl mx-4 max-h-[85vh] overflow-y-auto" onclick="event.stopPropagation()" id="pageModalContent"></div>
-  </div>
-
-  <script>
-    (function() {
-      // ---------- PRODUCT DATABASE (100 items) ----------
-      const products = [];
-      const categories = ['gaming-pcs','keyboards','headsets','controllers','monitors','mice','microphones','components','laptops','chairs'];
-      const sections = ['new-arrivals','top-selling','special-offers'];
-      // Helper to generate product images array using unsplash photo IDs
-      function imgUrls(ids) { return ids.map(id => `https://images.unsplash.com/${id}?w=600&h=600&fit=crop`); }
-      const photoBank = [
-        'photo-1587202372775-e229f172b9d7','photo-1597872200969-2b65d56bd16b','photo-1603481546238-3f741c1c6ab9',
-        'photo-1625842268584-a8e8c5c8c6a3','photo-1558618666-fcd25c85f82e','photo-1591488320449-011701bb6704',
-        'photo-1562976540-1502c2145186','photo-1518770660439-4636190af475','photo-1547082299-de196ea013d6',
-        'photo-1555680202-c86f0e12f086','photo-1587829741301-dc798b83add3','photo-1618384887929-16ec33fab9ef',
-        'photo-1595228305050-9b16eea6c1a9','photo-1541143012-6b3c4e4b2f2c','photo-1618366712010-f4ae9c647dcb',
-        'photo-1505740420928-5e560c06d30e','photo-1599669454699-248893623440','photo-1484704320595-2b1a2c1e2b2e',
-        'photo-1593118247618-e2dd3024c5be','photo-1612287230202-1ff1d85d1bdf','photo-1600080970646-d2e2d0b6c6b2',
-        'photo-1566576912321-d58f5b9e4e8c','photo-1527443224154-c4a3942d3acf','photo-1547119957-637f8679db1e',
-        'photo-1616763355548-1b606f439f86','photo-1585792182328-4a3c2e6b6e6b','photo-1527864550417-7fd91fc51a46',
-        'photo-1563297007-0686b7000af7','photo-1605773527852-c546a8584ea3','photo-1563642421748-5047b6585a4a',
-        'photo-1590602847861-f357a9332bbc','photo-1583394838336-acd977736f90','photo-1598550476439-6847785fcea6',
-        'photo-1555041469-a586c61ea9bc','photo-1506439773649-6e0f8e6b8b0e','photo-1603302576837-37561b2e2302',
-        'photo-1593642632823-8f785ba67e45','photo-1496181133206-80ce9b88a853','photo-1588872657578-7efd1f1555ed'
-      ];
-      let catIdx = 0;
-      for (let i = 0; i < 100; i++) {
-        const cat = categories[i % 10];
-        const namePrefix = cat.replace('-',' ').replace(/\b\w/g, l => l.toUpperCase());
-        const names = [
-          `${namePrefix} Pro X`, `${namePrefix} Elite`, `${namePrefix} Ultra`, `Vortex ${namePrefix}`, `${namePrefix} RGB`,
-          `Stealth ${namePrefix}`, `Titan ${namePrefix}`, `Fury ${namePrefix}`, `Apex ${namePrefix}`, `Phantom ${namePrefix}`
-        ];
-        const priceBase = { 'gaming-pcs':2500, 'keyboards':150, 'headsets':200, 'controllers':120, 'monitors':800, 'mice':80, 'microphones':130, 'components':300, 'laptops':1800, 'chairs':400 };
-        const base = priceBase[cat] || 200;
-        const discount = Math.floor(Math.random()*25)+10;
-        const originalPrice = Math.floor(base * (1 + discount/100));
-        const price = Math.floor(base);
-        const section = sections[i % 3];
-        const images = [photoBank[i % photoBank.length], photoBank[(i+7)%photoBank.length], photoBank[(i+14)%photoBank.length], photoBank[(i+21)%photoBank.length], photoBank[(i+28)%photoBank.length]];
-        products.push({
-          id: i+1,
-          name: names[i%10] + ' ' + (i%10+1),
-          category: cat,
-          image: imgUrls([images[0]])[0],
-          rating: (4 + Math.random()*0.9).toFixed(1),
-          discount, originalPrice, price,
-          tag: cat === 'gaming-pcs' ? 'RTX 5090' : (cat==='keyboards'?'Mechanical':cat),
-          section,
-          images: images
-        });
-      }
-
-      // ---------- STATE ----------
-      let cart = [];
-      let currentSection = 'new-arrivals';
-      let currentCategory = 'all';
-      let currentDetailProduct = null;
-      let carouselIndex = 0;
-
-      // DOM refs
-      const productGrid = document.getElementById('productGrid');
-      const cartBadge = document.getElementById('cartBadge');
-      const cartDrawer = document.getElementById('cartDrawer');
-      const cartOverlay = document.getElementById('cartOverlay');
-      const sectionTitle = document.getElementById('sectionTitle');
-      const toast = document.getElementById('toast');
-      const checkoutTotalDisplay = document.getElementById('checkoutTotalDisplay');
-      const searchInput = document.getElementById('searchInput');
-      const searchResults = document.getElementById('searchResults');
-      const mobileSidebar = document.getElementById('mobileSidebar');
-      const mobileSidebarOverlay = document.getElementById('mobileSidebarOverlay');
-
-      // Toast
-      function showToast(msg) {
-        toast.textContent = msg;
-        toast.classList.add('show');
-        clearTimeout(window.toastTimer);
-        window.toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
-      }
-
-      // Stars
-      function renderStars(rating) {
-        const num = parseFloat(rating);
-        const full = Math.floor(num);
-        const half = num - full >= 0.5;
-        return `<span class="star-rating">${'★'.repeat(full)}${half?'☆':''}${'☆'.repeat(5-full-(half?1:0))}</span><span class="text-gray-500 text-xs ml-1">${num}</span>`;
-      }
-
-      // Filter products
-      function getFilteredProducts() {
-        let filtered = products;
-        if (currentCategory !== 'all') filtered = filtered.filter(p => p.category === currentCategory);
-        return filtered.filter(p => p.section === currentSection);
-      }
-
-      // Render product card
-      function renderProductCard(p) {
-        return `
-        <div class="product-card bg-v-card rounded-2xl border border-v-border overflow-hidden neon-border flex flex-col" data-id="${p.id}">
-          <div class="relative overflow-hidden aspect-square">
-            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover" loading="lazy">
-            <span class="absolute top-3 left-3 badge-discount">-${p.discount}%</span>
-            <span class="absolute top-3 right-3 bg-v-dark/80 text-neon text-[10px] font-game px-2 py-1 rounded-full uppercase">${p.tag}</span>
-          </div>
-          <div class="p-4 flex flex-col flex-1">
-            <span class="text-[10px] text-purple font-game uppercase mb-1">${p.category.replace('-',' ')}</span>
-            <h3 class="text-white font-semibold text-sm mb-2 line-clamp-2">${p.name}</h3>
-            <div class="mb-2">${renderStars(p.rating)}</div>
-            <div class="mt-auto flex items-center justify-between gap-2">
-              <div><span class="text-gray-500 line-through text-xs">$${p.originalPrice}</span><span class="text-white font-bold text-lg ml-1">$${p.price}</span></div>
-              <button class="add-to-cart-btn bg-gradient-to-r from-neon to-purple text-black font-bold text-xs px-3.5 py-2 rounded-full" data-id="${p.id}">Add+</button>
-            </div>
-          </div>
-        </div>`;
-      }
-
-      function renderAllProducts() {
-        const filtered = getFilteredProducts();
-        if (filtered.length === 0) {
-          productGrid.innerHTML = '<div class="col-span-full text-center py-16 text-gray-500">No products found.</div>';
-        } else {
-          productGrid.innerHTML = filtered.map(p => renderProductCard(p)).join('');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>VORTEX — Exhale The Smoothness | Ultimate Gaming Store</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'v-black': '#0a0a0f',
+                        'v-dark': '#12121a',
+                        'v-card': '#181825',
+                        'v-border': '#252536',
+                        'neon': '#00d4ff',
+                        'purple': '#a855f7',
+                        'pink': '#ec4899',
+                        'green': '#10b981',
+                        'orange': '#f59e0b',
+                    },
+                    fontFamily: {
+                        game: ['Orbitron', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
         }
-        // Attach listeners
-        document.querySelectorAll('.product-card').forEach(card => {
-          card.addEventListener('click', function(e) {
-            if (e.target.closest('.add-to-cart-btn')) return;
-            const id = parseInt(this.dataset.id);
-            openProductDetail(id);
-          });
-        });
-        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-          btn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const id = parseInt(this.dataset.id);
-            const product = products.find(p => p.id === id);
-            if (product) addToCart({ id: product.id, name: product.name, price: product.price, image: product.image });
-            this.textContent = '✓ Added';
-            this.classList.add('bg-green');
-            setTimeout(() => { this.textContent = 'Add+'; this.classList.remove('bg-green'); }, 800);
-          });
-        });
-      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0f;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        .font-game {
+            font-family: 'Orbitron', sans-serif;
+        }
 
-      // ---------- CART ----------
-      function addToCart(item) {
-        const existing = cart.find(i => i.id === item.id);
-        if (existing) existing.quantity++;
-        else cart.push({ ...item, quantity: 1 });
-        updateCartUI();
-        showToast(`${item.name} added to cart!`);
-      }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #12121a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #252536;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a855f7;
+        }
 
-      function removeFromCart(id) {
-        cart = cart.filter(i => i.id !== id);
-        updateCartUI();
-        showToast('Item removed');
-      }
+        .glass {
+            background: rgba(18, 18, 26, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .neon-border {
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            transition: all 0.3s;
+        }
+        .neon-border:hover {
+            border-color: rgba(0, 212, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+        }
+        .btn-neon {
+            background: linear-gradient(135deg, #00d4ff, #a855f7);
+            color: white;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.35);
+        }
+        .btn-neon:hover {
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.7), 0 0 50px rgba(168, 85, 247, 0.5);
+            transform: translateY(-2px);
+        }
 
-      window.updateQuantity = (id, delta) => {
-        const item = cart.find(i => i.id === id);
-        if (!item) return;
-        item.quantity += delta;
-        if (item.quantity <= 0) removeFromCart(id);
-        else updateCartUI();
-      };
+        /* ===== TICKER ===== */
+        @keyframes ticker {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        .ticker-track {
+            display: inline-flex;
+            animation: ticker 42s linear infinite;
+            white-space: nowrap;
+        }
+        .ticker-track:hover {
+            animation-play-state: paused;
+        }
 
-      function getCartTotal() {
-        return cart.reduce((sum, i) => sum + i.price * i.quantity, 0);
-      }
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 420px;
+            max-width: 92vw;
+            height: 100vh;
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: -8px 0 40px rgba(0, 0, 0, 0.8);
+            background: rgba(18, 18, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            flex-direction: column;
+        }
+        .cart-drawer.open {
+            transform: translateX(0);
+        }
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s;
+        }
+        .cart-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .product-card {
+            transition: all 0.35s;
+            cursor: pointer;
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 212, 255, 0.15);
+        }
+        .badge-discount {
+            background: linear-gradient(135deg, #ef4444, #ec4899);
+            color: white;
+            font-weight: 700;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+        .star-rating {
+            color: #f59e0b;
+            letter-spacing: 1px;
+        }
+        .sidebar-link {
+            transition: 0.25s;
+            border-left: 3px solid transparent;
+            cursor: pointer;
+        }
+        .sidebar-link:hover,
+        .sidebar-link.active {
+            background: rgba(168, 85, 247, 0.12);
+            border-left-color: #a855f7;
+            color: #a855f7;
+        }
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(120px);
+            background: #181825;
+            border: 1px solid #00d4ff;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 30px;
+            z-index: 2000;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+        .carousel-btn {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+            border: none;
+            font-size: 1.2rem;
+        }
+        .carousel-btn:hover {
+            background: rgba(0, 212, 255, 0.6);
+        }
+        .view-section {
+            display: none;
+        }
+        .view-section.active {
+            display: block;
+        }
+        .category-nav-link {
+            transition: color 0.2s;
+        }
 
-      function updateCartUI() {
-        const count = cart.reduce((s, i) => s + i.quantity, 0);
-        cartBadge.textContent = count;
-        cartBadge.classList.toggle('hidden', count === 0);
-        const total = getCartTotal();
-        cartDrawer.innerHTML = `
-          <div class="flex items-center justify-between p-5 border-b border-v-border">
-            <h2 class="font-game text-lg text-white">🛒 Cart</h2>
-            <button onclick="closeCartDrawer()" class="text-gray-400 text-2xl">&times;</button>
-          </div>
-          <div class="flex-1 overflow-y-auto p-5 space-y-4">
-            ${cart.length === 0 ? '<div class="text-center text-gray-500 py-16">Cart empty</div>' : 
-              cart.map(item => `
-                <div class="flex gap-3 bg-v-card/60 rounded-xl p-3 border border-v-border">
-                  <img src="${item.image}" class="w-16 h-16 rounded-lg object-cover">
-                  <div class="flex-1 min-w-0">
-                    <p class="text-white text-sm font-semibold truncate">${item.name}</p>
-                    <p class="text-neon font-bold">$${(item.price * item.quantity).toFixed(2)}</p>
-                    <div class="flex items-center gap-2 mt-2">
-                      <button class="bg-v-border w-7 h-7 rounded-full text-sm font-bold" onclick="updateQuantity(${item.id}, -1)">−</button>
-                      <span class="text-white">${item.quantity}</span>
-                      <button class="bg-v-border w-7 h-7 rounded-full text-sm font-bold" onclick="updateQuantity(${item.id}, 1)">+</button>
+        @media (max-width: 768px) {
+            .cart-drawer {
+                width: 100%;
+                max-width: 100vw;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+
+    <!-- ===== ANNOUNCEMENT TICKER ===== -->
+    <div class="bg-gradient-to-r from-neon via-purple to-pink text-black font-semibold text-sm py-2.5 overflow-hidden whitespace-nowrap select-none">
+        <div class="ticker-track">
+            <span class="mx-8">🚀 FREE SHIPPING OVER $499</span>
+            <span class="mx-8">💎 30-DAY PRICE MATCH</span>
+            <span class="mx-8">🔄 HASSLE-FREE 60-DAY RETURNS</span>
+            <span class="mx-8">⚡ SAME-DAY DISPATCH</span>
+            <span class="mx-8">🔒 SECURE CHECKOUT</span>
+            <span class="mx-8">🎮 JOIN VORTEX REWARDS</span>
+            <span class="mx-8">🔥 NEXT-GEN PERFORMANCE</span>
+            <span class="mx-8">✨ EXHALE THE SMOOTHNESS</span>
+            <span class="mx-8">🏆 TOP RATED GAMING GEAR</span>
+            <!-- duplicate for seamless loop -->
+            <span class="mx-8">🚀 FREE SHIPPING OVER $499</span>
+            <span class="mx-8">💎 30-DAY PRICE MATCH</span>
+            <span class="mx-8">🔄 HASSLE-FREE 60-DAY RETURNS</span>
+            <span class="mx-8">⚡ SAME-DAY DISPATCH</span>
+            <span class="mx-8">🔒 SECURE CHECKOUT</span>
+            <span class="mx-8">🎮 JOIN VORTEX REWARDS</span>
+            <span class="mx-8">🔥 NEXT-GEN PERFORMANCE</span>
+            <span class="mx-8">✨ EXHALE THE SMOOTHNESS</span>
+            <span class="mx-8">🏆 TOP RATED GAMING GEAR</span>
+        </div>
+    </div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="sticky top-0 z-50 glass">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+            <a href="#" id="logoLink" class="font-game text-3xl md:text-4xl font-extrabold tracking-wider bg-gradient-to-r from-neon to-purple bg-clip-text text-transparent whitespace-nowrap">VORTEX</a>
+
+            <div class="flex-1 min-w-[160px] max-w-[500px] relative">
+                <input type="text" id="searchInput" placeholder="Search gaming gear..." class="w-full bg-v-card border border-v-border rounded-full px-5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-neon">
+                <div id="searchResults" class="absolute top-full mt-2 w-full bg-v-card border border-v-border rounded-xl shadow-2xl z-50 max-h-64 overflow-y-auto hidden"></div>
+            </div>
+
+            <div class="flex items-center gap-3 md:gap-5">
+                <button id="accountBtn" class="hidden sm:flex text-gray-300 hover:text-neon" title="Account"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg></button>
+                <button id="wishlistBtn" class="hidden sm:flex text-gray-300 hover:text-pink" title="Wishlist"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg></button>
+                <button id="cartToggleBtn" class="relative text-gray-300 hover:text-neon" title="Cart"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg><span id="cartBadge" class="absolute -top-2 -right-2 bg-gradient-to-r from-neon to-purple text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">0</span></button>
+                <button id="mobileSidebarToggle" class="md:hidden text-gray-300"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+            </div>
+        </div>
+
+        <!-- Category Nav -->
+        <nav class="hidden md:flex max-w-7xl mx-auto px-4 pb-2 gap-1 overflow-x-auto text-sm font-medium text-gray-400 scrollbar-hide">
+            <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="all">All</span>
+            <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="gaming-pcs">PCs</span>
+            <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="keyboards">Keyboards</span>
+            <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="headsets">Headsets</span>
+            <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="controllers">Controllers</span>
+            <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="monitors">Monitors</span>
+            <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="mice">Mice</span>
+            <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="microphones">Mics</span>
+            <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="components">Components</span>
+            <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="laptops">Laptops</span>
+            <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="chairs">Chairs</span>
+        </nav>
+    </header>
+
+    <!-- ===== MAIN LAYOUT ===== -->
+    <div class="max-w-7xl mx-auto px-4 py-6 flex gap-6">
+
+        <!-- DESKTOP SIDEBAR -->
+        <aside class="sidebar-desktop w-56 flex-shrink-0 hidden md:block">
+            <div class="sticky top-28 bg-v-card rounded-2xl border border-v-border p-4 space-y-1">
+                <h3 class="font-game text-sm text-neon mb-3 uppercase">Categories</h3>
+                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300 active" data-cat="all">🔥 All Products</div>
+                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="gaming-pcs">🖥️ Gaming PCs</div>
+                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="keyboards">⌨️ Keyboards</div>
+                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="headsets">🎧 Headsets</div>
+                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="controllers">🎮 Controllers</div>
+                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="monitors">🖥️ Monitors</div>
+                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="mice">🖱️ Mice</div>
+                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="microphones">🎙️ Microphones</div>
+                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="components">⚙️ Components</div>
+                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="laptops">💻 Laptops</div>
+                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="chairs">🪑 Chairs</div>
+            </div>
+        </aside>
+
+        <!-- MOBILE SIDEBAR -->
+        <div id="mobileSidebarOverlay" class="fixed inset-0 bg-black/70 z-40 hidden md:hidden" onclick="closeMobileSidebar()"></div>
+        <aside id="mobileSidebar" class="fixed top-0 left-0 w-72 h-full bg-v-dark border-r border-v-border z-50 transform -translate-x-full transition-transform md:hidden overflow-y-auto">
+            <div class="p-5">
+                <button onclick="closeMobileSidebar()" class="text-gray-400 text-2xl float-right">&times;</button>
+                <div class="space-y-2 mt-8">
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm active" data-cat="all" onclick="closeMobileSidebar()">🔥 All</div>
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="gaming-pcs" onclick="closeMobileSidebar()">🖥️ PCs</div>
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="keyboards" onclick="closeMobileSidebar()">⌨️ Keyboards</div>
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="headsets" onclick="closeMobileSidebar()">🎧 Headsets</div>
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="controllers" onclick="closeMobileSidebar()">🎮 Controllers</div>
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="monitors" onclick="closeMobileSidebar()">🖥️ Monitors</div>
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="mice" onclick="closeMobileSidebar()">🖱️ Mice</div>
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="microphones" onclick="closeMobileSidebar()">🎙️ Mics</div>
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="components" onclick="closeMobileSidebar()">⚙️ Components</div>
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="laptops" onclick="closeMobileSidebar()">💻 Laptops</div>
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="chairs" onclick="closeMobileSidebar()">🪑 Chairs</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="flex-1 min-w-0">
+
+            <!-- ---- VIEW: PRODUCTS (default) ---- -->
+            <div id="viewProducts" class="view-section active">
+
+                <!-- Hero -->
+                <section class="relative rounded-3xl overflow-hidden mb-8 neon-border min-h-[280px] md:min-h-[320px]">
+                    <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=1200&h=500&fit=crop&auto=format" class="absolute inset-0 w-full h-full object-cover" alt="hero" loading="lazy" onerror="this.src='https://picsum.photos/seed/hero/1200/500'">
+                    <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-transparent"></div>
+                    <div class="relative z-10 flex flex-col justify-center h-full min-h-[280px] md:min-h-[320px] px-6 md:px-12 py-10">
+                        <span class="text-neon font-game text-xs md:text-sm tracking-[0.3em] uppercase mb-3">Next-Gen Performance</span>
+                        <h1 class="font-game text-4xl md:text-6xl font-black text-white mb-3 leading-tight">EXHALE THE<br><span class="bg-gradient-to-r from-neon to-purple bg-clip-text text-transparent">SMOOTHNESS</span></h1>
+                        <button id="heroShopBtn" class="btn-neon self-start px-8 py-3.5 rounded-full text-base font-bold">SHOP NOW →</button>
+                    </div>
+                </section>
+
+                <!-- Products -->
+                <section id="productGridSection">
+                    <div class="flex flex-wrap items-center justify-between mb-5 gap-2">
+                        <h2 class="font-game text-xl md:text-2xl text-white" id="sectionTitle">🔥 New Arrivals</h2>
+                        <div class="flex gap-2">
+                            <button class="section-tab px-4 py-2 rounded-full text-sm font-semibold bg-neon text-black active" data-section="new-arrivals">New</button>
+                            <button class="section-tab px-4 py-2 rounded-full text-sm font-semibold bg-v-card text-gray-300" data-section="top-selling">Top</button>
+                            <button class="section-tab px-4 py-2 rounded-full text-sm font-semibold bg-v-card text-gray-300" data-section="special-offers">Deals</button>
+                        </div>
+                    </div>
+                    <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5"></div>
+                </section>
+            </div>
+
+            <!-- ---- VIEW: ABOUT ---- -->
+            <div id="viewAbout" class="view-section">
+                <div class="bg-v-card rounded-3xl border border-v-border p-6 md:p-10">
+                    <h2 class="font-game text-3xl text-neon mb-4">About VORTEX</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <p class="text-gray-300 leading-relaxed mb-4">Founded in 2020 by a collective of elite esports athletes and hardware engineers, <span class="text-neon font-bold">VORTEX</span> was born from a single mission: <span class="text-white font-semibold">to eliminate the gap between human reflex and machine response.</span></p>
+                            <p class="text-gray-300 leading-relaxed mb-4">Every product in our lineup is battle-tested in professional tournaments, refined through thousands of hours of gameplay, and crafted with obsessive attention to detail.</p>
+                            <div class="flex gap-6 mt-6">
+                                <div><span class="text-neon font-game text-2xl">50+</span><p class="text-gray-500 text-sm">Pro Teams</p></div>
+                                <div><span class="text-neon font-game text-2xl">200+</span><p class="text-gray-500 text-sm">Tournament Wins</p></div>
+                                <div><span class="text-neon font-game text-2xl">1M+</span><p class="text-gray-500 text-sm">Happy Gamers</p></div>
+                            </div>
+                        </div>
+                        <div class="rounded-2xl overflow-hidden neon-border">
+                            <img src="https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=600&h=400&fit=crop&auto=format" alt="VORTEX studio" class="w-full h-full object-cover" onerror="this.src='https://picsum.photos/seed/about/600/400'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ---- VIEW: CAREERS ---- -->
+            <div id="viewCareers" class="view-section">
+                <div class="bg-v-card rounded-3xl border border-v-border p-6 md:p-10">
+                    <h2 class="font-game text-3xl text-neon mb-4">Join the VORTEX Team</h2>
+                    <p class="text-gray-300 mb-8">We're always looking for passionate people who live and breathe gaming. If you're ready to build the future of competitive hardware, we want you.</p>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-v-dark rounded-2xl p-6 border border-v-border">
+                            <h3 class="text-white font-bold text-xl mb-2">🛠️ Hardware Engineer</h3>
+                            <p class="text-gray-400 text-sm mb-3">Design next-gen PCBs, cooling systems, and input devices.</p>
+                            <span class="text-neon text-xs font-game">📍 Remote • Full-time</span>
+                        </div>
+                        <div class="bg-v-dark rounded-2xl p-6 border border-v-border">
+                            <h3 class="text-white font-bold text-xl mb-2">🎮 Gameplay Tester</h3>
+                            <p class="text-gray-400 text-sm mb-3">Play the latest titles and provide feedback on performance.</p>
+                            <span class="text-neon text-xs font-game">📍 On-site • Full-time</span>
+                        </div>
+                        <div class="bg-v-dark rounded-2xl p-6 border border-v-border">
+                            <h3 class="text-white font-bold text-xl mb-2">📦 Logistics Lead</h3>
+                            <p class="text-gray-400 text-sm mb-3">Oversee global shipping, warehousing, and supply chain.</p>
+                            <span class="text-neon text-xs font-game">📍 Hybrid • Full-time</span>
+                        </div>
+                        <div class="bg-v-dark rounded-2xl p-6 border border-v-border">
+                            <h3 class="text-white font-bold text-xl mb-2">💻 Frontend Developer</h3>
+                            <p class="text-gray-400 text-sm mb-3">Build and maintain VORTEX's web presence and store.</p>
+                            <span class="text-neon text-xs font-game">📍 Remote • Full-time</span>
+                        </div>
+                    </div>
+                    <div class="mt-8 p-6 bg-v-dark rounded-2xl border border-neon/30 text-center">
+                        <p class="text-gray-300">📧 Send your resume to <span class="text-neon font-bold">careers@vortexgear.com</span></p>
+                        <p class="text-gray-500 text-sm mt-1">We'll get back to you within 48 hours.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ---- VIEW: PRIVACY ---- -->
+            <div id="viewPrivacy" class="view-section">
+                <div class="bg-v-card rounded-3xl border border-v-border p-6 md:p-10">
+                    <h2 class="font-game text-3xl text-neon mb-4">Privacy Policy</h2>
+                    <div class="prose prose-invert max-w-none text-gray-300 space-y-4">
+                        <p>At VORTEX, we take your privacy seriously. We only collect data that is essential to process your orders and improve your experience.</p>
+                        <p><strong class="text-white">What we collect:</strong> Name, email, shipping address, payment info (processed securely via third-party gateways).</p>
+                        <p><strong class="text-white">How we use it:</strong> Order fulfillment, customer support, and occasional product updates (opt-out anytime).</p>
+                        <p><strong class="text-white">Third-party sharing:</strong> We never sell your data. We share only with shipping partners and payment processors.</p>
+                        <p><strong class="text-white">Cookies:</strong> We use minimal cookies for cart and session management. No tracking pixels.</p>
+                        <p class="text-sm text-gray-500 mt-6">Last updated: January 2026</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ---- VIEW: TERMS ---- -->
+            <div id="viewTerms" class="view-section">
+                <div class="bg-v-card rounded-3xl border border-v-border p-6 md:p-10">
+                    <h2 class="font-game text-3xl text-neon mb-4">Terms of Service</h2>
+                    <div class="prose prose-invert max-w-none text-gray-300 space-y-4">
+                        <p>By using VORTEX's website and services, you agree to the following terms:</p>
+                        <p><strong class="text-white">1. Purchases:</strong> All orders are subject to our 60-day hassle-free return policy. Warranty periods vary by product, as stated on the product page.</p>
+                        <p><strong class="text-white">2. Pricing:</strong> We reserve the right to adjust prices at any time. The price at checkout is final.</p>
+                        <p><strong class="text-white">3. Shipping:</strong> We offer free shipping on orders over $499. Same-day dispatch applies to orders placed before 2 PM EST (Mon–Fri).</p>
+                        <p><strong class="text-white">4. Intellectual Property:</strong> All content on this site—including logos, images, and product designs—is the property of VORTEX Gaming Inc.</p>
+                        <p><strong class="text-white">5. Liability:</strong> VORTEX is not liable for damages arising from misuse of products. Our liability is limited to the purchase price.</p>
+                        <p class="text-sm text-gray-500 mt-6">Last updated: January 2026</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ---- FOOTER ---- -->
+            <footer class="border-t border-v-border pt-10 pb-6 mt-12">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
+                    <div><h4 class="font-game text-neon text-lg mb-3">VORTEX</h4><p class="text-gray-400">Elite gaming gear.</p></div>
+                    <div><h4 class="text-white font-semibold mb-3">Company</h4>
+                        <a href="#" class="block text-gray-400 hover:text-white nav-page-link" data-page="about">About Us</a>
+                        <a href="#" class="block text-gray-400 hover:text-white nav-page-link" data-page="careers">Careers</a>
+                        <a href="#" class="block text-gray-400 hover:text-white nav-page-link" data-page="privacy">Privacy Policy</a>
+                        <a href="#" class="block text-gray-400 hover:text-white nav-page-link" data-page="terms">Terms of Service</a>
+                    </div>
+                    <div><h4 class="text-white font-semibold mb-3">Contact</h4><p class="text-gray-400">📍 123 RGB Street</p><p class="text-gray-400">📞 1-800-VORTEX</p><p class="text-neon">📧 support@vortexgear.com</p></div>
+                    <div><h4 class="text-white font-semibold mb-3">Follow</h4><a href="#" class="block text-gray-400 hover:text-pink">📸 Instagram</a><a href="#" class="block text-gray-400 hover:text-neon">🐦 Twitter</a><a href="#" class="block text-gray-400 hover:text-purple">🎮 Discord</a></div>
+                </div>
+                <div class="text-center text-gray-500 text-xs mt-8 pt-6 border-t border-v-border">© 2026 Vortex Gaming Inc.</div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- ===== CART DRAWER ===== -->
+    <div id="cartOverlay" class="cart-overlay" onclick="closeCartDrawer()"></div>
+    <div id="cartDrawer" class="cart-drawer"></div>
+
+    <!-- ===== CHECKOUT MODAL ===== -->
+    <div id="checkoutModalOverlay" class="modal-overlay" onclick="closeCheckoutModal()">
+        <div class="bg-v-dark border border-v-border rounded-3xl p-6 w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center mb-6"><h2 class="font-game text-xl text-white">💳 Secure Checkout</h2><button onclick="closeCheckoutModal()" class="text-gray-400 text-2xl">&times;</button></div>
+            <form id="checkoutForm" onsubmit="handleCheckout(event)" class="space-y-4">
+                <input type="text" placeholder="Cardholder Name" required class="w-full bg-v-card border border-v-border rounded-xl px-4 py-3 text-white">
+                <input type="text" placeholder="Card Number" required class="w-full bg-v-card border border-v-border rounded-xl px-4 py-3 text-white">
+                <div class="flex gap-3"><input type="text" placeholder="MM/YY" required class="flex-1 bg-v-card border border-v-border rounded-xl px-4 py-3 text-white"><input type="text" placeholder="CVC" required class="w-24 bg-v-card border border-v-border rounded-xl px-4 py-3 text-white"></div>
+                <button type="submit" class="btn-neon w-full py-3.5 rounded-full text-base font-bold">PAY <span id="checkoutTotalDisplay">$0.00</span> SECURELY</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== ORDER CONFIRMATION ===== -->
+    <div id="confirmOverlay" class="modal-overlay" onclick="closeConfirmModal()">
+        <div class="bg-v-dark border border-green rounded-3xl p-8 text-center max-w-md mx-4" onclick="event.stopPropagation()">
+            <div class="text-6xl mb-4">✅</div><h2 class="font-game text-2xl text-white">Order Confirmed!</h2><p class="text-gray-400 mb-4">Your gear is on its way.</p><p class="text-green font-bold" id="confirmOrderId">Order #VX-2026</p><button onclick="closeConfirmModal()" class="btn-neon px-8 py-3 rounded-full mt-6">CONTINUE SHOPPING</button>
+        </div>
+    </div>
+
+    <!-- ===== PRODUCT DETAIL MODAL ===== -->
+    <div id="productDetailOverlay" class="modal-overlay" onclick="closeProductDetail()">
+        <div class="bg-v-dark border border-v-border rounded-3xl p-6 w-full max-w-4xl mx-4 max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
+            <button onclick="closeProductDetail()" class="text-gray-400 hover:text-white text-2xl float-right">&times;</button>
+            <div class="flex flex-col md:flex-row gap-6 mt-4">
+                <div class="w-full md:w-1/2 relative">
+                    <div class="relative overflow-hidden rounded-2xl aspect-square" id="detailCarousel">
+                        <div class="flex transition-transform duration-500" id="carouselTrack"></div>
+                        <button id="carouselPrev" class="absolute left-2 top-1/2 -translate-y-1/2 carousel-btn">‹</button>
+                        <button id="carouselNext" class="absolute right-2 top-1/2 -translate-y-1/2 carousel-btn">›</button>
+                        <div id="carouselDots" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2"></div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h2 class="text-2xl font-bold text-white" id="detailName"></h2>
+                    <p class="text-purple text-sm uppercase mt-1" id="detailCategory"></p>
+                    <div class="flex items-center gap-2 mt-2" id="detailRating"></div>
+                    <div class="mt-4"><span class="text-gray-500 line-through text-lg" id="detailOriginalPrice"></span><span class="text-white text-3xl font-bold ml-2" id="detailPrice"></span><span class="badge-discount ml-3" id="detailDiscount"></span></div>
+                    <p class="text-gray-300 mt-4 text-sm" id="detailDescription"></p>
+                    <button id="detailAddToCart" class="btn-neon px-8 py-3 rounded-full mt-6 font-bold">ADD TO CART</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // ================================================================
+            // 1. PRODUCT DATABASE — 100 unique items, 10 categories, 3 sections
+            // ================================================================
+            const CATEGORIES = ['gaming-pcs', 'keyboards', 'headsets', 'controllers', 'monitors', 'mice', 'microphones',
+                'components', 'laptops', 'chairs'
+            ];
+            const SECTIONS = ['new-arrivals', 'top-selling', 'special-offers'];
+            const SECTION_LABELS = {
+                'new-arrivals': '🔥 New Arrivals',
+                'top-selling': '🏆 Top Selling',
+                'special-offers': '💰 Special Offers'
+            };
+
+            // Category display names
+            const CAT_DISPLAY = {
+                'gaming-pcs': 'Gaming PCs',
+                'keyboards': 'Keyboards',
+                'headsets': 'Headsets',
+                'controllers': 'Controllers',
+                'monitors': 'Monitors',
+                'mice': 'Mice',
+                'microphones': 'Microphones',
+                'components': 'Components',
+                'laptops': 'Laptops',
+                'chairs': 'Chairs'
+            };
+
+            // Base prices per category
+            const PRICE_BASE = {
+                'gaming-pcs': 2200,
+                'keyboards': 140,
+                'headsets': 180,
+                'controllers': 110,
+                'monitors': 750,
+                'mice': 70,
+                'microphones': 120,
+                'components': 280,
+                'laptops': 1600,
+                'chairs': 380
+            };
+
+            // Product name prefixes per category
+            const NAME_PREFIXES = {
+                'gaming-pcs': ['Apex', 'Titan', 'Phantom', 'Vortex', 'Stealth', 'Fury', 'Omega', 'Nova', 'Eclipse',
+                    'Quantum'
+                ],
+                'keyboards': ['Mechanical', 'Optical', 'Wireless', 'TKL', 'Compact', 'RGB', 'Pro', 'Elite', 'Ultra',
+                    'Stealth'
+                ],
+                'headsets': ['Surround', 'Wireless', 'Noise-Cancelling', 'Pro', 'Elite', 'Ultra', 'RGB', 'Stealth',
+                    'Titan', 'Apex'
+                ],
+                'controllers': ['Wireless', 'Pro', 'Elite', 'Ultra', 'RGB', 'Stealth', 'Titan', 'Apex', 'Phantom',
+                    'Vortex'
+                ],
+                'monitors': ['Curved', 'OLED', 'UltraWide', 'G-Sync', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan',
+                    'Apex'
+                ],
+                'mice': ['Wireless', 'Ultra-Light', 'RGB', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex',
+                    'Phantom'
+                ],
+                'microphones': ['Cardioid', 'USB', 'XLR', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex',
+                    'Phantom'
+                ],
+                'components': ['CPU', 'GPU', 'RAM', 'SSD', 'PSU', 'Motherboard', 'Cooling', 'Case', 'Cable', 'Adapter'],
+                'laptops': ['Gaming', 'Ultra', 'Pro', 'Elite', 'Stealth', 'Titan', 'Apex', 'Phantom', 'Vortex', 'Nova'],
+                'chairs': ['Racing', 'Ergonomic', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex', 'Phantom',
+                    'Vortex'
+                ]
+            };
+
+            // Product tags per category
+            const TAGS = {
+                'gaming-pcs': ['RTX 5090', 'RTX 5080', 'RTX 5070', 'RX 7900', 'i9-14900K', 'i7-14700K', 'Ryzen 9',
+                    'Ryzen 7', '64GB RAM', '2TB SSD'
+                ],
+                'keyboards': ['Mechanical', 'Optical', 'Wireless', 'TKL', 'RGB', 'Hot-Swap', 'Gateron', 'Cherry MX',
+                    'Linear', 'Tactile'
+                ],
+                'headsets': ['7.1 Surround', 'Wireless', 'Noise-Cancelling', 'RGB', '50mm Drivers', 'Pro', 'Elite',
+                    'Ultra', 'Stealth', 'Titan'
+                ],
+                'controllers': ['Wireless', 'Hall Effect', 'RGB', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex',
+                    'Phantom'
+                ],
+                'monitors': ['4K', '144Hz', '240Hz', 'OLED', 'UltraWide', 'G-Sync', 'FreeSync', 'Pro', 'Elite', 'Ultra'],
+                'mice': ['Wireless', 'Ultra-Light', 'RGB', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex',
+                    'Phantom'
+                ],
+                'microphones': ['Cardioid', 'USB', 'XLR', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex',
+                    'Phantom'
+                ],
+                'components': ['Gen4', 'Gen5', 'RGB', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex', 'Phantom'],
+                'laptops': ['RTX 5090', 'RTX 5080', 'OLED', '240Hz', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan',
+                    'Apex'
+                ],
+                'chairs': ['Racing', 'Ergonomic', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex', 'Phantom',
+                    'Vortex'
+                ]
+            };
+
+            const products = [];
+            let productId = 0;
+
+            // Generate 100 unique products: each category gets 10 products (distributed across 3 sections)
+            for (let ci = 0; ci < CATEGORIES.length; ci++) {
+                const cat = CATEGORIES[ci];
+                const prefixes = NAME_PREFIXES[cat] || ['Pro', 'Elite', 'Ultra'];
+                const tags = TAGS[cat] || ['Premium', 'Pro', 'Elite'];
+
+                // 10 products per category: 3 in new, 3 in top, 4 in deals
+                const perSection = [3, 3, 4];
+                let itemIdx = 0;
+                for (let si = 0; si < SECTIONS.length; si++) {
+                    const section = SECTIONS[si];
+                    const count = perSection[si];
+                    for (let k = 0; k < count; k++) {
+                        const idx = itemIdx++;
+                        const prefix = prefixes[idx % prefixes.length];
+                        const suffix = (idx + 1) + (idx % 5 === 0 ? ' X' : '');
+                        const name = `${prefix} ${CAT_DISPLAY[cat]} ${suffix}`.trim();
+
+                        const base = PRICE_BASE[cat] || 200;
+                        const discount = 8 + Math.floor(Math.random() * 22); // 8–30%
+                        const price = Math.floor(base * (0.7 + Math.random() * 0.3));
+                        const originalPrice = Math.floor(price / (1 - discount / 100));
+
+                        const rating = (4.0 + Math.random() * 0.9).toFixed(1);
+
+                        // Use a deterministic seed based on product ID for picsum
+                        const seed = productId + 1000;
+                        const imgUrl = `https://picsum.photos/seed/${seed}/600/600`;
+                        // Also generate 4 more for carousel
+                        const extraSeeds = [seed + 1, seed + 2, seed + 3, seed + 4];
+                        const extraImages = extraSeeds.map(s =>
+                            `https://picsum.photos/seed/${s}/600/600`
+                        );
+
+                        products.push({
+                            id: ++productId,
+                            name: name,
+                            category: cat,
+                            section: section,
+                            image: imgUrl,
+                            images: [imgUrl, ...extraImages],
+                            rating: rating,
+                            discount: discount,
+                            originalPrice: originalPrice,
+                            price: price,
+                            tag: tags[idx % tags.length],
+                            description: `The ${name} delivers uncompromising performance for serious gamers. Engineered with precision components and tested in pro-level conditions.`
+                        });
+                    }
+                }
+            }
+
+            // Shuffle a bit to mix sections visually
+            products.sort(() => Math.random() - 0.5);
+
+            // ================================================================
+            // 2. STATE
+            // ================================================================
+            let cart = [];
+            let currentSection = 'new-arrivals';
+            let currentCategory = 'all';
+            let currentDetailProduct = null;
+            let carouselIndex = 0;
+
+            // DOM refs
+            const productGrid = document.getElementById('productGrid');
+            const cartBadge = document.getElementById('cartBadge');
+            const cartDrawer = document.getElementById('cartDrawer');
+            const cartOverlay = document.getElementById('cartOverlay');
+            const sectionTitle = document.getElementById('sectionTitle');
+            const toast = document.getElementById('toast');
+            const checkoutTotalDisplay = document.getElementById('checkoutTotalDisplay');
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            const mobileSidebar = document.getElementById('mobileSidebar');
+            const mobileSidebarOverlay = document.getElementById('mobileSidebarOverlay');
+
+            // Views
+            const viewProducts = document.getElementById('viewProducts');
+            const viewAbout = document.getElementById('viewAbout');
+            const viewCareers = document.getElementById('viewCareers');
+            const viewPrivacy = document.getElementById('viewPrivacy');
+            const viewTerms = document.getElementById('viewTerms');
+            const allViews = [viewProducts, viewAbout, viewCareers, viewPrivacy, viewTerms];
+
+            // ================================================================
+            // 3. HELPERS
+            // ================================================================
+            function showToast(msg) {
+                toast.textContent = msg;
+                toast.classList.add('show');
+                clearTimeout(window.toastTimer);
+                window.toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+            }
+
+            function renderStars(rating) {
+                const num = parseFloat(rating);
+                const full = Math.floor(num);
+                const half = num - full >= 0.5 ? 1 : 0;
+                const empty = 5 - full - half;
+                return `<span class="star-rating">${'★'.repeat(full)}${half?'☆':''}${'☆'.repeat(empty)}</span><span class="text-gray-500 text-xs ml-1">${num}</span>`;
+            }
+
+            function getFilteredProducts() {
+                let filtered = products;
+                if (currentCategory !== 'all') {
+                    filtered = filtered.filter(p => p.category === currentCategory);
+                }
+                return filtered.filter(p => p.section === currentSection);
+            }
+
+            // ================================================================
+            // 4. RENDER PRODUCTS
+            // ================================================================
+            function renderProductCard(p) {
+                return `
+                <div class="product-card bg-v-card rounded-2xl border border-v-border overflow-hidden neon-border flex flex-col" data-id="${p.id}">
+                  <div class="relative overflow-hidden aspect-square bg-v-black">
+                    <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://picsum.photos/seed/fallback_${p.id}/600/600'">
+                    <span class="absolute top-3 left-3 badge-discount">-${p.discount}%</span>
+                    <span class="absolute top-3 right-3 bg-v-dark/80 text-neon text-[10px] font-game px-2 py-1 rounded-full uppercase">${p.tag}</span>
+                  </div>
+                  <div class="p-4 flex flex-col flex-1">
+                    <span class="text-[10px] text-purple font-game uppercase mb-1">${CAT_DISPLAY[p.category] || p.category}</span>
+                    <h3 class="text-white font-semibold text-sm mb-2 line-clamp-2">${p.name}</h3>
+                    <div class="mb-2">${renderStars(p.rating)}</div>
+                    <div class="mt-auto flex items-center justify-between gap-2">
+                      <div><span class="text-gray-500 line-through text-xs">$${p.originalPrice}</span><span class="text-white font-bold text-lg ml-1">$${p.price}</span></div>
+                      <button class="add-to-cart-btn bg-gradient-to-r from-neon to-purple text-black font-bold text-xs px-3.5 py-2 rounded-full" data-id="${p.id}">Add+</button>
                     </div>
                   </div>
-                  <button class="text-gray-500 hover:text-red-400 self-start" onclick="removeFromCart(${item.id})"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
-                </div>
-              `).join('')
+                </div>`;
             }
-          </div>
-          ${cart.length ? `
-          <div class="border-t border-v-border p-5 space-y-3">
-            <div class="flex justify-between text-sm"><span>Subtotal</span><span>$${total.toFixed(2)}</span></div>
-            <div class="flex justify-between font-bold text-white text-lg"><span>Total</span><span class="text-neon">$${total.toFixed(2)}</span></div>
-            <button class="btn-neon w-full py-3 rounded-full font-bold" onclick="openCheckoutModal()">CHECKOUT</button>
-          </div>` : ''}
-        `;
-      }
 
-      window.openCartDrawer = () => { cartDrawer.classList.add('open'); cartOverlay.classList.add('active'); };
-      window.closeCartDrawer = () => { cartDrawer.classList.remove('open'); cartOverlay.classList.remove('active'); };
-      document.getElementById('cartToggleBtn').addEventListener('click', openCartDrawer);
-      window.removeFromCart = removeFromCart; // expose
+            function renderAllProducts() {
+                const filtered = getFilteredProducts();
+                if (filtered.length === 0) {
+                    productGrid.innerHTML =
+                        '<div class="col-span-full text-center py-16 text-gray-500">No products found in this category.</div>';
+                } else {
+                    productGrid.innerHTML = filtered.map(p => renderProductCard(p)).join('');
+                }
 
-      // ---------- CHECKOUT ----------
-      window.openCheckoutModal = () => {
-        if (cart.length === 0) { showToast('Cart is empty!'); return; }
-        checkoutTotalDisplay.textContent = '$' + getCartTotal().toFixed(2);
-        document.getElementById('checkoutModalOverlay').classList.add('active');
-        closeCartDrawer();
-      };
-      window.closeCheckoutModal = () => document.getElementById('checkoutModalOverlay').classList.remove('active');
-      window.handleCheckout = (e) => {
-        e.preventDefault();
-        closeCheckoutModal();
-        document.getElementById('confirmOverlay').classList.add('active');
-        document.getElementById('confirmOrderId').textContent = 'Order #VX-' + Math.floor(Math.random()*900000+100000);
-        cart = [];
-        updateCartUI();
-        renderAllProducts();
-      };
-      window.closeConfirmModal = () => document.getElementById('confirmOverlay').classList.remove('active');
+                document.querySelectorAll('.product-card').forEach(card => {
+                    card.addEventListener('click', function(e) {
+                        if (e.target.closest('.add-to-cart-btn')) return;
+                        const id = parseInt(this.dataset.id);
+                        openProductDetail(id);
+                    });
+                });
 
-      // ---------- PRODUCT DETAIL ----------
-      window.openProductDetail = (id) => {
-        const p = products.find(x => x.id === id);
-        if (!p) return;
-        currentDetailProduct = p;
-        carouselIndex = 0;
-        document.getElementById('detailName').textContent = p.name;
-        document.getElementById('detailCategory').textContent = p.category.replace('-',' ');
-        document.getElementById('detailRating').innerHTML = renderStars(p.rating);
-        document.getElementById('detailOriginalPrice').textContent = '$'+p.originalPrice;
-        document.getElementById('detailPrice').textContent = '$'+p.price;
-        document.getElementById('detailDiscount').textContent = '-'+p.discount+'%';
-        document.getElementById('detailDescription').textContent = `Experience the ultimate performance with the ${p.name}. Designed for gamers who demand precision, speed, and style.`;
-        const track = document.getElementById('carouselTrack');
-        const imageUrls = imgUrls(p.images);
-        track.innerHTML = imageUrls.map(src => `<div class="w-full flex-shrink-0"><img src="${src}" class="w-full aspect-square object-cover rounded-xl"></div>`).join('');
-        document.getElementById('carouselDots').innerHTML = imageUrls.map((_,i) => `<span class="w-3 h-3 rounded-full ${i===0?'bg-neon':'bg-gray-600'}"></span>`).join('');
-        track.style.transform = 'translateX(0)';
-        document.getElementById('productDetailOverlay').classList.add('active');
-      };
-      window.closeProductDetail = () => document.getElementById('productDetailOverlay').classList.remove('active');
-      document.getElementById('carouselPrev').addEventListener('click', () => {
-        if (!currentDetailProduct) return;
-        carouselIndex = (carouselIndex - 1 + currentDetailProduct.images.length) % currentDetailProduct.images.length;
-        updateCarousel();
-      });
-      document.getElementById('carouselNext').addEventListener('click', () => {
-        if (!currentDetailProduct) return;
-        carouselIndex = (carouselIndex + 1) % currentDetailProduct.images.length;
-        updateCarousel();
-      });
-      function updateCarousel() {
-        document.getElementById('carouselTrack').style.transform = `translateX(-${carouselIndex * 100}%)`;
-        document.querySelectorAll('#carouselDots span').forEach((dot, i) => {
-          dot.className = `w-3 h-3 rounded-full ${i === carouselIndex ? 'bg-neon' : 'bg-gray-600'}`;
-        });
-      }
-      document.getElementById('detailAddToCart').addEventListener('click', () => {
-        if (currentDetailProduct) {
-          addToCart({ id: currentDetailProduct.id, name: currentDetailProduct.name, price: currentDetailProduct.price, image: currentDetailProduct.image });
-          closeProductDetail();
-        }
-      });
+                document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const id = parseInt(this.dataset.id);
+                        const product = products.find(p => p.id === id);
+                        if (product) addToCart({ id: product.id, name: product.name, price: product
+                                .price, image: product.image });
+                        this.textContent = '✓ Added';
+                        this.classList.add('bg-green');
+                        setTimeout(() => { this.textContent = 'Add+';
+                            this.classList.remove('bg-green'); }, 800);
+                    });
+                });
+            }
 
-      // ---------- PAGE MODALS ----------
-      document.querySelectorAll('.page-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          const page = e.target.dataset.page;
-          const content = document.getElementById('pageModalContent');
-          const pages = {
-            about: `<h2 class="text-2xl font-bold text-white">About VORTEX</h2><p class="text-gray-300 mt-4">VORTEX was founded by elite gamers and engineers to deliver uncompromising performance. Every product is tested under extreme conditions.</p>`,
-            careers: `<h2 class="text-2xl font-bold text-white">Careers</h2><p class="text-gray-300 mt-4">Join our team! Send your resume to careers@vortexgear.com. We're looking for passionate developers, designers, and gamers.</p>`,
-            privacy: `<h2 class="text-2xl font-bold text-white">Privacy Policy</h2><p class="text-gray-300 mt-4">We only collect data needed to process orders. No third-party sharing. Your privacy is our priority.</p>`,
-            terms: `<h2 class="text-2xl font-bold text-white">Terms of Service</h2><p class="text-gray-300 mt-4">By using VORTEX, you agree to our terms. All purchases are covered by our 60-day return policy. Warranty as per manufacturer.</p>`
-          };
-          content.innerHTML = pages[page] || '';
-          document.getElementById('pageModalOverlay').classList.add('active');
-        });
-      });
-      window.closePageModal = () => document.getElementById('pageModalOverlay').classList.remove('active');
+            // ================================================================
+            // 5. CART
+            // ================================================================
+            function addToCart(item) {
+                const existing = cart.find(i => i.id === item.id);
+                if (existing) existing.quantity++;
+                else cart.push({ ...item, quantity: 1 });
+                updateCartUI();
+                showToast(`${item.name} added to cart!`);
+            }
 
-      // ---------- SEARCH ----------
-      searchInput.addEventListener('input', function() {
-        const q = this.value.toLowerCase().trim();
-        if (q.length < 2) { searchResults.classList.add('hidden'); return; }
-        const matches = products.filter(p => p.name.toLowerCase().includes(q) || p.category.includes(q) || p.tag.toLowerCase().includes(q)).slice(0, 8);
-        searchResults.innerHTML = matches.length ? matches.map(p => `
-          <div class="flex items-center gap-3 p-3 hover:bg-v-border/50 cursor-pointer" data-id="${p.id}">
-            <img src="${p.image}" class="w-10 h-10 rounded-lg object-cover">
-            <div class="flex-1"><p class="text-white text-sm">${p.name}</p><p class="text-neon text-xs">$${p.price}</p></div>
-          </div>`).join('') : '<div class="p-4 text-gray-500">No results</div>';
-        searchResults.classList.remove('hidden');
-        searchResults.querySelectorAll('div[data-id]').forEach(el => {
-          el.addEventListener('click', () => {
-            const id = parseInt(el.dataset.id);
-            const prod = products.find(p => p.id === id);
-            if (prod) addToCart({ id: prod.id, name: prod.name, price: prod.price, image: prod.image });
-            searchResults.classList.add('hidden');
-            searchInput.value = '';
-          });
-        });
-      });
-      document.addEventListener('click', (e) => {
-        if (!searchResults.contains(e.target) && e.target !== searchInput) searchResults.classList.add('hidden');
-      });
+            function removeFromCart(id) {
+                cart = cart.filter(i => i.id !== id);
+                updateCartUI();
+                showToast('Item removed');
+            }
 
-      // ---------- SECTION TABS ----------
-      document.querySelectorAll('.section-tab').forEach(tab => {
-        tab.addEventListener('click', function() {
-          document.querySelectorAll('.section-tab').forEach(t => { t.classList.remove('bg-neon','text-black'); t.classList.add('bg-v-card','text-gray-300'); });
-          this.classList.add('bg-neon','text-black');
-          currentSection = this.dataset.section;
-          sectionTitle.textContent = { 'new-arrivals':'🔥 New Arrivals', 'top-selling':'🏆 Top Selling', 'special-offers':'💰 Special Offers' }[currentSection];
-          renderAllProducts();
-        });
-      });
+            window.updateQuantity = (id, delta) => {
+                const item = cart.find(i => i.id === id);
+                if (!item) return;
+                item.quantity += delta;
+                if (item.quantity <= 0) removeFromCart(id);
+                else updateCartUI();
+            };
 
-      // ---------- CATEGORY FILTERS ----------
-      function setActiveCategory(cat) {
-        currentCategory = cat;
-        document.querySelectorAll('.sidebar-link').forEach(l => l.classList.toggle('active', l.dataset.cat === cat));
-        document.querySelectorAll('.category-nav-link').forEach(l => {
-          l.style.color = l.dataset.cat === cat ? '#00d4ff' : '';
-          l.style.fontWeight = l.dataset.cat === cat ? '700' : '';
-        });
-        renderAllProducts();
-      }
-      document.querySelectorAll('.sidebar-link, .category-nav-link').forEach(el => {
-        el.addEventListener('click', function() { setActiveCategory(this.dataset.cat); });
-      });
+            function getCartTotal() {
+                return cart.reduce((sum, i) => sum + i.price * i.quantity, 0);
+            }
 
-      // Hero shop now
-      document.getElementById('heroShopBtn').addEventListener('click', () => {
-        currentSection = 'new-arrivals';
-        currentCategory = 'all';
-        sectionTitle.textContent = '🔥 New Arrivals';
-        document.querySelectorAll('.section-tab').forEach(t => { t.classList.remove('bg-neon','text-black'); t.classList.add('bg-v-card','text-gray-300'); });
-        document.querySelector('.section-tab[data-section="new-arrivals"]').classList.add('bg-neon','text-black');
-        setActiveCategory('all');
-        document.getElementById('productGridSection').scrollIntoView({ behavior: 'smooth' });
-      });
+            function updateCartUI() {
+                const count = cart.reduce((s, i) => s + i.quantity, 0);
+                cartBadge.textContent = count;
+                cartBadge.classList.toggle('hidden', count === 0);
+                const total = getCartTotal();
+                cartDrawer.innerHTML = `
+                  <div class="flex items-center justify-between p-5 border-b border-v-border">
+                    <h2 class="font-game text-lg text-white">🛒 Cart</h2>
+                    <button onclick="closeCartDrawer()" class="text-gray-400 text-2xl">&times;</button>
+                  </div>
+                  <div class="flex-1 overflow-y-auto p-5 space-y-4">
+                    ${cart.length === 0 ? '<div class="text-center text-gray-500 py-16">Cart empty</div>' :
+                      cart.map(item => `
+                        <div class="flex gap-3 bg-v-card/60 rounded-xl p-3 border border-v-border">
+                          <img src="${item.image}" class="w-16 h-16 rounded-lg object-cover bg-v-black" onerror="this.src='https://picsum.photos/seed/cart_${item.id}/100/100'">
+                          <div class="flex-1 min-w-0">
+                            <p class="text-white text-sm font-semibold truncate">${item.name}</p>
+                            <p class="text-neon font-bold">$${(item.price * item.quantity).toFixed(2)}</p>
+                            <div class="flex items-center gap-2 mt-2">
+                              <button class="bg-v-border w-7 h-7 rounded-full text-sm font-bold" onclick="updateQuantity(${item.id}, -1)">−</button>
+                              <span class="text-white">${item.quantity}</span>
+                              <button class="bg-v-border w-7 h-7 rounded-full text-sm font-bold" onclick="updateQuantity(${item.id}, 1)">+</button>
+                            </div>
+                          </div>
+                          <button class="text-gray-500 hover:text-red-400 self-start" onclick="removeFromCart(${item.id})"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
+                        </div>
+                      `).join('')
+                    }
+                  </div>
+                  ${cart.length ? `
+                  <div class="border-t border-v-border p-5 space-y-3">
+                    <div class="flex justify-between text-sm"><span>Subtotal</span><span>$${total.toFixed(2)}</span></div>
+                    <div class="flex justify-between font-bold text-white text-lg"><span>Total</span><span class="text-neon">$${total.toFixed(2)}</span></div>
+                    <button class="btn-neon w-full py-3 rounded-full font-bold" onclick="openCheckoutModal()">CHECKOUT</button>
+                  </div>` : ''}
+                `;
+            }
 
-      // Mobile sidebar
-      document.getElementById('mobileSidebarToggle').addEventListener('click', () => {
-        mobileSidebar.classList.remove('-translate-x-full');
-        mobileSidebarOverlay.classList.remove('hidden');
-      });
-      window.closeMobileSidebar = () => {
-        mobileSidebar.classList.add('-translate-x-full');
-        mobileSidebarOverlay.classList.add('hidden');
-      };
-      mobileSidebarOverlay.addEventListener('click', closeMobileSidebar);
+            window.openCartDrawer = () => { cartDrawer.classList.add('open');
+                cartOverlay.classList.add('active'); };
+            window.closeCartDrawer = () => { cartDrawer.classList.remove('open');
+                cartOverlay.classList.remove('active'); };
+            document.getElementById('cartToggleBtn').addEventListener('click', openCartDrawer);
+            window.removeFromCart = removeFromCart;
 
-      // Account / Wishlist demo
-      document.getElementById('accountBtn').addEventListener('click', () => showToast('Account sign-in (demo)'));
-      document.getElementById('wishlistBtn').addEventListener('click', () => showToast('Added to wishlist (demo)'));
+            // ================================================================
+            // 6. CHECKOUT
+            // ================================================================
+            window.openCheckoutModal = () => {
+                if (cart.length === 0) { showToast('Cart is empty!'); return; }
+                checkoutTotalDisplay.textContent = '$' + getCartTotal().toFixed(2);
+                document.getElementById('checkoutModalOverlay').classList.add('active');
+                closeCartDrawer();
+            };
+            window.closeCheckoutModal = () => document.getElementById('checkoutModalOverlay').classList.remove('active');
+            window.handleCheckout = (e) => {
+                e.preventDefault();
+                closeCheckoutModal();
+                document.getElementById('confirmOverlay').classList.add('active');
+                document.getElementById('confirmOrderId').textContent = 'Order #VX-' + Math.floor(Math.random() *
+                    900000 + 100000);
+                cart = [];
+                updateCartUI();
+                renderAllProducts();
+            };
+            window.closeConfirmModal = () => document.getElementById('confirmOverlay').classList.remove('active');
 
-      // Initialize
-      renderAllProducts();
-      updateCartUI();
-      document.querySelector('.category-nav-link[data-cat="all"]').style.color = '#00d4ff';
-      document.querySelector('.category-nav-link[data-cat="all"]').style.fontWeight = '700';
-    })();
-  </script>
+            // ================================================================
+            // 7. PRODUCT DETAIL
+            // ================================================================
+            window.openProductDetail = (id) => {
+                const p = products.find(x => x.id === id);
+                if (!p) return;
+                currentDetailProduct = p;
+                carouselIndex = 0;
+                document.getElementById('detailName').textContent = p.name;
+                document.getElementById('detailCategory').textContent = CAT_DISPLAY[p.category] || p.category;
+                document.getElementById('detailRating').innerHTML = renderStars(p.rating);
+                document.getElementById('detailOriginalPrice').textContent = '$' + p.originalPrice;
+                document.getElementById('detailPrice').textContent = '$' + p.price;
+                document.getElementById('detailDiscount').textContent = '-' + p.discount + '%';
+                document.getElementById('detailDescription').textContent = p.description;
+
+                const track = document.getElementById('carouselTrack');
+                const images = p.images && p.images.length ? p.images : [p.image, p.image];
+                track.innerHTML = images.map(src =>
+                    `<div class="w-full flex-shrink-0"><img src="${src}" class="w-full aspect-square object-cover rounded-xl bg-v-black" onerror="this.src='https://picsum.photos/seed/detail_${p.id}/600/600'"></div>`
+                ).join('');
+                document.getElementById('carouselDots').innerHTML = images.map((_, i) =>
+                    `<span class="w-3 h-3 rounded-full ${i===0?'bg-neon':'bg-gray-600'}"></span>`
+                ).join('');
+                track.style.transform = 'translateX(0)';
+                document.getElementById('productDetailOverlay').classList.add('active');
+            };
+
+            window.closeProductDetail = () => document.getElementById('productDetailOverlay').classList.remove('active');
+
+            document.getElementById('carouselPrev').addEventListener('click', () => {
+                if (!currentDetailProduct) return;
+                const imgs = currentDetailProduct.images || [currentDetailProduct.image];
+                carouselIndex = (carouselIndex - 1 + imgs.length) % imgs.length;
+                updateCarousel(imgs);
+            });
+            document.getElementById('carouselNext').addEventListener('click', () => {
+                if (!currentDetailProduct) return;
+                const imgs = currentDetailProduct.images || [currentDetailProduct.image];
+                carouselIndex = (carouselIndex + 1) % imgs.length;
+                updateCarousel(imgs);
+            });
+
+            function updateCarousel(images) {
+                document.getElementById('carouselTrack').style.transform = `translateX(-${carouselIndex * 100}%)`;
+                document.querySelectorAll('#carouselDots span').forEach((dot, i) => {
+                    dot.className = `w-3 h-3 rounded-full ${i === carouselIndex ? 'bg-neon' : 'bg-gray-600'}`;
+                });
+            }
+
+            document.getElementById('detailAddToCart').addEventListener('click', () => {
+                if (currentDetailProduct) {
+                    addToCart({ id: currentDetailProduct.id, name: currentDetailProduct.name, price: currentDetailProduct
+                            .price, image: currentDetailProduct.image });
+                    closeProductDetail();
+                }
+            });
+
+            // ================================================================
+            // 8. PAGE NAVIGATION (About, Careers, Privacy, Terms)
+            // ================================================================
+            function showView(viewId) {
+                allViews.forEach(v => v.classList.remove('active'));
+                const target = document.getElementById(viewId);
+                if (target) target.classList.add('active');
+                // scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Footer / nav page links
+            document.querySelectorAll('.nav-page-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = this.dataset.page;
+                    if (page === 'about') showView('viewAbout');
+                    else if (page === 'careers') showView('viewCareers');
+                    else if (page === 'privacy') showView('viewPrivacy');
+                    else if (page === 'terms') showView('viewTerms');
+                    else showView('viewProducts');
+                });
+            });
+
+            // Logo goes back to products
+            document.getElementById('logoLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                showView('viewProducts');
+                // reset category and section
+                currentCategory = 'all';
+                currentSection = 'new-arrivals';
+                setActiveCategory('all');
+                updateSectionTabs('new-arrivals');
+                sectionTitle.textContent = SECTION_LABELS['new-arrivals'];
+                renderAllProducts();
+            });
+
+            // ================================================================
+            // 9. SECTION TABS (New / Top / Deals)
+            // ================================================================
+            function updateSectionTabs(section) {
+                document.querySelectorAll('.section-tab').forEach(t => {
+                    t.classList.remove('bg-neon', 'text-black');
+                    t.classList.add('bg-v-card', 'text-gray-300');
+                    if (t.dataset.section === section) {
+                        t.classList.add('bg-neon', 'text-black');
+                    }
+                });
+            }
+
+            document.querySelectorAll('.section-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const section = this.dataset.section;
+                    currentSection = section;
+                    sectionTitle.textContent = SECTION_LABELS[section] || '🔥 New Arrivals';
+                    updateSectionTabs(section);
+                    renderAllProducts();
+                });
+            });
+
+            // ================================================================
+            // 10. CATEGORY FILTERS
+            // ================================================================
+            function setActiveCategory(cat) {
+                currentCategory = cat;
+                document.querySelectorAll('.sidebar-link').forEach(l => {
+                    l.classList.toggle('active', l.dataset.cat === cat);
+                });
+                document.querySelectorAll('.category-nav-link').forEach(l => {
+                    if (l.dataset.cat === cat) {
+                        l.style.color = '#00d4ff';
+                        l.style.fontWeight = '700';
+                    } else {
+                        l.style.color = '';
+                        l.style.fontWeight = '';
+                    }
+                });
+                renderAllProducts();
+            }
+
+            document.querySelectorAll('.sidebar-link, .category-nav-link').forEach(el => {
+                el.addEventListener('click', function() {
+                    // If we're on a non-products view, switch back
+                    if (!viewProducts.classList.contains('active')) {
+                        showView('viewProducts');
+                    }
+                    const cat = this.dataset.cat;
+                    setActiveCategory(cat);
+                    // Update section tabs visual
+                    updateSectionTabs(currentSection);
+                    sectionTitle.textContent = SECTION_LABELS[currentSection] || '🔥 New Arrivals';
+                });
+            });
+
+            // ================================================================
+            // 11. HERO SHOP NOW
+            // ================================================================
+            document.getElementById('heroShopBtn').addEventListener('click', () => {
+                showView('viewProducts');
+                currentCategory = 'all';
+                currentSection = 'new-arrivals';
+                setActiveCategory('all');
+                updateSectionTabs('new-arrivals');
+                sectionTitle.textContent = SECTION_LABELS['new-arrivals'];
+                renderAllProducts();
+                document.getElementById('productGridSection').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // ================================================================
+            // 12. SEARCH
+            // ================================================================
+            searchInput.addEventListener('input', function() {
+                const q = this.value.toLowerCase().trim();
+                if (q.length < 2) { searchResults.classList.add('hidden'); return; }
+                const matches = products.filter(p =>
+                    p.name.toLowerCase().includes(q) ||
+                    p.category.includes(q) ||
+                    p.tag.toLowerCase().includes(q)
+                ).slice(0, 8);
+                searchResults.innerHTML = matches.length ? matches.map(p => `
+                      <div class="flex items-center gap-3 p-3 hover:bg-v-border/50 cursor-pointer" data-id="${p.id}">
+                        <img src="${p.image}" class="w-10 h-10 rounded-lg object-cover bg-v-black" onerror="this.src='https://picsum.photos/seed/s_${p.id}/100/100'">
+                        <div class="flex-1"><p class="text-white text-sm">${p.name}</p><p class="text-neon text-xs">$${p.price}</p></div>
+                      </div>`).join('') :
+                    '<div class="p-4 text-gray-500">No results</div>';
+                searchResults.classList.remove('hidden');
+                searchResults.querySelectorAll('div[data-id]').forEach(el => {
+                    el.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        const prod = products.find(p => p.id === id);
+                        if (prod) {
+                            // Switch to products view and show the item
+                            showView('viewProducts');
+                            // Set category to match product
+                            currentCategory = prod.category;
+                            currentSection = prod.section;
+                            setActiveCategory(prod.category);
+                            updateSectionTabs(prod.section);
+                            sectionTitle.textContent = SECTION_LABELS[prod.section] || '🔥 New Arrivals';
+                            renderAllProducts();
+                            // Open detail after render
+                            setTimeout(() => openProductDetail(id), 100);
+                        }
+                        searchResults.classList.add('hidden');
+                        searchInput.value = '';
+                    });
+                });
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!searchResults.contains(e.target) && e.target !== searchInput) searchResults.classList.add('hidden');
+            });
+
+            // ================================================================
+            // 13. MOBILE SIDEBAR
+            // ================================================================
+            document.getElementById('mobileSidebarToggle').addEventListener('click', () => {
+                mobileSidebar.classList.remove('-translate-x-full');
+                mobileSidebarOverlay.classList.remove('hidden');
+            });
+            window.closeMobileSidebar = () => {
+                mobileSidebar.classList.add('-translate-x-full');
+                mobileSidebarOverlay.classList.add('hidden');
+            };
+            mobileSidebarOverlay.addEventListener('click', closeMobileSidebar);
+
+            // ================================================================
+            // 14. ACCOUNT / WISHLIST (demo)
+            // ================================================================
+            document.getElementById('accountBtn').addEventListener('click', () => showToast('🔐 Account sign-in (demo)'));
+            document.getElementById('wishlistBtn').addEventListener('click', () => showToast('❤️ Added to wishlist (demo)'));
+
+            // ================================================================
+            // 15. INIT
+            // ================================================================
+            // Default: show products, all categories, new arrivals
+            showView('viewProducts');
+            currentCategory = 'all';
+            currentSection = 'new-arrivals';
+            setActiveCategory('all');
+            updateSectionTabs('new-arrivals');
+            sectionTitle.textContent = SECTION_LABELS['new-arrivals'];
+            renderAllProducts();
+            updateCartUI();
+
+            // Highlight "All" in category nav
+            document.querySelector('.category-nav-link[data-cat="all"]').style.color = '#00d4ff';
+            document.querySelector('.category-nav-link[data-cat="all"]').style.fontWeight = '700';
+
+            console.log('✅ VORTEX initialized with', products.length, 'unique products');
+        })();
+    </script>
 </body>
 </html>
