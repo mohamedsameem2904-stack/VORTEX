@@ -349,7 +349,7 @@
 
                 <!-- Hero -->
                 <section class="relative rounded-3xl overflow-hidden mb-8 neon-border min-h-[280px] md:min-h-[320px]">
-                    <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=1200&h=500&fit=crop&auto=format" class="absolute inset-0 w-full h-full object-cover" alt="hero" loading="lazy" onerror="this.src='https://picsum.photos/seed/hero/1200/500'">
+                    <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=1200&h=500&fit=crop&auto=format" class="absolute inset-0 w-full h-full object-cover" alt="hero" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-transparent"></div>
                     <div class="relative z-10 flex flex-col justify-center h-full min-h-[280px] md:min-h-[320px] px-6 md:px-12 py-10">
                         <span class="text-neon font-game text-xs md:text-sm tracking-[0.3em] uppercase mb-3">Next-Gen Performance</span>
@@ -387,7 +387,7 @@
                             </div>
                         </div>
                         <div class="rounded-2xl overflow-hidden neon-border">
-                            <img src="https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=600&h=400&fit=crop&auto=format" alt="VORTEX studio" class="w-full h-full object-cover" onerror="this.src='https://picsum.photos/seed/about/600/400'">
+                            <img src="https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=600&h=400&fit=crop&auto=format" alt="VORTEX studio" class="w-full h-full object-cover">
                         </div>
                     </div>
                 </div>
@@ -528,7 +528,7 @@
     <script>
         (function() {
             // ================================================================
-            // 1. PRODUCT DATABASE — 100 unique items, 10 categories, 3 sections
+            // 1. PRODUCT DATABASE & ACCURATE IMAGE MAPPING
             // ================================================================
             const CATEGORIES = ['gaming-pcs', 'keyboards', 'headsets', 'controllers', 'monitors', 'mice', 'microphones',
                 'components', 'laptops', 'chairs'
@@ -540,7 +540,6 @@
                 'special-offers': '💰 Special Offers'
             };
 
-            // Category display names
             const CAT_DISPLAY = {
                 'gaming-pcs': 'Gaming PCs',
                 'keyboards': 'Keyboards',
@@ -554,7 +553,80 @@
                 'chairs': 'Chairs'
             };
 
-            // Base prices per category
+            // Accurate, specific Unsplash image pools for each category
+            const CATEGORY_IMAGES = {
+                'gaming-pcs': [
+                    'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1624685860492-1a921d3f9a46?w=600&h=600&fit=crop&auto=format'
+                ],
+                'keyboards': [
+                    'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1595225476474-87563907a212?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1595225476634-cad327e74281?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1561154464-82e9adf32764?w=600&h=600&fit=crop&auto=format'
+                ],
+                'headsets': [
+                    'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&h=600&fit=crop&auto=format'
+                ],
+                'controllers': [
+                    'https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1592840496694-26d035b52b48?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&h=600&fit=crop&auto=format'
+                ],
+                'monitors': [
+                    'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1585790050230-5dd28066ccf9?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1547082299-de196ea013d6?w=600&h=600&fit=crop&auto=format'
+                ],
+                'mice': [
+                    'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1586816879360-004f5b0c51e3?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=600&h=600&fit=crop&auto=format'
+                ],
+                'microphones': [
+                    'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1583245934988-444453b0521d?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1520523839896-515438885b5f?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1543269865-cbf427effbad?w=600&h=600&fit=crop&auto=format'
+                ],
+                'components': [
+                    'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&h=600&fit=crop&auto=format'
+                ],
+                'laptops': [
+                    'https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=600&h=600&fit=crop&auto=format'
+                ],
+                'chairs': [
+                    'https://images.unsplash.com/photo-1580481077494-e3299acae5e2?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=600&h=600&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1592078615290-033ee584e267?w=600&h=600&fit=crop&auto=format'
+                ]
+            };
+
             const PRICE_BASE = {
                 'gaming-pcs': 2200,
                 'keyboards': 140,
@@ -568,76 +640,41 @@
                 'chairs': 380
             };
 
-            // Product name prefixes per category
             const NAME_PREFIXES = {
-                'gaming-pcs': ['Apex', 'Titan', 'Phantom', 'Vortex', 'Stealth', 'Fury', 'Omega', 'Nova', 'Eclipse',
-                    'Quantum'
-                ],
-                'keyboards': ['Mechanical', 'Optical', 'Wireless', 'TKL', 'Compact', 'RGB', 'Pro', 'Elite', 'Ultra',
-                    'Stealth'
-                ],
-                'headsets': ['Surround', 'Wireless', 'Noise-Cancelling', 'Pro', 'Elite', 'Ultra', 'RGB', 'Stealth',
-                    'Titan', 'Apex'
-                ],
-                'controllers': ['Wireless', 'Pro', 'Elite', 'Ultra', 'RGB', 'Stealth', 'Titan', 'Apex', 'Phantom',
-                    'Vortex'
-                ],
-                'monitors': ['Curved', 'OLED', 'UltraWide', 'G-Sync', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan',
-                    'Apex'
-                ],
-                'mice': ['Wireless', 'Ultra-Light', 'RGB', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex',
-                    'Phantom'
-                ],
-                'microphones': ['Cardioid', 'USB', 'XLR', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex',
-                    'Phantom'
-                ],
+                'gaming-pcs': ['Apex', 'Titan', 'Phantom', 'Vortex', 'Stealth', 'Fury', 'Omega', 'Nova', 'Eclipse', 'Quantum'],
+                'keyboards': ['Mechanical', 'Optical', 'Wireless', 'TKL', 'Compact', 'RGB', 'Pro', 'Elite', 'Ultra', 'Stealth'],
+                'headsets': ['Surround', 'Wireless', 'Noise-Cancelling', 'Pro', 'Elite', 'Ultra', 'RGB', 'Stealth', 'Titan', 'Apex'],
+                'controllers': ['Wireless', 'Pro', 'Elite', 'Ultra', 'RGB', 'Stealth', 'Titan', 'Apex', 'Phantom', 'Vortex'],
+                'monitors': ['Curved', 'OLED', 'UltraWide', 'G-Sync', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex'],
+                'mice': ['Wireless', 'Ultra-Light', 'RGB', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex', 'Phantom'],
+                'microphones': ['Cardioid', 'USB', 'XLR', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex', 'Phantom'],
                 'components': ['CPU', 'GPU', 'RAM', 'SSD', 'PSU', 'Motherboard', 'Cooling', 'Case', 'Cable', 'Adapter'],
                 'laptops': ['Gaming', 'Ultra', 'Pro', 'Elite', 'Stealth', 'Titan', 'Apex', 'Phantom', 'Vortex', 'Nova'],
-                'chairs': ['Racing', 'Ergonomic', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex', 'Phantom',
-                    'Vortex'
-                ]
+                'chairs': ['Racing', 'Ergonomic', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex', 'Phantom', 'Vortex']
             };
 
-            // Product tags per category
             const TAGS = {
-                'gaming-pcs': ['RTX 5090', 'RTX 5080', 'RTX 5070', 'RX 7900', 'i9-14900K', 'i7-14700K', 'Ryzen 9',
-                    'Ryzen 7', '64GB RAM', '2TB SSD'
-                ],
-                'keyboards': ['Mechanical', 'Optical', 'Wireless', 'TKL', 'RGB', 'Hot-Swap', 'Gateron', 'Cherry MX',
-                    'Linear', 'Tactile'
-                ],
-                'headsets': ['7.1 Surround', 'Wireless', 'Noise-Cancelling', 'RGB', '50mm Drivers', 'Pro', 'Elite',
-                    'Ultra', 'Stealth', 'Titan'
-                ],
-                'controllers': ['Wireless', 'Hall Effect', 'RGB', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex',
-                    'Phantom'
-                ],
+                'gaming-pcs': ['RTX 5090', 'RTX 5080', 'RTX 5070', 'RX 7900', 'i9-14900K', 'i7-14700K', 'Ryzen 9', 'Ryzen 7', '64GB RAM', '2TB SSD'],
+                'keyboards': ['Mechanical', 'Optical', 'Wireless', 'TKL', 'RGB', 'Hot-Swap', 'Gateron', 'Cherry MX', 'Linear', 'Tactile'],
+                'headsets': ['7.1 Surround', 'Wireless', 'Noise-Cancelling', 'RGB', '50mm Drivers', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan'],
+                'controllers': ['Wireless', 'Hall Effect', 'RGB', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex', 'Phantom'],
                 'monitors': ['4K', '144Hz', '240Hz', 'OLED', 'UltraWide', 'G-Sync', 'FreeSync', 'Pro', 'Elite', 'Ultra'],
-                'mice': ['Wireless', 'Ultra-Light', 'RGB', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex',
-                    'Phantom'
-                ],
-                'microphones': ['Cardioid', 'USB', 'XLR', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex',
-                    'Phantom'
-                ],
+                'mice': ['Wireless', 'Ultra-Light', 'RGB', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex', 'Phantom'],
+                'microphones': ['Cardioid', 'USB', 'XLR', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex', 'Phantom'],
                 'components': ['Gen4', 'Gen5', 'RGB', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex', 'Phantom'],
-                'laptops': ['RTX 5090', 'RTX 5080', 'OLED', '240Hz', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan',
-                    'Apex'
-                ],
-                'chairs': ['Racing', 'Ergonomic', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex', 'Phantom',
-                    'Vortex'
-                ]
+                'laptops': ['RTX 5090', 'RTX 5080', 'OLED', '240Hz', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex'],
+                'chairs': ['Racing', 'Ergonomic', 'Pro', 'Elite', 'Ultra', 'Stealth', 'Titan', 'Apex', 'Phantom', 'Vortex']
             };
 
             const products = [];
             let productId = 0;
 
-            // Generate 100 unique products: each category gets 10 products (distributed across 3 sections)
             for (let ci = 0; ci < CATEGORIES.length; ci++) {
                 const cat = CATEGORIES[ci];
                 const prefixes = NAME_PREFIXES[cat] || ['Pro', 'Elite', 'Ultra'];
                 const tags = TAGS[cat] || ['Premium', 'Pro', 'Elite'];
+                const imgPool = CATEGORY_IMAGES[cat];
 
-                // 10 products per category: 3 in new, 3 in top, 4 in deals
                 const perSection = [3, 3, 4];
                 let itemIdx = 0;
                 for (let si = 0; si < SECTIONS.length; si++) {
@@ -650,28 +687,26 @@
                         const name = `${prefix} ${CAT_DISPLAY[cat]} ${suffix}`.trim();
 
                         const base = PRICE_BASE[cat] || 200;
-                        const discount = 8 + Math.floor(Math.random() * 22); // 8–30%
+                        const discount = 8 + Math.floor(Math.random() * 22);
                         const price = Math.floor(base * (0.7 + Math.random() * 0.3));
                         const originalPrice = Math.floor(price / (1 - discount / 100));
-
                         const rating = (4.0 + Math.random() * 0.9).toFixed(1);
 
-                        // Use a deterministic seed based on product ID for picsum
-                        const seed = productId + 1000;
-                        const imgUrl = `https://picsum.photos/seed/${seed}/600/600`;
-                        // Also generate 4 more for carousel
-                        const extraSeeds = [seed + 1, seed + 2, seed + 3, seed + 4];
-                        const extraImages = extraSeeds.map(s =>
-                            `https://picsum.photos/seed/${s}/600/600`
-                        );
+                        // Select accurate images from category specific pools
+                        const primaryImg = imgPool[idx % imgPool.length];
+                        const extraImgs = [
+                            imgPool[(idx + 1) % imgPool.length],
+                            imgPool[(idx + 2) % imgPool.length],
+                            imgPool[(idx + 3) % imgPool.length]
+                        ];
 
                         products.push({
                             id: ++productId,
                             name: name,
                             category: cat,
                             section: section,
-                            image: imgUrl,
-                            images: [imgUrl, ...extraImages],
+                            image: primaryImg,
+                            images: [primaryImg, ...extraImgs],
                             rating: rating,
                             discount: discount,
                             originalPrice: originalPrice,
@@ -683,11 +718,10 @@
                 }
             }
 
-            // Shuffle a bit to mix sections visually
             products.sort(() => Math.random() - 0.5);
 
             // ================================================================
-            // 2. STATE
+            // 2. STATE & UI CONTROLLERS
             // ================================================================
             let cart = [];
             let currentSection = 'new-arrivals';
@@ -695,7 +729,6 @@
             let currentDetailProduct = null;
             let carouselIndex = 0;
 
-            // DOM refs
             const productGrid = document.getElementById('productGrid');
             const cartBadge = document.getElementById('cartBadge');
             const cartDrawer = document.getElementById('cartDrawer');
@@ -708,7 +741,6 @@
             const mobileSidebar = document.getElementById('mobileSidebar');
             const mobileSidebarOverlay = document.getElementById('mobileSidebarOverlay');
 
-            // Views
             const viewProducts = document.getElementById('viewProducts');
             const viewAbout = document.getElementById('viewAbout');
             const viewCareers = document.getElementById('viewCareers');
@@ -716,9 +748,6 @@
             const viewTerms = document.getElementById('viewTerms');
             const allViews = [viewProducts, viewAbout, viewCareers, viewPrivacy, viewTerms];
 
-            // ================================================================
-            // 3. HELPERS
-            // ================================================================
             function showToast(msg) {
                 toast.textContent = msg;
                 toast.classList.add('show');
@@ -742,14 +771,11 @@
                 return filtered.filter(p => p.section === currentSection);
             }
 
-            // ================================================================
-            // 4. RENDER PRODUCTS
-            // ================================================================
             function renderProductCard(p) {
                 return `
                 <div class="product-card bg-v-card rounded-2xl border border-v-border overflow-hidden neon-border flex flex-col" data-id="${p.id}">
                   <div class="relative overflow-hidden aspect-square bg-v-black">
-                    <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://picsum.photos/seed/fallback_${p.id}/600/600'">
+                    <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover" loading="lazy">
                     <span class="absolute top-3 left-3 badge-discount">-${p.discount}%</span>
                     <span class="absolute top-3 right-3 bg-v-dark/80 text-neon text-[10px] font-game px-2 py-1 rounded-full uppercase">${p.tag}</span>
                   </div>
@@ -768,8 +794,7 @@
             function renderAllProducts() {
                 const filtered = getFilteredProducts();
                 if (filtered.length === 0) {
-                    productGrid.innerHTML =
-                        '<div class="col-span-full text-center py-16 text-gray-500">No products found in this category.</div>';
+                    productGrid.innerHTML = '<div class="col-span-full text-center py-16 text-gray-500">No products found in this category.</div>';
                 } else {
                     productGrid.innerHTML = filtered.map(p => renderProductCard(p)).join('');
                 }
@@ -787,19 +812,14 @@
                         e.stopPropagation();
                         const id = parseInt(this.dataset.id);
                         const product = products.find(p => p.id === id);
-                        if (product) addToCart({ id: product.id, name: product.name, price: product
-                                .price, image: product.image });
+                        if (product) addToCart({ id: product.id, name: product.name, price: product.price, image: product.image });
                         this.textContent = '✓ Added';
                         this.classList.add('bg-green');
-                        setTimeout(() => { this.textContent = 'Add+';
-                            this.classList.remove('bg-green'); }, 800);
+                        setTimeout(() => { this.textContent = 'Add+'; this.classList.remove('bg-green'); }, 800);
                     });
                 });
             }
 
-            // ================================================================
-            // 5. CART
-            // ================================================================
             function addToCart(item) {
                 const existing = cart.find(i => i.id === item.id);
                 if (existing) existing.quantity++;
@@ -840,7 +860,7 @@
                     ${cart.length === 0 ? '<div class="text-center text-gray-500 py-16">Cart empty</div>' :
                       cart.map(item => `
                         <div class="flex gap-3 bg-v-card/60 rounded-xl p-3 border border-v-border">
-                          <img src="${item.image}" class="w-16 h-16 rounded-lg object-cover bg-v-black" onerror="this.src='https://picsum.photos/seed/cart_${item.id}/100/100'">
+                          <img src="${item.image}" class="w-16 h-16 rounded-lg object-cover bg-v-black">
                           <div class="flex-1 min-w-0">
                             <p class="text-white text-sm font-semibold truncate">${item.name}</p>
                             <p class="text-neon font-bold">$${(item.price * item.quantity).toFixed(2)}</p>
@@ -864,16 +884,11 @@
                 `;
             }
 
-            window.openCartDrawer = () => { cartDrawer.classList.add('open');
-                cartOverlay.classList.add('active'); };
-            window.closeCartDrawer = () => { cartDrawer.classList.remove('open');
-                cartOverlay.classList.remove('active'); };
+            window.openCartDrawer = () => { cartDrawer.classList.add('open'); cartOverlay.classList.add('active'); };
+            window.closeCartDrawer = () => { cartDrawer.classList.remove('open'); cartOverlay.classList.remove('active'); };
             document.getElementById('cartToggleBtn').addEventListener('click', openCartDrawer);
             window.removeFromCart = removeFromCart;
 
-            // ================================================================
-            // 6. CHECKOUT
-            // ================================================================
             window.openCheckoutModal = () => {
                 if (cart.length === 0) { showToast('Cart is empty!'); return; }
                 checkoutTotalDisplay.textContent = '$' + getCartTotal().toFixed(2);
@@ -885,17 +900,13 @@
                 e.preventDefault();
                 closeCheckoutModal();
                 document.getElementById('confirmOverlay').classList.add('active');
-                document.getElementById('confirmOrderId').textContent = 'Order #VX-' + Math.floor(Math.random() *
-                    900000 + 100000);
+                document.getElementById('confirmOrderId').textContent = 'Order #VX-' + Math.floor(Math.random() * 900000 + 100000);
                 cart = [];
                 updateCartUI();
                 renderAllProducts();
             };
             window.closeConfirmModal = () => document.getElementById('confirmOverlay').classList.remove('active');
 
-            // ================================================================
-            // 7. PRODUCT DETAIL
-            // ================================================================
             window.openProductDetail = (id) => {
                 const p = products.find(x => x.id === id);
                 if (!p) return;
@@ -911,12 +922,8 @@
 
                 const track = document.getElementById('carouselTrack');
                 const images = p.images && p.images.length ? p.images : [p.image, p.image];
-                track.innerHTML = images.map(src =>
-                    `<div class="w-full flex-shrink-0"><img src="${src}" class="w-full aspect-square object-cover rounded-xl bg-v-black" onerror="this.src='https://picsum.photos/seed/detail_${p.id}/600/600'"></div>`
-                ).join('');
-                document.getElementById('carouselDots').innerHTML = images.map((_, i) =>
-                    `<span class="w-3 h-3 rounded-full ${i===0?'bg-neon':'bg-gray-600'}"></span>`
-                ).join('');
+                track.innerHTML = images.map(src => `<div class="w-full flex-shrink-0"><img src="${src}" class="w-full aspect-square object-cover rounded-xl bg-v-black"></div>`).join('');
+                document.getElementById('carouselDots').innerHTML = images.map((_, i) => `<span class="w-3 h-3 rounded-full ${i===0?'bg-neon':'bg-gray-600'}"></span>`).join('');
                 track.style.transform = 'translateX(0)';
                 document.getElementById('productDetailOverlay').classList.add('active');
             };
@@ -945,24 +952,18 @@
 
             document.getElementById('detailAddToCart').addEventListener('click', () => {
                 if (currentDetailProduct) {
-                    addToCart({ id: currentDetailProduct.id, name: currentDetailProduct.name, price: currentDetailProduct
-                            .price, image: currentDetailProduct.image });
+                    addToCart({ id: currentDetailProduct.id, name: currentDetailProduct.name, price: currentDetailProduct.price, image: currentDetailProduct.image });
                     closeProductDetail();
                 }
             });
 
-            // ================================================================
-            // 8. PAGE NAVIGATION (About, Careers, Privacy, Terms)
-            // ================================================================
             function showView(viewId) {
                 allViews.forEach(v => v.classList.remove('active'));
                 const target = document.getElementById(viewId);
                 if (target) target.classList.add('active');
-                // scroll to top
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
 
-            // Footer / nav page links
             document.querySelectorAll('.nav-page-link').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -975,11 +976,9 @@
                 });
             });
 
-            // Logo goes back to products
             document.getElementById('logoLink').addEventListener('click', function(e) {
                 e.preventDefault();
                 showView('viewProducts');
-                // reset category and section
                 currentCategory = 'all';
                 currentSection = 'new-arrivals';
                 setActiveCategory('all');
@@ -988,9 +987,6 @@
                 renderAllProducts();
             });
 
-            // ================================================================
-            // 9. SECTION TABS (New / Top / Deals)
-            // ================================================================
             function updateSectionTabs(section) {
                 document.querySelectorAll('.section-tab').forEach(t => {
                     t.classList.remove('bg-neon', 'text-black');
@@ -1011,9 +1007,6 @@
                 });
             });
 
-            // ================================================================
-            // 10. CATEGORY FILTERS
-            // ================================================================
             function setActiveCategory(cat) {
                 currentCategory = cat;
                 document.querySelectorAll('.sidebar-link').forEach(l => {
@@ -1033,21 +1026,16 @@
 
             document.querySelectorAll('.sidebar-link, .category-nav-link').forEach(el => {
                 el.addEventListener('click', function() {
-                    // If we're on a non-products view, switch back
                     if (!viewProducts.classList.contains('active')) {
                         showView('viewProducts');
                     }
                     const cat = this.dataset.cat;
                     setActiveCategory(cat);
-                    // Update section tabs visual
                     updateSectionTabs(currentSection);
                     sectionTitle.textContent = SECTION_LABELS[currentSection] || '🔥 New Arrivals';
                 });
             });
 
-            // ================================================================
-            // 11. HERO SHOP NOW
-            // ================================================================
             document.getElementById('heroShopBtn').addEventListener('click', () => {
                 showView('viewProducts');
                 currentCategory = 'all';
@@ -1059,9 +1047,6 @@
                 document.getElementById('productGridSection').scrollIntoView({ behavior: 'smooth' });
             });
 
-            // ================================================================
-            // 12. SEARCH
-            // ================================================================
             searchInput.addEventListener('input', function() {
                 const q = this.value.toLowerCase().trim();
                 if (q.length < 2) { searchResults.classList.add('hidden'); return; }
@@ -1072,7 +1057,7 @@
                 ).slice(0, 8);
                 searchResults.innerHTML = matches.length ? matches.map(p => `
                       <div class="flex items-center gap-3 p-3 hover:bg-v-border/50 cursor-pointer" data-id="${p.id}">
-                        <img src="${p.image}" class="w-10 h-10 rounded-lg object-cover bg-v-black" onerror="this.src='https://picsum.photos/seed/s_${p.id}/100/100'">
+                        <img src="${p.image}" class="w-10 h-10 rounded-lg object-cover bg-v-black">
                         <div class="flex-1"><p class="text-white text-sm">${p.name}</p><p class="text-neon text-xs">$${p.price}</p></div>
                       </div>`).join('') :
                     '<div class="p-4 text-gray-500">No results</div>';
@@ -1082,16 +1067,13 @@
                         const id = parseInt(this.dataset.id);
                         const prod = products.find(p => p.id === id);
                         if (prod) {
-                            // Switch to products view and show the item
                             showView('viewProducts');
-                            // Set category to match product
                             currentCategory = prod.category;
                             currentSection = prod.section;
                             setActiveCategory(prod.category);
                             updateSectionTabs(prod.section);
                             sectionTitle.textContent = SECTION_LABELS[prod.section] || '🔥 New Arrivals';
                             renderAllProducts();
-                            // Open detail after render
                             setTimeout(() => openProductDetail(id), 100);
                         }
                         searchResults.classList.add('hidden');
@@ -1104,9 +1086,6 @@
                 if (!searchResults.contains(e.target) && e.target !== searchInput) searchResults.classList.add('hidden');
             });
 
-            // ================================================================
-            // 13. MOBILE SIDEBAR
-            // ================================================================
             document.getElementById('mobileSidebarToggle').addEventListener('click', () => {
                 mobileSidebar.classList.remove('-translate-x-full');
                 mobileSidebarOverlay.classList.remove('hidden');
@@ -1117,16 +1096,9 @@
             };
             mobileSidebarOverlay.addEventListener('click', closeMobileSidebar);
 
-            // ================================================================
-            // 14. ACCOUNT / WISHLIST (demo)
-            // ================================================================
             document.getElementById('accountBtn').addEventListener('click', () => showToast('🔐 Account sign-in (demo)'));
             document.getElementById('wishlistBtn').addEventListener('click', () => showToast('❤️ Added to wishlist (demo)'));
 
-            // ================================================================
-            // 15. INIT
-            // ================================================================
-            // Default: show products, all categories, new arrivals
             showView('viewProducts');
             currentCategory = 'all';
             currentSection = 'new-arrivals';
@@ -1136,11 +1108,8 @@
             renderAllProducts();
             updateCartUI();
 
-            // Highlight "All" in category nav
             document.querySelector('.category-nav-link[data-cat="all"]').style.color = '#00d4ff';
             document.querySelector('.category-nav-link[data-cat="all"]').style.fontWeight = '700';
-
-            console.log('✅ VORTEX initialized with', products.length, 'unique products');
         })();
     </script>
 </body>
