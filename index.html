@@ -295,6 +295,7 @@
             <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="keyboards">Keyboards</span>
             <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="mice">Mice</span>
             <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="headsets">Headsets</span>
+            <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="gaming-chairs">Gaming Chairs</span>
         </nav>
     </header>
 
@@ -304,12 +305,20 @@
         <!-- DESKTOP SIDEBAR -->
         <aside class="sidebar-desktop w-56 flex-shrink-0 hidden md:block">
             <div class="sticky top-28 bg-v-card rounded-2xl border border-v-border p-4 space-y-1">
-                <h3 class="font-game text-sm text-neon mb-3 uppercase">Categories</h3>
+                <!-- Company Section added above categories -->
+                <h3 class="font-game text-sm text-neon mb-3 uppercase">Company</h3>
+                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" onclick="showPage('about')">🏢 About Us</div>
+                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" onclick="showPage('careers')">💼 Careers</div>
+                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" onclick="showPage('terms')">📄 Terms & Cond.</div>
+                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" onclick="showPage('privacy')">🔒 Privacy Policy</div>
+
+                <h3 class="font-game text-sm text-neon mb-3 mt-6 uppercase">Categories</h3>
                 <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300 active" data-cat="all">🔥 All Products</div>
                 <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="gaming-pcs">🖥️ Gaming PCs</div>
                 <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="keyboards">⌨️ Keyboards</div>
                 <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="mice">🖱️ Mice</div>
                 <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="headsets">🎧 Headsets</div>
+                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="gaming-chairs">💺 Gaming Chairs</div>
             </div>
         </aside>
 
@@ -318,12 +327,22 @@
         <aside id="mobileSidebar" class="fixed top-0 left-0 w-72 h-full bg-v-dark border-r border-v-border z-50 transform -translate-x-full transition-transform md:hidden overflow-y-auto">
             <div class="p-5">
                 <button onclick="closeMobileSidebar()" class="text-gray-400 text-2xl float-right">&times;</button>
+                
                 <div class="space-y-2 mt-8">
+                    <!-- Company Section added above categories -->
+                    <h3 class="font-game text-sm text-neon mb-3 uppercase">Company</h3>
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" onclick="closeMobileSidebar(); showPage('about');">🏢 About Us</div>
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" onclick="closeMobileSidebar(); showPage('careers');">💼 Careers</div>
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" onclick="closeMobileSidebar(); showPage('terms');">📄 Terms & Cond.</div>
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" onclick="closeMobileSidebar(); showPage('privacy');">🔒 Privacy Policy</div>
+
+                    <h3 class="font-game text-sm text-neon mb-3 mt-6 uppercase">Categories</h3>
                     <div class="sidebar-link rounded-lg px-3 py-3 text-sm active" data-cat="all" onclick="closeMobileSidebar(); filterCategory('all');">🔥 All Gear</div>
                     <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="gaming-pcs" onclick="closeMobileSidebar(); filterCategory('gaming-pcs');">🖥️ Gaming PCs</div>
                     <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="keyboards" onclick="closeMobileSidebar(); filterCategory('keyboards');">⌨️ Keyboards</div>
                     <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="mice" onclick="closeMobileSidebar(); filterCategory('mice');">🖱️ Mice</div>
                     <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="headsets" onclick="closeMobileSidebar(); filterCategory('headsets');">🎧 Headsets</div>
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="gaming-chairs" onclick="closeMobileSidebar(); filterCategory('gaming-chairs');">💺 Gaming Chairs</div>
                 </div>
             </div>
         </aside>
@@ -342,7 +361,8 @@
                         <span class="text-neon font-game text-xs md:text-sm tracking-[0.3em] uppercase mb-3">Prestige Collection</span>
                         <h1 class="font-game text-3xl md:text-5xl font-black text-white mb-3 leading-tight">EXHALE THE<br><span class="bg-gradient-to-r from-neon to-purple bg-clip-text text-transparent">SMOOTHNESS</span></h1>
                         <p class="text-gray-300 text-sm md:text-base mb-5 max-w-md">Upgrade your battle station with India's premier pro-grade gaming hardware.</p>
-                        <button id="heroShopBtn" onclick="filterCategory('gaming-pcs')" class="btn-neon self-start px-8 py-3.5 rounded-full text-base font-bold">EXPLORE RIGS →</button>
+                        <!-- Fixed Explore Rigs Button -->
+                        <button id="heroShopBtn" onclick="filterCategory('gaming-pcs'); document.getElementById('productGridSection').scrollIntoView({behavior: 'smooth'});" class="btn-neon self-start px-8 py-3.5 rounded-full text-base font-bold">EXPLORE RIGS →</button>
                     </div>
                 </section>
 
@@ -357,6 +377,7 @@
 
             <!-- ---- VIEW: ABOUT US ---- -->
             <div id="viewAbout" class="view-section bg-v-card p-6 md:p-10 rounded-3xl border border-v-border">
+                <button onclick="showPage('products')" class="btn-neon px-5 py-2 rounded-full text-xs font-bold mb-6">← BACK TO STORE</button>
                 <h2 class="font-game text-2xl md:text-3xl text-white mb-4">About <span class="text-neon">VORTEX</span></h2>
                 <p class="text-gray-300 leading-relaxed mb-4">Founded in Bengaluru, India, VORTEX was born out of a relentless passion for high-performance gaming hardware. We engineer and curate elite gaming PCs, custom keyboards, high-DPI mice, and spatial audio headsets designed to give competitive gamers and creators the absolute edge.</p>
                 <p class="text-gray-300 leading-relaxed mb-4">Our mission is simple: to exhale smoothness into every frame, every keystroke, and every victory. Backed by rigorous benchmark testing, 3-year onsite warranties, and lightning-fast nationwide delivery, VORTEX is your definitive destination for pro-grade battle stations.</p>
@@ -364,6 +385,7 @@
 
             <!-- ---- VIEW: CAREERS ---- -->
             <div id="viewCareers" class="view-section bg-v-card p-6 md:p-10 rounded-3xl border border-v-border">
+                <button onclick="showPage('products')" class="btn-neon px-5 py-2 rounded-full text-xs font-bold mb-6">← BACK TO STORE</button>
                 <h2 class="font-game text-2xl md:text-3xl text-white mb-4">Careers at <span class="text-neon">VORTEX</span></h2>
                 <p class="text-gray-300 leading-relaxed mb-6">Want to build the future of gaming technology in India? Join our dynamic team of engineers, system builders, and esports enthusiasts in Bengaluru.</p>
                 <div class="space-y-4">
@@ -386,6 +408,7 @@
 
             <!-- ---- VIEW: TERMS & CONDITIONS ---- -->
             <div id="viewTerms" class="view-section bg-v-card p-6 md:p-10 rounded-3xl border border-v-border">
+                <button onclick="showPage('products')" class="btn-neon px-5 py-2 rounded-full text-xs font-bold mb-6">← BACK TO STORE</button>
                 <h2 class="font-game text-2xl md:text-3xl text-white mb-4">Terms & Conditions</h2>
                 <div class="text-gray-300 text-sm space-y-4 leading-relaxed">
                     <p>Welcome to VORTEX Gaming India. By accessing our website and purchasing our products, you agree to comply with and be bound by the following terms and conditions.</p>
@@ -400,6 +423,7 @@
 
             <!-- ---- VIEW: PRIVACY POLICY ---- -->
             <div id="viewPrivacy" class="view-section bg-v-card p-6 md:p-10 rounded-3xl border border-v-border">
+                <button onclick="showPage('products')" class="btn-neon px-5 py-2 rounded-full text-xs font-bold mb-6">← BACK TO STORE</button>
                 <h2 class="font-game text-2xl md:text-3xl text-white mb-4">Privacy Policy</h2>
                 <div class="text-gray-300 text-sm space-y-4 leading-relaxed">
                     <p>At VORTEX, we respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you visit our store.</p>
@@ -415,10 +439,7 @@
             <!-- FOOTER -->
             <footer class="border-t border-v-border pt-10 pb-6 mt-12">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
-                    <div>
-                        <h4 class="font-game text-neon text-lg mb-3">VORTEX INDIA</h4>
-                        <p class="text-gray-400">Elite gaming gear engineered for high FPS performance.</p>
-                    </div>
+                    <!-- Adjusted Footer layout & contents to better match requirements -->
                     <div>
                         <h4 class="text-white font-semibold mb-3">Company</h4>
                         <p><a href="#" onclick="showPage('about'); return false;" class="text-gray-400 hover:text-neon">About Us</a></p>
@@ -431,14 +452,19 @@
                         <p><a href="#" onclick="filterCategory('all'); return false;" class="text-gray-400 hover:text-neon">All Products</a></p>
                         <p><a href="#" onclick="filterCategory('gaming-pcs'); return false;" class="text-gray-400 hover:text-neon">Gaming PCs</a></p>
                         <p><a href="#" onclick="filterCategory('keyboards'); return false;" class="text-gray-400 hover:text-neon">Keyboards</a></p>
-                        <p><a href="#" onclick="showPage('terms'); return false;" class="text-gray-400 hover:text-neon">Terms & Conditions</a></p>
-                        <p><a href="#" onclick="showPage('privacy'); return false;" class="text-gray-400 hover:text-neon">Privacy Policy</a></p>
+                        <p><a href="#" onclick="filterCategory('mice'); return false;" class="text-gray-400 hover:text-neon">Mice</a></p>
+                        <p><a href="#" onclick="filterCategory('headsets'); return false;" class="text-gray-400 hover:text-neon">Headsets</a></p>
+                        <p><a href="#" onclick="filterCategory('gaming-chairs'); return false;" class="text-gray-400 hover:text-neon">Gaming Chairs</a></p>
                     </div>
                     <div>
                         <h4 class="text-white font-semibold mb-3">Support</h4>
                         <p class="text-gray-400">📍 Tech Park, Bengaluru, IN</p>
                         <p class="text-gray-400">📞 +91 1800-VORTEX-IN</p>
                         <p class="text-neon">📧 support@vortexgear.in</p>
+                    </div>
+                    <div>
+                        <h4 class="font-game text-neon text-lg mb-3">VORTEX INDIA</h4>
+                        <p class="text-gray-400">Elite gaming gear engineered for high FPS performance.</p>
                     </div>
                 </div>
                 <div class="text-center text-gray-500 text-xs mt-8 pt-6 border-t border-v-border">© 2026 Vortex Gaming India Pvt. Ltd. All rights reserved.</div>
@@ -837,6 +863,14 @@
                 image: 'https://images.unsplash.com/photo-1563298723-dcfebaa392e3?w=800&fit=crop', 
                 description: 'Dual wireless simultaneous Bluetooth + 2.4G audio mixing headset with hot-swappable battery.',
                 specs: ['Dual Wireless: Simultaneous 2.4GHz + Bluetooth mixing', 'Battery System: Hot-Swappable Dual Battery System (Infinite Play)', 'Drivers: Planar Magnetic Elite Drivers', 'Microphone: Broadcast Studio Grade', 'Software: Advanced Sound Customizer']
+            },
+            
+            // 1 GAMING CHAIR
+            {
+                id: 'chair-1', category: 'gaming-chairs', title: 'VORTEX Ergonomic Titan Chair', price: 14999, originalPrice: 19999,
+                image: 'https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=800&fit=crop',
+                description: 'Premium ergonomic gaming chair engineered for absolute comfort during prolonged sessions.',
+                specs: ['Material: Premium PU Leather & Breathable Mesh', 'Armrests: 4D Adjustable', 'Recline: Up to 165 Degrees', 'Support: Memory Foam Lumbar & Neck Pillows', 'Base: Heavy Duty Aluminum Class 4 Gas Lift']
             }
         ];
 
