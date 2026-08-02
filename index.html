@@ -261,16 +261,13 @@
             </div>
         </div>
 
-        <!-- Category Nav -->
+        <!-- Category Nav (About, Terms, Privacy buttons removed as requested) -->
         <nav class="hidden md:flex max-w-7xl mx-auto px-4 pb-2 gap-1 overflow-x-auto text-sm font-medium text-gray-400 scrollbar-hide">
             <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="all">All Gear</span>
             <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="gaming-pcs">Gaming PCs</span>
             <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="keyboards">Keyboards</span>
             <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="mice">Mice</span>
             <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="headsets">Headsets</span>
-            <span class="cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap border-l border-v-border ml-2 pl-4" onclick="showPage('about')">About Us</span>
-            <span class="cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" onclick="showPage('terms')">Terms</span>
-            <span class="cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" onclick="showPage('privacy')">Privacy</span>
         </nav>
     </header>
 
@@ -286,11 +283,6 @@
                 <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="keyboards">⌨️ Keyboards</div>
                 <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="mice">🖱️ Mice</div>
                 <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="headsets">🎧 Headsets</div>
-
-                <h3 class="font-game text-sm text-neon pt-4 mb-2 uppercase border-t border-v-border">Company</h3>
-                <div class="sidebar-link rounded-lg px-3 py-2 text-xs text-gray-400" onclick="showPage('about')">📖 About Us</div>
-                <div class="sidebar-link rounded-lg px-3 py-2 text-xs text-gray-400" onclick="showPage('terms')">📜 Terms & Conditions</div>
-                <div class="sidebar-link rounded-lg px-3 py-2 text-xs text-gray-400" onclick="showPage('privacy')">🔒 Privacy Policy</div>
             </div>
         </aside>
 
@@ -300,17 +292,11 @@
             <div class="p-5">
                 <button onclick="closeMobileSidebar()" class="text-gray-400 text-2xl float-right">&times;</button>
                 <div class="space-y-2 mt-8">
-                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm active" data-cat="all" onclick="closeMobileSidebar(); showPage('products');">🔥 All Gear</div>
-                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="gaming-pcs" onclick="closeMobileSidebar(); showPage('products');">🖥️ Gaming PCs</div>
-                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="keyboards" onclick="closeMobileSidebar(); showPage('products');">⌨️ Keyboards</div>
-                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="mice" onclick="closeMobileSidebar(); showPage('products');">🖱️ Mice</div>
-                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="headsets" onclick="closeMobileSidebar(); showPage('products');">🎧 Headsets</div>
-
-                    <div class="pt-4 border-t border-v-border space-y-2">
-                        <div class="px-3 py-2 text-xs text-gray-400" onclick="closeMobileSidebar(); showPage('about');">📖 About Us</div>
-                        <div class="px-3 py-2 text-xs text-gray-400" onclick="closeMobileSidebar(); showPage('terms');">📜 Terms & Conditions</div>
-                        <div class="px-3 py-2 text-xs text-gray-400" onclick="closeMobileSidebar(); showPage('privacy');">🔒 Privacy Policy</div>
-                    </div>
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm active" data-cat="all" onclick="closeMobileSidebar(); filterCategory('all');">🔥 All Gear</div>
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="gaming-pcs" onclick="closeMobileSidebar(); filterCategory('gaming-pcs');">🖥️ Gaming PCs</div>
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="keyboards" onclick="closeMobileSidebar(); filterCategory('keyboards');">⌨️ Keyboards</div>
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="mice" onclick="closeMobileSidebar(); filterCategory('mice');">🖱️ Mice</div>
+                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="headsets" onclick="closeMobileSidebar(); filterCategory('headsets');">🎧 Headsets</div>
                 </div>
             </div>
         </aside>
@@ -318,7 +304,7 @@
         <!-- ===== MAIN CONTENT ===== -->
         <main class="flex-1 min-w-0">
 
-            <!-- ---- VIEW 1: PRODUCTS STORE ---- -->
+            <!-- ---- VIEW: PRODUCTS STORE ---- -->
             <div id="viewProducts" class="view-section active">
 
                 <!-- Hero Section -->
@@ -342,57 +328,6 @@
                 </section>
             </div>
 
-            <!-- ---- VIEW 2: ABOUT US PAGE ---- -->
-            <div id="viewAbout" class="view-section bg-v-card p-6 md:p-10 rounded-3xl border border-v-border space-y-6">
-                <h1 class="font-game text-3xl text-neon mb-2">About VORTEX</h1>
-                <p class="text-gray-300 text-base leading-relaxed">
-                    Founded in 2026, <strong>VORTEX</strong> was built by gamers, for gamers. Our mission is simple: <em>Exhale The Smoothness</em>. We engineer and deliver top-tier, ultra-responsive gaming rigs and peripherals designed to give esports athletes and competitive enthusiasts in India a decisive edge.
-                </p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
-                    <div class="p-4 bg-v-dark rounded-2xl border border-v-border">
-                        <h3 class="font-game text-neon text-lg mb-2">⚡ 1ms Performance</h3>
-                        <p class="text-xs text-gray-400">Zero-lag hardware handpicked and stress-tested for frame-rate stability.</p>
-                    </div>
-                    <div class="p-4 bg-v-dark rounded-2xl border border-v-border">
-                        <h3 class="font-game text-purple text-lg mb-2">🇮🇳 Nationwide Express</h3>
-                        <p class="text-xs text-gray-400">Fast, insured shipping across tier-1, tier-2, and tier-3 Indian cities.</p>
-                    </div>
-                    <div class="p-4 bg-v-dark rounded-2xl border border-v-border">
-                        <h3 class="font-game text-orange text-lg mb-2">🛡️ 3-Year Warranty</h3>
-                        <p class="text-xs text-gray-400">Dedicated local customer support and seamless replacements.</p>
-                    </div>
-                </div>
-                <button onclick="showPage('products')" class="btn-neon px-6 py-2.5 rounded-full text-xs font-bold mt-4">BACK TO STORE</button>
-            </div>
-
-            <!-- ---- VIEW 3: TERMS & CONDITIONS PAGE ---- -->
-            <div id="viewTerms" class="view-section bg-v-card p-6 md:p-10 rounded-3xl border border-v-border space-y-6">
-                <h1 class="font-game text-3xl text-neon mb-2">Terms & Conditions</h1>
-                <p class="text-gray-400 text-xs">Last Updated: August 2026</p>
-                <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
-                    <h3 class="text-white font-semibold text-base">1. General Terms</h3>
-                    <p>By placing an order on VORTEX India, you agree to adhere to our sales policies, shipping terms, and hardware warranty agreements.</p>
-                    <h3 class="text-white font-semibold text-base">2. Payments & UPI</h3>
-                    <p>We support secure payments via Instant UPI (Google Pay, PhonePe, Paytm, BHIM) and standard debit/credit cards. Orders are dispatched upon payment verification.</p>
-                    <h3 class="text-white font-semibold text-base">3. Order Fulfillment & Shipping</h3>
-                    <p>Delivery timeframes range from 2 to 5 business days across India depending on delivery pincode.</p>
-                </div>
-                <button onclick="showPage('products')" class="btn-neon px-6 py-2.5 rounded-full text-xs font-bold mt-4">BACK TO STORE</button>
-            </div>
-
-            <!-- ---- VIEW 4: PRIVACY POLICY PAGE ---- -->
-            <div id="viewPrivacy" class="view-section bg-v-card p-6 md:p-10 rounded-3xl border border-v-border space-y-6">
-                <h1 class="font-game text-3xl text-neon mb-2">Privacy Policy</h1>
-                <p class="text-gray-400 text-xs">Last Updated: August 2026</p>
-                <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
-                    <h3 class="text-white font-semibold text-base">1. Data Collection</h3>
-                    <p>We collect essential shipping addresses, contact numbers, and login credentials to process purchases and offer customer support.</p>
-                    <h3 class="text-white font-semibold text-base">2. Security</h3>
-                    <p>Your payment information and UPI interactions are encrypted using enterprise SSL protocols. VORTEX never stores full payment card details or private PINs.</p>
-                </div>
-                <button onclick="showPage('products')" class="btn-neon px-6 py-2.5 rounded-full text-xs font-bold mt-4">BACK TO STORE</button>
-            </div>
-
             <!-- FOOTER -->
             <footer class="border-t border-v-border pt-10 pb-6 mt-12">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
@@ -401,10 +336,10 @@
                         <p class="text-gray-400">Elite gaming gear engineered for high FPS performance.</p>
                     </div>
                     <div>
-                        <h4 class="text-white font-semibold mb-3">Quick Links</h4>
-                        <p><a href="#" onclick="showPage('about'); return false;" class="text-gray-400 hover:text-neon">📖 About Us</a></p>
-                        <p><a href="#" onclick="showPage('terms'); return false;" class="text-gray-400 hover:text-neon">📜 Terms & Conditions</a></p>
-                        <p><a href="#" onclick="showPage('privacy'); return false;" class="text-gray-400 hover:text-neon">🔒 Privacy Policy</a></p>
+                        <h4 class="text-white font-semibold mb-3">Quick Navigation</h4>
+                        <p><a href="#" onclick="filterCategory('all'); return false;" class="text-gray-400 hover:text-neon">🔥 All Products</a></p>
+                        <p><a href="#" onclick="filterCategory('gaming-pcs'); return false;" class="text-gray-400 hover:text-neon">🖥️ Gaming PCs</a></p>
+                        <p><a href="#" onclick="filterCategory('keyboards'); return false;" class="text-gray-400 hover:text-neon">⌨️ Keyboards</a></p>
                     </div>
                     <div>
                         <h4 class="text-white font-semibold mb-3">Support</h4>
@@ -531,30 +466,38 @@
         </div>
     </div>
 
-    <!-- ===== PRODUCT DETAIL MODAL (SINGLE STATIC IMAGE WITH INFO) ===== -->
+    <!-- ===== EXPANDED PRODUCT DETAIL MODAL (DETAILED SPECIFICATIONS) ===== -->
     <div id="productDetailOverlay" class="modal-overlay" onclick="closeProductDetail()">
-        <div class="bg-v-dark border border-v-border rounded-3xl p-6 w-full max-w-4xl mx-4 max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
+        <div class="bg-v-dark border border-v-border rounded-3xl p-6 md:p-8 w-full max-w-3xl mx-4 max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
             <button onclick="closeProductDetail()" class="text-gray-400 hover:text-white text-2xl float-right">&times;</button>
             <div class="flex flex-col md:flex-row gap-6 mt-4">
                 <div class="w-full md:w-1/2 relative">
-                    <div class="relative overflow-hidden rounded-2xl aspect-square bg-v-black">
+                    <div class="relative overflow-hidden rounded-2xl aspect-square bg-v-black border border-v-border">
                         <img id="detailImage" src="" alt="Product Image" class="w-full h-full object-cover">
                     </div>
                 </div>
                 <div class="w-full md:w-1/2 flex flex-col justify-between">
                     <div>
-                        <h2 class="text-2xl font-bold text-white" id="detailName"></h2>
-                        <p class="text-purple text-sm uppercase mt-1 font-semibold" id="detailCategory"></p>
-                        <div class="mt-4 flex items-center">
-                            <span class="text-gray-500 line-through text-lg" id="detailOriginalPrice"></span>
-                            <span class="text-neon text-3xl font-bold ml-2" id="detailPrice"></span>
+                        <span class="text-xs text-purple font-semibold uppercase tracking-wider" id="detailCategory"></span>
+                        <h2 class="text-xl md:text-2xl font-bold text-white mt-1" id="detailName"></h2>
+                        <div class="mt-3 flex items-center">
+                            <span class="text-neon text-2xl font-bold" id="detailPrice"></span>
+                            <span class="text-gray-500 line-through text-base ml-3" id="detailOriginalPrice"></span>
                             <span class="badge-discount ml-3" id="detailDiscount"></span>
                         </div>
-                        <p class="text-gray-300 mt-4 text-sm leading-relaxed" id="detailDescription"></p>
+                        <p class="text-gray-300 mt-3 text-sm leading-relaxed" id="detailDescription"></p>
+                        
+                        <!-- Extra Detailed Specs Section Added -->
+                        <div class="mt-4 pt-4 border-t border-v-border space-y-2">
+                            <h4 class="font-game text-xs text-neon uppercase tracking-wider">Expanded Specifications:</h4>
+                            <ul class="text-xs text-gray-400 space-y-1.5" id="detailSpecsList">
+                                <!-- Dynamic specs list injected via JS -->
+                            </ul>
+                        </div>
                     </div>
                     <div class="flex gap-3 mt-6">
-                        <button id="detailAddToCart" class="btn-neon px-6 py-3.5 rounded-full font-bold flex-1">ADD TO CART</button>
-                        <button id="detailWishlistBtn" class="bg-v-card border border-v-border hover:border-neon text-white p-3.5 rounded-full">❤️</button>
+                        <button id="detailAddToCart" class="btn-neon px-6 py-3 rounded-full text-sm font-bold flex-1">ADD TO CART</button>
+                        <button id="detailWishlistBtn" class="bg-v-card border border-v-border hover:border-neon text-white p-3 rounded-full">❤️</button>
                     </div>
                 </div>
             </div>
@@ -564,56 +507,256 @@
     <!-- ===== JAVASCRIPT ===== -->
     <script>
         // ------------------------------------------------------------------
-        // EXACT PRODUCTS ARRAY WITH 40 UNIQUE HIGH-RES IMAGES
+        // PRODUCTS ARRAY ENRICHED WITH DETAILED SPECS
         // ------------------------------------------------------------------
         const PRODUCTS = [
             // 10 GAMING PCs
-            { id: 'pc-1', category: 'gaming-pcs', title: 'VORTEX Titan Rig V1 (RTX 5060 / Intel i7)', price: 79999, originalPrice: 94999, image: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=800&fit=crop', description: 'High-speed desktop rig engineered for 1080p ray-traced gaming with custom dual AIO cooling.' },
-            { id: 'pc-2', category: 'gaming-pcs', title: 'VORTEX Titan Rig V2 (RTX 5062 / Intel i7)', price: 91999, originalPrice: 106999, image: 'https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?w=800&fit=crop', description: 'Enhanced desktop rig featuring 32GB DDR5 RAM, 1TB NVMe Gen4 SSD, and custom glass side panel.' },
-            { id: 'pc-3', category: 'gaming-pcs', title: 'VORTEX Titan Rig V3 (RTX 5064 / Intel i9)', price: 103999, originalPrice: 118999, image: 'https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=800&fit=crop', description: 'Monster performance desktop for esports enthusiasts and creators featuring liquid cooling.' },
-            { id: 'pc-4', category: 'gaming-pcs', title: 'VORTEX Titan Rig V4 (RTX 5066 / Intel i9)', price: 115999, originalPrice: 130999, image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&fit=crop', description: 'Built for high framerate 2K gaming with fully customizable addressable RGB light strips.' },
-            { id: 'pc-5', category: 'gaming-pcs', title: 'VORTEX Titan Rig V5 (RTX 5068 / Ryzen 7)', price: 127999, originalPrice: 142999, image: 'https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=800&fit=crop', description: 'Flagship AMD Ryzen architecture paired with high-frequency memory for peak gaming throughput.' },
-            { id: 'pc-6', category: 'gaming-pcs', title: 'VORTEX Titan Rig V6 (RTX 5070 / Ryzen 9)', price: 139999, originalPrice: 154999, image: 'https://images.unsplash.com/photo-1547082299-de196ea013d6?w=800&fit=crop', description: 'Dual-chamber thermal isolation desktop chassis for near-silent full load gaming operation.' },
-            { id: 'pc-7', category: 'gaming-pcs', title: 'VORTEX Titan Rig V7 (RTX 5072 / Intel i9)', price: 151999, originalPrice: 166999, image: 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=800&fit=crop', description: 'Ultra-tier workstation & gaming hybrid rig loaded with 64GB DDR5 memory.' },
-            { id: 'pc-8', category: 'gaming-pcs', title: 'VORTEX Titan Rig V8 (RTX 5074 / Intel i9)', price: 163999, originalPrice: 178999, image: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800&fit=crop', description: 'Extreme gaming setup with PCIe Gen5 SSD speeds and custom sleeved cable extensions.' },
-            { id: 'pc-9', category: 'gaming-pcs', title: 'VORTEX Titan Rig V9 (RTX 5076 / Ryzen 9)', price: 175999, originalPrice: 190999, image: 'https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=800&fit=crop', description: 'Esports tournament spec PC with custom loop water cooling and hand-tuned overclocks.' },
-            { id: 'pc-10', category: 'gaming-pcs', title: 'VORTEX Titan Rig V10 (RTX 5080 Extreme)', price: 187999, originalPrice: 202999, image: 'https://images.unsplash.com/photo-1624705009806-6da72bf3a9ec?w=800&fit=crop', description: 'The absolute pinnacle of gaming PCs. Uncompromised 4K 240Hz gaming capabilities.' },
+            { 
+                id: 'pc-1', category: 'gaming-pcs', title: 'VORTEX Titan Rig V1 (RTX 5060 / Intel i7)', price: 79999, originalPrice: 94999, 
+                image: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=800&fit=crop', 
+                description: 'High-speed desktop rig engineered for 1080p ray-traced gaming with custom dual AIO cooling.',
+                specs: ['Processor: Intel Core i7-14700F', 'Graphics: NVIDIA GeForce RTX 5060 8GB', 'RAM: 16GB DDR5 5600MHz RGB', 'Storage: 1TB NVMe Gen4 SSD', 'Cooling: Vortex Liquid AIO 240mm', 'OS: Windows 11 Home Pre-activated']
+            },
+            { 
+                id: 'pc-2', category: 'gaming-pcs', title: 'VORTEX Titan Rig V2 (RTX 5062 / Intel i7)', price: 91999, originalPrice: 106999, 
+                image: 'https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?w=800&fit=crop', 
+                description: 'Enhanced desktop rig featuring 32GB DDR5 RAM, 1TB NVMe Gen4 SSD, and custom glass side panel.',
+                specs: ['Processor: Intel Core i7-14700K', 'Graphics: NVIDIA GeForce RTX 5062 12GB', 'RAM: 32GB DDR5 6000MHz', 'Storage: 1TB NVMe Gen4 SSD + 2TB HDD', 'Chassis: Tempered Glass ARGB Mid-Tower', 'Power Supply: 750W 80+ Gold Certified']
+            },
+            { 
+                id: 'pc-3', category: 'gaming-pcs', title: 'VORTEX Titan Rig V3 (RTX 5064 / Intel i9)', price: 103999, originalPrice: 118999, 
+                image: 'https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=800&fit=crop', 
+                description: 'Monster performance desktop for esports enthusiasts and creators featuring liquid cooling.',
+                specs: ['Processor: Intel Core i9-14900KF', 'Graphics: NVIDIA GeForce RTX 5064 16GB', 'RAM: 32GB DDR5 High Speed', 'Storage: 2TB Ultra NVMe Gen4 SSD', 'Cooling: 360mm Triple Fan AIO', 'Connectivity: Wi-Fi 6E + Bluetooth 5.3']
+            },
+            { 
+                id: 'pc-4', category: 'gaming-pcs', title: 'VORTEX Titan Rig V4 (RTX 5066 / Intel i9)', price: 115999, originalPrice: 130999, 
+                image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&fit=crop', 
+                description: 'Built for high framerate 2K gaming with fully customizable addressable RGB light strips.',
+                specs: ['Processor: Intel Core i9-14900KS', 'Graphics: NVIDIA GeForce RTX 5066 16GB', 'RAM: 64GB DDR5 6400MHz', 'Storage: 2TB NVMe Gen4 SSD', 'Motherboard: Z790 Gaming Wi-Fi', 'PSU: 850W Fully Modular ATX 3.0']
+            },
+            { 
+                id: 'pc-5', category: 'gaming-pcs', title: 'VORTEX Titan Rig V5 (RTX 5068 / Ryzen 7)', price: 127999, originalPrice: 142999, 
+                image: 'https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=800&fit=crop', 
+                description: 'Flagship AMD Ryzen architecture paired with high-frequency memory for peak gaming throughput.',
+                specs: ['Processor: AMD Ryzen 7 7800X3D', 'Graphics: NVIDIA GeForce RTX 5068', 'RAM: 32GB DDR5 CL30 EXPO', 'Storage: 2TB NVMe M.2 SSD', 'Cooling: Deepcool LT720 AIO', 'Chassis: Dual Chamber Panoramic Glass']
+            },
+            { 
+                id: 'pc-6', category: 'gaming-pcs', title: 'VORTEX Titan Rig V6 (RTX 5070 / Ryzen 9)', price: 139999, originalPrice: 154999, 
+                image: 'https://images.unsplash.com/photo-1547082299-de196ea013d6?w=800&fit=crop', 
+                description: 'Dual-chamber thermal isolation desktop chassis for near-silent full load gaming operation.',
+                specs: ['Processor: AMD Ryzen 9 7950X3D', 'Graphics: NVIDIA GeForce RTX 5070', 'RAM: 64GB DDR5 RAM', 'Storage: 4TB NVMe Gen4 Storage', 'Cooling: Custom Loop Config Option', 'Warranty: 3 Years Onsite Comprehensive']
+            },
+            { 
+                id: 'pc-7', category: 'gaming-pcs', title: 'VORTEX Titan Rig V7 (RTX 5072 / Intel i9)', price: 151999, originalPrice: 166999, 
+                image: 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=800&fit=crop', 
+                description: 'Ultra-tier workstation & gaming hybrid rig loaded with 64GB DDR5 memory.',
+                specs: ['Processor: Intel Core i9-14900KS', 'Graphics: NVIDIA GeForce RTX 5072', 'RAM: 64GB DDR5 Dominator', 'Storage: 2TB Gen5 NVMe SSD', 'Motherboard: ROG Maximus Hero', 'PSU: 1000W Platinum Rated']
+            },
+            { 
+                id: 'pc-8', category: 'gaming-pcs', title: 'VORTEX Titan Rig V8 (RTX 5074 / Intel i9)', price: 163999, originalPrice: 178999, 
+                image: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800&fit=crop', 
+                description: 'Extreme gaming setup with PCIe Gen5 SSD speeds and custom sleeved cable extensions.',
+                specs: ['Processor: Intel Core i9 Extreme', 'Graphics: RTX 5074 Enthusiast Edition', 'RAM: 64GB High Performance', 'Storage: 4TB Gen5 SSD Array', 'Cables: Custom Braided Sleeved Cables', 'Cooling: Premium 360mm Liquid Cooler']
+            },
+            { 
+                id: 'pc-9', category: 'gaming-pcs', title: 'VORTEX Titan Rig V9 (RTX 5076 / Ryzen 9)', price: 175999, originalPrice: 190999, 
+                image: 'https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=800&fit=crop', 
+                description: 'Esports tournament spec PC with custom loop water cooling and hand-tuned overclocks.',
+                specs: ['Processor: AMD Ryzen 9 7950X', 'Graphics: RTX 5076 Pro OC', 'RAM: 64GB DDR5 tuned', 'Storage: 2TB NVMe + 4TB HDD', 'Cooling: Hard-tube Custom Water Loop', 'Chassis: Full Tower Aluminum']
+            },
+            { 
+                id: 'pc-10', category: 'gaming-pcs', title: 'VORTEX Titan Rig V10 (RTX 5080 Extreme)', price: 187999, originalPrice: 202999, 
+                image: 'https://images.unsplash.com/photo-1624705009806-6da72bf3a9ec?w=800&fit=crop', 
+                description: 'The absolute pinnacle of gaming PCs. Uncompromised 4K 240Hz gaming capabilities.',
+                specs: ['Processor: Intel Core i9-14900KS Overclocked', 'Graphics: NVIDIA GeForce RTX 5080 Extreme', 'RAM: 128GB DDR5 RAM Kit', 'Storage: 8TB High-Speed Gen5 NVMe SSD', 'Cooling: Custom Dual Radiator Liquid Loop', 'PSU: 1200W Titanium Certified']
+            },
 
             // 10 KEYBOARDS
-            { id: 'kb-1', category: 'keyboards', title: 'VORTEX CyberKeys K1 Optical', price: 2999, originalPrice: 3999, image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&fit=crop', description: 'Rapid-trigger magnetic optical switch keyboard with hot-swappable PBT keycaps.' },
-            { id: 'kb-2', category: 'keyboards', title: 'VORTEX CyberKeys K2 Mechanical', price: 3699, originalPrice: 4699, image: 'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=800&fit=crop', description: 'Compact 75% layout mechanical keyboard with lubricated tactile switches and sound-dampening foam.' },
-            { id: 'kb-3', category: 'keyboards', title: 'VORTEX CyberKeys K3 Wireless', price: 4399, originalPrice: 5399, image: 'https://images.unsplash.com/photo-1595225476474-87563907a212?w=800&fit=crop', description: 'Tri-mode wireless (2.4G/Bluetooth/USB-C) mech keyboard with South-facing RGB lighting.' },
-            { id: 'kb-4', category: 'keyboards', title: 'VORTEX CyberKeys K4 Custom', price: 5099, originalPrice: 6099, image: 'https://images.unsplash.com/photo-1541140134513-88a483a9f07d?w=800&fit=crop', description: 'CNC anodized aluminum body mech board designed for supreme acoustics and feel.' },
-            { id: 'kb-5', category: 'keyboards', title: 'VORTEX CyberKeys K5 TKL', price: 5799, originalPrice: 6799, image: 'https://images.unsplash.com/photo-1626218174358-7769486c4b79?w=800&fit=crop', description: 'Tenkeyless tournament layout with ultra-responsive linear red optical switches.' },
-            { id: 'kb-6', category: 'keyboards', title: 'VORTEX CyberKeys K6 Hall-Effect', price: 6499, originalPrice: 7499, image: 'https://images.unsplash.com/photo-1601445638532-3c6f6c326212?w=800&fit=crop', description: 'Magnetic Hall-Effect switches allowing custom per-key actuation distance adjustments.' },
-            { id: 'kb-7', category: 'keyboards', title: 'VORTEX CyberKeys K7 Silent', price: 7199, originalPrice: 8199, image: 'https://images.unsplash.com/photo-1563191911-e65f8655fe77?w=800&fit=crop', description: 'Ultra-quiet linear switches ideal for silent late-night gaming and office productivity.' },
-            { id: 'kb-8', category: 'keyboards', title: 'VORTEX CyberKeys K8 Retro', price: 7899, originalPrice: 8899, image: 'https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=800&fit=crop', description: 'Retro aesthetic keycaps with modern hot-swap capabilities and customizable OLED status display.' },
-            { id: 'kb-9', category: 'keyboards', title: 'VORTEX CyberKeys K9 RGB Pro', price: 8599, originalPrice: 9599, image: 'https://images.unsplash.com/photo-1589578228447-e1a4e481c6c8?w=800&fit=crop', description: 'Per-key 16.8 million color RGB with customizable side glow underglow strips.' },
-            { id: 'kb-10', category: 'keyboards', title: 'VORTEX CyberKeys K10 Wireless Mini', price: 9299, originalPrice: 10299, image: 'https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=800&fit=crop', description: '60% ultra-compact form factor designed for maximum desk space and rapid mouse flicks.' },
+            { 
+                id: 'kb-1', category: 'keyboards', title: 'VORTEX CyberKeys K1 Optical', price: 2999, originalPrice: 3999, 
+                image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&fit=crop', 
+                description: 'Rapid-trigger magnetic optical switch keyboard with hot-swappable PBT keycaps.',
+                specs: ['Switches: Magnetic Optical Switches', 'Layout: 80% TKL Compact', 'Keycaps: Double-shot PBT', 'Backlight: Per-key RGB', 'Polling Rate: 8000Hz Hyper-Polling', 'Connection: Detachable USB-C Braided Cable']
+            },
+            { 
+                id: 'kb-2', category: 'keyboards', title: 'VORTEX CyberKeys K2 Mechanical', price: 3699, originalPrice: 4699, 
+                image: 'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=800&fit=crop', 
+                description: 'Compact 75% layout mechanical keyboard with lubricated tactile switches and sound-dampening foam.',
+                specs: ['Switches: Pre-lubed Tactile Brown', 'Layout: 75% Space Saver', 'Acoustics: Silicone Sound Dampening Layer', 'Hot-Swap: Universal 5-pin Sockets', 'Battery: 4000mAh Rechargeable']
+            },
+            { 
+                id: 'kb-3', category: 'keyboards', title: 'VORTEX CyberKeys K3 Wireless', price: 4399, originalPrice: 5399, 
+                image: 'https://images.unsplash.com/photo-1595225476474-87563907a212?w=800&fit=crop', 
+                description: 'Tri-mode wireless (2.4G/Bluetooth/USB-C) mech keyboard with South-facing RGB lighting.',
+                specs: ['Connectivity: Tri-Mode (2.4GHz / BT 5.1 / USB-C)', 'Switches: Linear Red Mechanical', 'RGB: South-Facing LEDs', 'Battery Life: Up to 200 Hours (Backlight Off)', 'Compatibility: Windows / Mac / Android']
+            },
+            { 
+                id: 'kb-4', category: 'keyboards', title: 'VORTEX CyberKeys K4 Custom', price: 5099, originalPrice: 6099, 
+                image: 'https://images.unsplash.com/photo-1541140134513-88a483a9f07d?w=800&fit=crop', 
+                description: 'CNC anodized aluminum body mech board designed for supreme acoustics and feel.',
+                specs: ['Case Material: CNC Anodized Aluminum', 'Mounting Style: Gasket Mounted', 'Switches: Custom Vortex Cream Linear', 'Plate: Polycarbonate Flex-Cut', 'Software: VIA / QMK Programmable Support']
+            },
+            { 
+                id: 'kb-5', category: 'keyboards', title: 'VORTEX CyberKeys K5 TKL', price: 5799, originalPrice: 6799, 
+                image: 'https://images.unsplash.com/photo-1626218174358-7769486c4b79?w=800&fit=crop', 
+                description: 'Tenkeyless tournament layout with ultra-responsive linear red optical switches.',
+                specs: ['Layout: Tenkeyless (87 Keys)', 'Response Time: 0.2ms Ultra-Fast', 'Keycaps: Dye-Sublimated PBT', 'Anti-Ghosting: Full N-Key Rollover', 'Weight: 920g Solid Build']
+            },
+            { 
+                id: 'kb-6', category: 'keyboards', title: 'VORTEX CyberKeys K6 Hall-Effect', price: 6499, originalPrice: 7499, 
+                image: 'https://images.unsplash.com/photo-1601445638532-3c6f6c326212?w=800&fit=crop', 
+                description: 'Magnetic Hall-Effect switches allowing custom per-key actuation distance adjustments.',
+                specs: ['Switch Type: Adjustable Hall-Effect Magnetic', 'Actuation Range: 0.1mm to 4.0mm', 'Rapid Trigger: Supported', 'Polling Rate: 8000Hz Real-time', 'Chassis: Frosted Acrylic Bottom Shell']
+            },
+            { 
+                id: 'kb-7', category: 'keyboards', title: 'VORTEX CyberKeys K7 Silent', price: 7199, originalPrice: 8199, 
+                image: 'https://images.unsplash.com/photo-1563191911-e65f8655fe77?w=800&fit=crop', 
+                description: 'Ultra-quiet linear switches ideal for silent late-night gaming and office productivity.',
+                specs: ['Switches: Silent Linear Dampened', 'Noise Level: Under 35 dB', 'Layout: Full Size 104 Keys with Media Roller', 'Connectivity: Wireless Dual-Link', 'Wrist Rest: Ergonomic Magnetic Included']
+            },
+            { 
+                id: 'kb-8', category: 'keyboards', title: 'VORTEX CyberKeys K8 Retro', price: 7899, originalPrice: 8899, 
+                image: 'https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=800&fit=crop', 
+                description: 'Retro aesthetic keycaps with modern hot-swap capabilities and customizable OLED status display.',
+                specs: ['Display: Smart OLED Status Screen', 'Design: Vintage 90s Grey Aesthetic', 'Switches: Clicky / Tactile options', 'Hot-Swappable: Yes (3/5 pin compatible)', 'Connectivity: Bluetooth & USB-C']
+            },
+            { 
+                id: 'kb-9', category: 'keyboards', title: 'VORTEX CyberKeys K9 RGB Pro', price: 8599, originalPrice: 9599, 
+                image: 'https://images.unsplash.com/photo-1589578228447-e1a4e481c6c8?w=800&fit=crop', 
+                description: 'Per-key 16.8 million color RGB with customizable side glow underglow strips.',
+                specs: ['Lighting: 360-degree Side Underglow + Per-Key RGB', 'Switches: Optical Speed Silver', 'Frame: Brushed Gunmetal Steel Plate', 'Onboard Memory: Store up to 5 profiles', 'Cable: Braided Type-C Gold Plated']
+            },
+            { 
+                id: 'kb-10', category: 'keyboards', title: 'VORTEX CyberKeys K10 Wireless Mini', price: 9299, originalPrice: 10299, 
+                image: 'https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=800&fit=crop', 
+                description: '60% ultra-compact form factor designed for maximum desk space and rapid mouse flicks.',
+                specs: ['Layout: 60% Ultra-Compact (61 keys)', 'Switches: Premium Lubricated Mechanical', 'Connectivity: 2.4GHz Wireless + Type-C', 'Weight: 580g Portable Design', 'Keycaps: Shine-Through Pudding PBT']
+            },
 
             // 10 MICE
-            { id: 'mouse-1', category: 'mice', title: 'VORTEX Phantom Pro M1 Wireless', price: 1499, originalPrice: 2199, image: 'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=800&fit=crop', description: 'Ultra-lightweight 49g ergonomic wireless gaming mouse with 30,000 DPI 8K polling optical sensor.' },
-            { id: 'mouse-2', category: 'mice', title: 'VORTEX Phantom Pro M2 RGB', price: 1999, originalPrice: 2699, image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=800&fit=crop', description: 'High-precision gaming mouse with honey-comb shell for effortless glide and breathability.' },
-            { id: 'mouse-3', category: 'mice', title: 'VORTEX Phantom Pro M3 Lightweight', price: 2499, originalPrice: 3199, image: 'https://images.unsplash.com/photo-1629429408209-1f912961dbd8?w=800&fit=crop', description: 'Flawless 26K DPI optical sensor with zero smoothing, acceleration, or filtering.' },
-            { id: 'mouse-4', category: 'mice', title: 'VORTEX Phantom Pro M4 Ergonomic', price: 2999, originalPrice: 3699, image: 'https://images.unsplash.com/photo-1605773527852-c546a8584ea3?w=800&fit=crop', description: 'Contoured palm rest ergonomics with 100% pure virgin PTFE feet for frictionless motion.' },
-            { id: 'mouse-5', category: 'mice', title: 'VORTEX Phantom Pro M5 Dual-Mode', price: 3499, originalPrice: 4199, image: 'https://images.unsplash.com/photo-1563298723-dcfebaa392e3?w=800&fit=crop', description: 'Seamless switching between 2.4GHz low-latency wireless and Bluetooth 5.2 connectivity.' },
-            { id: 'mouse-6', category: 'mice', title: 'VORTEX Phantom Pro M6 FPS Edition', price: 3999, originalPrice: 4699, image: 'https://images.unsplash.com/photo-1613141411244-0e4ac259d217?w=800&fit=crop', description: 'Dedicated sniper clutch thumb button for instant sensitivity drop in precision aim moments.' },
-            { id: 'mouse-7', category: 'mice', title: 'VORTEX Phantom Pro M7 MMO', price: 4499, originalPrice: 5199, image: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=800&fit=crop', description: '12 side-button grid for rapid macro access in MMOs and complex video editing software.' },
-            { id: 'mouse-8', category: 'mice', title: 'VORTEX Phantom Pro M8 Ultralight', price: 4999, originalPrice: 5699, image: 'https://images.unsplash.com/photo-1586105251261-72a756497a11?w=800&fit=crop', description: 'Sub-42 gram carbon fiber shell construction for competitive esports aim stability.' },
-            { id: 'mouse-9', category: 'mice', title: 'VORTEX Phantom Pro M9 Precision', price: 5499, originalPrice: 6199, image: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=800&fit=crop', description: 'Optical switches rated for 90 million clicks with instantaneous response time.' },
-            { id: 'mouse-10', category: 'mice', title: 'VORTEX Phantom Pro M10 Glass Glide', price: 5999, originalPrice: 6699, image: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=800&fit=crop', description: 'Equipped with custom tempered glass skates for maximum speed on cloth pads.' },
+            { 
+                id: 'mouse-1', category: 'mice', title: 'VORTEX Phantom Pro M1 Wireless', price: 1499, originalPrice: 2199, 
+                image: 'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=800&fit=crop', 
+                description: 'Ultra-lightweight 49g ergonomic wireless gaming mouse with 30,000 DPI 8K polling optical sensor.',
+                specs: ['Weight: 49g Ultra-Lightweight', 'Sensor: PAW3395 30,000 DPI Optical', 'Polling Rate: 8000Hz Wireless Dongle included', 'Switches: Optical 90M Click Life', 'Battery: Up to 90 Hours Continuous Play']
+            },
+            { 
+                id: 'mouse-2', category: 'mice', title: 'VORTEX Phantom Pro M2 RGB', price: 1999, originalPrice: 2699, 
+                image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=800&fit=crop', 
+                description: 'High-precision gaming mouse with honey-comb shell for effortless glide and breathability.',
+                specs: ['Design: Ventilated Honeycomb Shell', 'Sensor: 26,000 DPI Gaming Grade', 'RGB: Adjustable Chroma Loop Lighting', 'Skates: 100% Pure PTFE Glides', 'Buttons: 6 Programmable Macro Keys']
+            },
+            { 
+                id: 'mouse-3', category: 'mice', title: 'VORTEX Phantom Pro M3 Lightweight', price: 2499, originalPrice: 3199, 
+                image: 'https://images.unsplash.com/photo-1629429408209-1f912961dbd8?w=800&fit=crop', 
+                description: 'Flawless 26K DPI optical sensor with zero smoothing, acceleration, or filtering.',
+                specs: ['Sensor Tracking: 650 IPS, 50G Acceleration', 'Weight: 53 grams symmetrical', 'Connection: Low-latency 2.4GHz wireless', 'Charging: Fast USB-C Cable (Charge while playing)', 'Coating: Matte anti-slip sweat-resistant grip']
+            },
+            { 
+                id: 'mouse-4', category: 'mice', title: 'VORTEX Phantom Pro M4 Ergonomic', price: 2999, originalPrice: 3699, 
+                image: 'https://images.unsplash.com/photo-1605773527852-c546a8584ea3?w=800&fit=crop', 
+                description: 'Contoured palm rest ergonomics with 100% pure virgin PTFE feet for frictionless motion.',
+                specs: ['Shape: Right-Handed Ergonomic Contour', 'Sensor: 26K Precision Optical', 'Switches: Mechanical Omron 50M', 'Skates: Extra Large Virgin PTFE', 'On-Board Memory: 3 Profile Slots']
+            },
+            { 
+                id: 'mouse-5', category: 'mice', title: 'VORTEX Phantom Pro M5 Dual-Mode', price: 3499, originalPrice: 4199, 
+                image: 'https://images.unsplash.com/photo-1563298723-dcfebaa392e3?w=800&fit=crop', 
+                description: 'Seamless switching between 2.4GHz low-latency wireless and Bluetooth 5.2 connectivity.',
+                specs: ['Dual-Mode: 2.4G RF + Bluetooth 5.2', 'Sensor: PixArt 3395 High Accuracy', 'Battery Indicator: LED status light', 'Weight: 68g Balanced Feel', 'Customization: Vortex Control Hub Software']
+            },
+            { 
+                id: 'mouse-6', category: 'mice', title: 'VORTEX Phantom Pro M6 FPS Edition', price: 3999, originalPrice: 4699, 
+                image: 'https://images.unsplash.com/photo-1613141411244-0e4ac259d217?w=800&fit=crop', 
+                description: 'Dedicated sniper clutch thumb button for instant sensitivity drop in precision aim moments.',
+                specs: ['Special Feature: Removable Sniper Clutch Button', 'DPI Range: 100 - 32,000 adjustable on-the-fly', 'Response: 1ms click latency', 'Grip Style: Palm / Claw hybrid', 'Cable: Ultra-flexible Paracord USB-C']
+            },
+            { 
+                id: 'mouse-7', category: 'mice', title: 'VORTEX Phantom Pro M7 MMO', price: 4499, originalPrice: 5199, 
+                image: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=800&fit=crop', 
+                description: '12 side-button grid for rapid macro access in MMOs and complex video editing software.',
+                specs: ['Side Buttons: 12-Button Grid Layout', 'Total Buttons: 16 Programmable Controls', 'Sensor: High precision optical sensor', 'Ergonomics: Wide thumb rest ledge', 'Weight: 95g solid stability']
+            },
+            { 
+                id: 'mouse-8', category: 'mice', title: 'VORTEX Phantom Pro M8 Ultralight', price: 4999, originalPrice: 5699, 
+                image: 'https://images.unsplash.com/photo-1586105251261-72a756497a11?w=800&fit=crop', 
+                description: 'Sub-42 gram carbon fiber shell construction for competitive esports aim stability.',
+                specs: ['Weight: Sub-42g Extreme Ultralight', 'Shell: Carbon Fiber Composite', 'Sensor: Flagship 30K Optical Engine', 'Polling Rate: Native 4000Hz support', 'Glide: Rounded edge pure PTFE skates']
+            },
+            { 
+                id: 'mouse-9', category: 'mice', title: 'VORTEX Phantom Pro M9 Precision', price: 5499, originalPrice: 6199, 
+                image: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=800&fit=crop', 
+                description: 'Optical switches rated for 90 million clicks with instantaneous response time.',
+                specs: ['Switch Durability: 90 Million Clicks Optical', 'Sensor: Custom Tuned Esports Sensor', 'Max Speed: 700 IPS tracking', 'Connectivity: Tri-connection capability', 'Software: Macro & DPI Customization Suite']
+            },
+            { 
+                id: 'mouse-10', category: 'mice', title: 'VORTEX Phantom Pro M10 Glass Glide', price: 5999, originalPrice: 6699, 
+                image: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=800&fit=crop', 
+                description: 'Equipped with custom tempered glass skates for maximum speed on cloth pads.',
+                specs: ['Skates: Tempered Aluminosilicate Glass Feet', 'Sensor: 32,000 DPI Max Resolution', 'Weight: 60g precision tuned', 'Battery: 100 Hours endurance', 'Package: Includes replacement glass skates']
+            },
 
             // 10 HEADSETS
-            { id: 'headset-1', category: 'headsets', title: 'VORTEX Apex Surround H1', price: 2499, originalPrice: 3299, image: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800&fit=crop', description: 'Spatial 7.1 surround sound gaming headset with 50mm Titanium Drivers and noise-canceling mic.' },
-            { id: 'headset-2', category: 'headsets', title: 'VORTEX Apex Surround H2 Wireless', price: 3099, originalPrice: 3899, image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&fit=crop', description: '2.4GHz lossless wireless audio transmission with 40-hour battery life.' },
-            { id: 'headset-3', category: 'headsets', title: 'VORTEX Apex Surround H3 Studio', price: 3699, originalPrice: 4499, image: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800&fit=crop', description: 'Audiophile-grade flat frequency response drivers for crystal clear footstep audio location.' },
-            { id: 'headset-4', category: 'headsets', title: 'VORTEX Apex Surround H4 RGB', price: 4299, originalPrice: 5099, image: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800&fit=crop', description: 'Breathable cooling-gel ear cushions paired with vibrant earcup RGB lighting.' },
-            { id: 'headset-5', category: 'headsets', title: 'VORTEX Apex Surround H5 Pro Mic', price: 4899, originalPrice: 5699, image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&fit=crop', description: 'Broadcast-quality detachable cardioid microphone with pop filter included.' },
-            { id: 'headset-6', category: 'headsets', title: 'VORTEX Apex Surround H6 ANC', price: 5499, originalPrice: 6299, image: 'https://images.unsplash.com/photo-1578319439584-104c94d37305?w=800&fit=crop', description: 'Active Noise Cancellation technology blocks out ambient room noise completely.' },
-            { id: 'headset-7', category: 'headsets', title: 'VORTEX Apex Surround H7 Lightweight', price: 6099, originalPrice: 6899, image: 'https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?w=800&fit=crop', description: 'Featherweight 220g headband design for long tournament marathon sessions.' },
-            { id: 'headset-8', category: 'headsets', title: 'VORTEX Apex Surround H8 Dual Driver', price: 6699, originalPrice: 7499, image: 'https://images.unsplash.com/photo-1599669454699-248893623440?w=800&fit=crop', description: 'Dual chamber drivers separating bass frequencies from mids and highs for clarity.' },
-            { id: 'headset-9', category: 'headsets', title: 'VORTEX Apex Surround H9 Carbon', price: 7299, originalPrice: 8099, image: 'https://images.unsplash.com/photo-1545127398-14699f92334b?w=800&fit=crop', description: 'Reinforced carbon fiber headband construction with plush memory foam earcups.' },
-            { id: 'headset-10', category: 'headsets', title: 'VORTEX Apex Surround H10 Wireless Pro', price: 7899, originalPrice: 8699, image: 'https://images.unsplash.com/photo-1563298723-dcfebaa392e3?w=800&fit=crop', description: 'Dual wireless simultaneous Bluetooth + 2.4G audio mixing headset with hot-swappable battery.' }
+            { 
+                id: 'headset-1', category: 'headsets', title: 'VORTEX Apex Surround H1', price: 2499, originalPrice: 3299, 
+                image: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800&fit=crop', 
+                description: 'Spatial 7.1 surround sound gaming headset with 50mm Titanium Drivers and noise-canceling mic.',
+                specs: ['Drivers: 50mm Titanium Dynamic Drivers', 'Audio: Virtual 7.1 Surround Sound', 'Microphone: Unidirectional Noise-Canceling', 'Ear Cushions: Breathable Memory Foam Fabric', 'Connection: 3.5mm Jack + USB Audio Adapter']
+            },
+            { 
+                id: 'headset-2', category: 'headsets', title: 'VORTEX Apex Surround H2 Wireless', price: 3099, originalPrice: 3899, 
+                image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&fit=crop', 
+                description: '2.4GHz lossless wireless audio transmission with 40-hour battery life.',
+                specs: ['Wireless: 2.4GHz Lossless Ultra-Low Latency', 'Battery Life: 40 Hours continuous playback', 'Drivers: 50mm Neodymium', 'Weight: 275g Lightweight Frame', 'Controls: On-ear volume & mic mute toggles']
+            },
+            { 
+                id: 'headset-3', category: 'headsets', title: 'VORTEX Apex Surround H3 Studio', price: 3699, originalPrice: 4499, 
+                image: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800&fit=crop', 
+                description: 'Audiophile-grade flat frequency response drivers for crystal clear footstep audio location.',
+                specs: ['Frequency Response: 10Hz - 40,000Hz Hi-Res', 'Acoustic Tuning: Studio Mastered for FPS Footsteps', 'Ear Pads: Protein Leather Luxury Cushion', 'Mic: Studio Grade Pop Filtered Boom', 'Frame: Aluminum Reinforced Headband']
+            },
+            { 
+                id: 'headset-4', category: 'headsets', title: 'VORTEX Apex Surround H4 RGB', price: 4299, originalPrice: 5099, 
+                image: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800&fit=crop', 
+                description: 'Breathable cooling-gel ear cushions paired with vibrant earcup RGB lighting.',
+                specs: ['Cooling: Infused Cooling Gel Ear Cups', 'RGB: Dynamic Earcup Flow Lighting', 'Drivers: 53mm Custom Tuned Drivers', 'Connectivity: USB Digital Direct', 'Software: Vortex Audio Equalizer Suite']
+            },
+            { 
+                id: 'headset-5', category: 'headsets', title: 'VORTEX Apex Surround H5 Pro Mic', price: 4899, originalPrice: 5699, 
+                image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&fit=crop', 
+                description: 'Broadcast-quality detachable cardioid microphone with pop filter included.',
+                specs: ['Microphone: 9.9mm Broadcast Cardioid Boom', 'Noise Rejection: AI Environmental Noise Cancellation', 'Drivers: 50mm Hybrid Diaphragm', 'Weight: 290g balanced weight distribution', 'Cables: Braided detachable audio cables']
+            },
+            { 
+                id: 'headset-6', category: 'headsets', title: 'VORTEX Apex Surround H6 ANC', price: 5499, originalPrice: 6299, 
+                image: 'https://images.unsplash.com/photo-1578319439584-104c94d37305?w=800&fit=crop', 
+                description: 'Active Noise Cancellation technology blocks out ambient room noise completely.',
+                specs: ['ANC: Hybrid Active Noise Cancellation (-38dB)', 'Transparency Mode: Ambient awareness switch', 'Battery: 35 Hours with ANC Enabled', 'Drivers: Dual chamber acoustic drivers', 'Build: Premium matte finish folding design']
+            },
+            { 
+                id: 'headset-7', category: 'headsets', title: 'VORTEX Apex Surround H7 Lightweight', price: 6099, originalPrice: 6899, 
+                image: 'https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?w=800&fit=crop', 
+                description: 'Featherweight 220g headband design for long tournament marathon sessions.',
+                specs: ['Weight: 220g Featherweight Architecture', 'Headband: Suspended elastic cloth band', 'Drivers: Neodymium High Efficiency', 'Impedance: 32 Ohm low power draw', 'Compatibility: PC, PS5, Xbox, Nintendo Switch, Mobile']
+            },
+            { 
+                id: 'headset-8', category: 'headsets', title: 'VORTEX Apex Surround H8 Dual Driver', price: 6699, originalPrice: 7499, 
+                image: 'https://images.unsplash.com/photo-1599669454699-248893623440?w=800&fit=crop', 
+                description: 'Dual chamber drivers separating bass frequencies from mids and highs for clarity.',
+                specs: ['Driver System: Dual Chamber (Separate Bass & Highs)', 'Soundstage: Immersive 3D Positional Audio', 'Mic: Retractable unidirectional boom', 'Ear Cushions: Extra plush memory foam', 'Warranty: 2 Year Replacement Warranty']
+            },
+            { 
+                id: 'headset-9', category: 'headsets', title: 'VORTEX Apex Surround H9 Carbon', price: 7299, originalPrice: 8099, 
+                image: 'https://images.unsplash.com/photo-1545127398-14699f92334b?w=800&fit=crop', 
+                description: 'Reinforced carbon fiber headband construction with plush memory foam earcups.',
+                specs: ['Headband: Pure Carbon Fiber Reinforced Structure', 'Drivers: 50mm Titanium Hi-Fi', 'Audio Channels: 7.1 Dolby Atmos Support', 'Connection: Wireless 2.4G + Bluetooth + Wired', 'Battery: 50 Hours Max Endurance']
+            },
+            { 
+                id: 'headset-10', category: 'headsets', title: 'VORTEX Apex Surround H10 Wireless Pro', price: 7899, originalPrice: 8699, 
+                image: 'https://images.unsplash.com/photo-1563298723-dcfebaa392e3?w=800&fit=crop', 
+                description: 'Dual wireless simultaneous Bluetooth + 2.4G audio mixing headset with hot-swappable battery.',
+                specs: ['Dual Wireless: Simultaneous 2.4GHz + Bluetooth mixing', 'Battery System: Hot-Swappable Dual Battery System (Infinite Play)', 'Drivers: Planar Magnetic Elite Drivers', 'Microphone: Broadcast Studio Grade', 'Software: Advanced Sound Customizer']
+            }
         ];
 
         // ------------------------------------------------------------------
@@ -638,14 +781,11 @@
         });
 
         // ------------------------------------------------------------------
-        // PAGE NAVIGATION (PRODUCTS / ABOUT / TERMS / PRIVACY)
+        // PAGE NAVIGATION (PRODUCTS ONLY NOW)
         // ------------------------------------------------------------------
         function showPage(pageId) {
             document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
-            if (pageId === 'about') document.getElementById('viewAbout').classList.add('active');
-            else if (pageId === 'terms') document.getElementById('viewTerms').classList.add('active');
-            else if (pageId === 'privacy') document.getElementById('viewPrivacy').classList.add('active');
-            else document.getElementById('viewProducts').classList.add('active');
+            document.getElementById('viewProducts').classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -739,14 +879,14 @@
         }
 
         // ------------------------------------------------------------------
-        // PRODUCT MODAL (STATIC IMAGE WITH INFO)
+        // PRODUCT MODAL WITH DETAILED SPECS
         // ------------------------------------------------------------------
         function openProductDetail(id) {
             selectedProductForModal = PRODUCTS.find(p => p.id === id);
             if (!selectedProductForModal) return;
 
             document.getElementById('detailName').innerText = selectedProductForModal.title;
-            document.getElementById('detailCategory').innerText = selectedProductForModal.category;
+            document.getElementById('detailCategory').innerText = selectedProductForModal.category.replace('-', ' ');
             document.getElementById('detailPrice').innerText = `₹${selectedProductForModal.price.toLocaleString('en-IN')}`;
             document.getElementById('detailOriginalPrice').innerText = `₹${selectedProductForModal.originalPrice.toLocaleString('en-IN')}`;
             document.getElementById('detailDescription').innerText = selectedProductForModal.description;
@@ -754,6 +894,14 @@
            
             const discount = Math.round(((selectedProductForModal.originalPrice - selectedProductForModal.price) / selectedProductForModal.originalPrice) * 100);
             document.getElementById('detailDiscount').innerText = `${discount}% OFF`;
+
+            // Render specs list inside modal
+            const specsContainer = document.getElementById('detailSpecsList');
+            if (selectedProductForModal.specs && selectedProductForModal.specs.length > 0) {
+                specsContainer.innerHTML = selectedProductForModal.specs.map(spec => `<li>• ${spec}</li>`).join('');
+            } else {
+                specsContainer.innerHTML = `<li>• Premium grade hardware built for durability and high-performance esports gaming.</li>`;
+            }
 
             document.getElementById('detailAddToCart').onclick = (e) => addToCart(e, selectedProductForModal.id);
             document.getElementById('detailWishlistBtn').onclick = (e) => toggleWishlist(e, selectedProductForModal.id);
