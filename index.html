@@ -82,6 +82,23 @@
             transform: translateY(-2px);
         }
 
+        /* ===== WELCOME INTRO SCREEN ===== */
+        #welcomeScreen {
+            position: fixed;
+            inset: 0;
+            background: #09090b;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        #welcomeScreen.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
         /* ===== TICKER ===== */
         @keyframes ticker {
             0% { transform: translateX(100%); }
@@ -217,6 +234,16 @@
 </head>
 <body>
 
+    <!-- ===== WELCOME INTRO OVERLAY SCREEN ===== -->
+    <div id="welcomeScreen">
+        <div class="text-center px-4 max-w-2xl">
+            <h1 class="font-game text-4xl md:text-6xl font-black tracking-wider bg-gradient-to-r from-neon via-purple to-orange bg-clip-text text-transparent mb-4">VORTEX</h1>
+            <p class="text-xl md:text-2xl font-game text-white mb-2">Welcome to VORTEX</p>
+            <p class="text-gray-400 text-sm md:text-base mb-8">Let's build your dream battle station or find something beautiful.</p>
+            <button onclick="enterWebsite()" class="btn-neon px-10 py-4 rounded-full text-lg font-bold tracking-wider">ENTER STORE →</button>
+        </div>
+    </div>
+
     <!-- Toast Notification -->
     <div id="toast" class="toast"></div>
 
@@ -261,7 +288,7 @@
             </div>
         </div>
 
-        <!-- Category Nav (About, Terms, Privacy buttons removed as requested) -->
+        <!-- Category Nav -->
         <nav class="hidden md:flex max-w-7xl mx-auto px-4 pb-2 gap-1 overflow-x-auto text-sm font-medium text-gray-400 scrollbar-hide">
             <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="all">All Gear</span>
             <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="gaming-pcs">Gaming PCs</span>
@@ -328,6 +355,63 @@
                 </section>
             </div>
 
+            <!-- ---- VIEW: ABOUT US ---- -->
+            <div id="viewAbout" class="view-section bg-v-card p-6 md:p-10 rounded-3xl border border-v-border">
+                <h2 class="font-game text-2xl md:text-3xl text-white mb-4">About <span class="text-neon">VORTEX</span></h2>
+                <p class="text-gray-300 leading-relaxed mb-4">Founded in Bengaluru, India, VORTEX was born out of a relentless passion for high-performance gaming hardware. We engineer and curate elite gaming PCs, custom keyboards, high-DPI mice, and spatial audio headsets designed to give competitive gamers and creators the absolute edge.</p>
+                <p class="text-gray-300 leading-relaxed mb-4">Our mission is simple: to exhale smoothness into every frame, every keystroke, and every victory. Backed by rigorous benchmark testing, 3-year onsite warranties, and lightning-fast nationwide delivery, VORTEX is your definitive destination for pro-grade battle stations.</p>
+            </div>
+
+            <!-- ---- VIEW: CAREERS ---- -->
+            <div id="viewCareers" class="view-section bg-v-card p-6 md:p-10 rounded-3xl border border-v-border">
+                <h2 class="font-game text-2xl md:text-3xl text-white mb-4">Careers at <span class="text-neon">VORTEX</span></h2>
+                <p class="text-gray-300 leading-relaxed mb-6">Want to build the future of gaming technology in India? Join our dynamic team of engineers, system builders, and esports enthusiasts in Bengaluru.</p>
+                <div class="space-y-4">
+                    <div class="bg-v-dark p-4 rounded-xl border border-v-border flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <h3 class="text-white font-semibold text-lg">Senior PC System Integration Engineer</h3>
+                            <p class="text-xs text-gray-400">Bengaluru, IN • Full-Time • Hardware Engineering</p>
+                        </div>
+                        <button onclick="showToast('Application sent successfully! 🚀')" class="btn-neon px-5 py-2 rounded-full text-xs font-bold">APPLY NOW</button>
+                    </div>
+                    <div class="bg-v-dark p-4 rounded-xl border border-v-border flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <h3 class="text-white font-semibold text-lg">Esports Community & Partnerships Manager</h3>
+                            <p class="text-xs text-gray-400">Remote / Bengaluru • Full-Time • Marketing</p>
+                        </div>
+                        <button onclick="showToast('Application sent successfully! 🚀')" class="btn-neon px-5 py-2 rounded-full text-xs font-bold">APPLY NOW</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ---- VIEW: TERMS & CONDITIONS ---- -->
+            <div id="viewTerms" class="view-section bg-v-card p-6 md:p-10 rounded-3xl border border-v-border">
+                <h2 class="font-game text-2xl md:text-3xl text-white mb-4">Terms & Conditions</h2>
+                <div class="text-gray-300 text-sm space-y-4 leading-relaxed">
+                    <p>Welcome to VORTEX Gaming India. By accessing our website and purchasing our products, you agree to comply with and be bound by the following terms and conditions.</p>
+                    <h3 class="text-white font-semibold text-base pt-2">1. Orders & Pricing</h3>
+                    <p>All prices listed on VORTEX are in Indian Rupees (INR) and inclusive of applicable GST unless stated otherwise. We reserve the right to modify or discontinue any product without prior notice.</p>
+                    <h3 class="text-white font-semibold text-base pt-2">2. Shipping & Delivery</h3>
+                    <p>We offer free standard shipping across India on all orders above ₹2,499. Delivery times typically range between 3 to 7 business days depending on your location.</p>
+                    <h3 class="text-white font-semibold text-base pt-2">3. Warranty & Returns</h3>
+                    <p>All pre-built gaming rigs and peripherals come with standard manufacturer warranties and our 60-day hassle-free return policy for unopened or defective items.</p>
+                </div>
+            </div>
+
+            <!-- ---- VIEW: PRIVACY POLICY ---- -->
+            <div id="viewPrivacy" class="view-section bg-v-card p-6 md:p-10 rounded-3xl border border-v-border">
+                <h2 class="font-game text-2xl md:text-3xl text-white mb-4">Privacy Policy</h2>
+                <div class="text-gray-300 text-sm space-y-4 leading-relaxed">
+                    <p>At VORTEX, we respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you visit our store.</p>
+                    <h3 class="text-white font-semibold text-base pt-2">1. Information We Collect</h3>
+                    <p>We collect details you provide during account creation, checkout, or support interactions, including your name, email address, shipping address, and phone number.</p>
+                    <h3 class="text-white font-semibold text-base pt-2">2. How We Use Your Data</h3>
+                    <p>Your information is utilized solely to process orders, provide customer support updates, send tracking details, and improve our hardware catalog.</p>
+                    <h3 class="text-white font-semibold text-base pt-2">3. Security</h3>
+                    <p>All payment transactions are encrypted via secure gateway protocols (SSL) and processed through trusted UPI and banking partners.</p>
+                </div>
+            </div>
+
             <!-- FOOTER -->
             <footer class="border-t border-v-border pt-10 pb-6 mt-12">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
@@ -336,22 +420,25 @@
                         <p class="text-gray-400">Elite gaming gear engineered for high FPS performance.</p>
                     </div>
                     <div>
+                        <h4 class="text-white font-semibold mb-3">Company</h4>
+                        <p><a href="#" onclick="showPage('about'); return false;" class="text-gray-400 hover:text-neon">About Us</a></p>
+                        <p><a href="#" onclick="showPage('careers'); return false;" class="text-gray-400 hover:text-neon">Career</a></p>
+                        <p><a href="#" onclick="showPage('terms'); return false;" class="text-gray-400 hover:text-neon">Terms & Condition</a></p>
+                        <p><a href="#" onclick="showPage('privacy'); return false;" class="text-gray-400 hover:text-neon">Privacy Policy</a></p>
+                    </div>
+                    <div>
                         <h4 class="text-white font-semibold mb-3">Quick Navigation</h4>
-                        <p><a href="#" onclick="filterCategory('all'); return false;" class="text-gray-400 hover:text-neon">🔥 All Products</a></p>
-                        <p><a href="#" onclick="filterCategory('gaming-pcs'); return false;" class="text-gray-400 hover:text-neon">🖥️ Gaming PCs</a></p>
-                        <p><a href="#" onclick="filterCategory('keyboards'); return false;" class="text-gray-400 hover:text-neon">⌨️ Keyboards</a></p>
+                        <p><a href="#" onclick="filterCategory('all'); return false;" class="text-gray-400 hover:text-neon">All Products</a></p>
+                        <p><a href="#" onclick="filterCategory('gaming-pcs'); return false;" class="text-gray-400 hover:text-neon">Gaming PCs</a></p>
+                        <p><a href="#" onclick="filterCategory('keyboards'); return false;" class="text-gray-400 hover:text-neon">Keyboards</a></p>
+                        <p><a href="#" onclick="showPage('terms'); return false;" class="text-gray-400 hover:text-neon">Terms & Conditions</a></p>
+                        <p><a href="#" onclick="showPage('privacy'); return false;" class="text-gray-400 hover:text-neon">Privacy Policy</a></p>
                     </div>
                     <div>
                         <h4 class="text-white font-semibold mb-3">Support</h4>
                         <p class="text-gray-400">📍 Tech Park, Bengaluru, IN</p>
                         <p class="text-gray-400">📞 +91 1800-VORTEX-IN</p>
                         <p class="text-neon">📧 support@vortexgear.in</p>
-                    </div>
-                    <div>
-                        <h4 class="text-white font-semibold mb-3">Follow</h4>
-                        <a href="#" class="block text-gray-400 hover:text-neon">📸 Instagram</a>
-                        <a href="#" class="block text-gray-400 hover:text-neon">🐦 Twitter</a>
-                        <a href="#" class="block text-gray-400 hover:text-neon">🎮 Discord</a>
                     </div>
                 </div>
                 <div class="text-center text-gray-500 text-xs mt-8 pt-6 border-t border-v-border">© 2026 Vortex Gaming India Pvt. Ltd. All rights reserved.</div>
@@ -466,7 +553,7 @@
         </div>
     </div>
 
-    <!-- ===== EXPANDED PRODUCT DETAIL MODAL (DETAILED SPECIFICATIONS) ===== -->
+    <!-- ===== EXPANDED PRODUCT DETAIL MODAL ===== -->
     <div id="productDetailOverlay" class="modal-overlay" onclick="closeProductDetail()">
         <div class="bg-v-dark border border-v-border rounded-3xl p-6 md:p-8 w-full max-w-3xl mx-4 max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
             <button onclick="closeProductDetail()" class="text-gray-400 hover:text-white text-2xl float-right">&times;</button>
@@ -487,12 +574,9 @@
                         </div>
                         <p class="text-gray-300 mt-3 text-sm leading-relaxed" id="detailDescription"></p>
                         
-                        <!-- Extra Detailed Specs Section Added -->
                         <div class="mt-4 pt-4 border-t border-v-border space-y-2">
                             <h4 class="font-game text-xs text-neon uppercase tracking-wider">Expanded Specifications:</h4>
-                            <ul class="text-xs text-gray-400 space-y-1.5" id="detailSpecsList">
-                                <!-- Dynamic specs list injected via JS -->
-                            </ul>
+                            <ul class="text-xs text-gray-400 space-y-1.5" id="detailSpecsList"></ul>
                         </div>
                     </div>
                     <div class="flex gap-3 mt-6">
@@ -506,9 +590,6 @@
 
     <!-- ===== JAVASCRIPT ===== -->
     <script>
-        // ------------------------------------------------------------------
-        // PRODUCTS ARRAY ENRICHED WITH DETAILED SPECS
-        // ------------------------------------------------------------------
         const PRODUCTS = [
             // 10 GAMING PCs
             { 
@@ -759,18 +840,12 @@
             }
         ];
 
-        // ------------------------------------------------------------------
-        // APP STATE & STORAGE
-        // ------------------------------------------------------------------
         let cart = JSON.parse(localStorage.getItem('vortex_cart')) || [];
         let wishlist = JSON.parse(localStorage.getItem('vortex_wishlist')) || [];
         let currentUser = localStorage.getItem('vortex_user') || null;
         let activeCategory = 'all';
         let selectedProductForModal = null;
 
-        // ------------------------------------------------------------------
-        // INITIALIZATION
-        // ------------------------------------------------------------------
         document.addEventListener('DOMContentLoaded', () => {
             renderProducts();
             updateCartUI();
@@ -780,18 +855,26 @@
             setupCategoryListeners();
         });
 
-        // ------------------------------------------------------------------
-        // PAGE NAVIGATION (PRODUCTS ONLY NOW)
-        // ------------------------------------------------------------------
+        function enterWebsite() {
+            document.getElementById('welcomeScreen').classList.add('fade-out');
+        }
+
         function showPage(pageId) {
             document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
-            document.getElementById('viewProducts').classList.add('active');
+            if (pageId === 'products') {
+                document.getElementById('viewProducts').classList.add('active');
+            } else if (pageId === 'about') {
+                document.getElementById('viewAbout').classList.add('active');
+            } else if (pageId === 'careers') {
+                document.getElementById('viewCareers').classList.add('active');
+            } else if (pageId === 'terms') {
+                document.getElementById('viewTerms').classList.add('active');
+            } else if (pageId === 'privacy') {
+                document.getElementById('viewPrivacy').classList.add('active');
+            }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // ------------------------------------------------------------------
-        // PRODUCT RENDERING & FILTERING
-        // ------------------------------------------------------------------
         function renderProducts() {
             const grid = document.getElementById('productGrid');
             const filtered = activeCategory === 'all'
@@ -803,7 +886,7 @@
                 const discount = Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100);
                 return `
                     <div class="product-card bg-v-card rounded-2xl border border-v-border overflow-hidden relative flex flex-col justify-between" onclick="openProductDetail('${p.id}')">
-                        <button class="absolute top-3 right-3 z-10 text-xl bg-v-black/60 backdrop-blur p-1.5 rounded-full transition hover:scale-110" onclick="toggleWishlist(event, '${p.id}')">
+                        <button class="absolute top-3 right-3 z-10 text-xl bg-v-black/65 backdrop-blur p-1.5 rounded-full transition hover:scale-110" onclick="toggleWishlist(event, '${p.id}')">
                             ${isWishlisted ? '❤️' : '🤍'}
                         </button>
                         <div>
@@ -849,9 +932,6 @@
             renderProducts();
         }
 
-        // ------------------------------------------------------------------
-        // SEARCH FUNCTIONALITY
-        // ------------------------------------------------------------------
         function setupSearch() {
             const input = document.getElementById('searchInput');
             const results = document.getElementById('searchResults');
@@ -878,9 +958,6 @@
             });
         }
 
-        // ------------------------------------------------------------------
-        // PRODUCT MODAL WITH DETAILED SPECS
-        // ------------------------------------------------------------------
         function openProductDetail(id) {
             selectedProductForModal = PRODUCTS.find(p => p.id === id);
             if (!selectedProductForModal) return;
@@ -895,7 +972,6 @@
             const discount = Math.round(((selectedProductForModal.originalPrice - selectedProductForModal.price) / selectedProductForModal.originalPrice) * 100);
             document.getElementById('detailDiscount').innerText = `${discount}% OFF`;
 
-            // Render specs list inside modal
             const specsContainer = document.getElementById('detailSpecsList');
             if (selectedProductForModal.specs && selectedProductForModal.specs.length > 0) {
                 specsContainer.innerHTML = selectedProductForModal.specs.map(spec => `<li>• ${spec}</li>`).join('');
@@ -913,9 +989,6 @@
             document.getElementById('productDetailOverlay').classList.remove('active');
         }
 
-        // ------------------------------------------------------------------
-        // CART & WISHLIST MANAGERS
-        // ------------------------------------------------------------------
         function addToCart(e, id) {
             if (e) e.stopPropagation();
             const existing = cart.find(item => item.id === id);
@@ -1031,9 +1104,6 @@
             document.getElementById('wishlistOverlay').classList.toggle('active');
         }
 
-        // ------------------------------------------------------------------
-        // ACCOUNT LOGIN SYSTEM
-        // ------------------------------------------------------------------
         function openLoginModal() {
             document.getElementById('loginModalOverlay').classList.add('active');
         }
@@ -1060,9 +1130,6 @@
             }
         }
 
-        // ------------------------------------------------------------------
-        // UPI & CHECKOUT SYSTEM
-        // ------------------------------------------------------------------
         function openCheckoutModal() {
             if (cart.length === 0) { showToast('Cart is empty!'); return; }
             toggleCartDrawer();
@@ -1109,9 +1176,6 @@
             document.getElementById('confirmOverlay').classList.remove('active');
         }
 
-        // ------------------------------------------------------------------
-        // UTILS
-        // ------------------------------------------------------------------
         function showToast(msg) {
             const toast = document.getElementById('toast');
             toast.innerText = msg;
