@@ -42,6 +42,7 @@
 
         ::-webkit-scrollbar {
             width: 6px;
+            height: 6px;
         }
         ::-webkit-scrollbar-track {
             background: #121215;
@@ -55,7 +56,7 @@
         }
 
         .glass {
-            background: rgba(18, 18, 21, 0.85);
+            background: rgba(18, 18, 21, 0.9);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.06);
@@ -82,7 +83,7 @@
             transform: translateY(-2px);
         }
 
-        /* ===== WELCOME INTRO SCREEN ===== */
+        /* WELCOME INTRO SCREEN */
         #welcomeScreen {
             position: fixed;
             inset: 0;
@@ -99,7 +100,7 @@
             visibility: hidden;
         }
 
-        /* ===== TICKER ===== */
+        /* TICKER */
         @keyframes ticker {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
@@ -157,6 +158,7 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s;
+            padding: 1rem;
         }
         .modal-overlay.active {
             opacity: 1;
@@ -167,15 +169,15 @@
             cursor: pointer;
         }
         .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(251, 191, 36, 0.12);
+            transform: translateY(-6px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(251, 191, 36, 0.12);
         }
         .badge-discount {
             background: linear-gradient(135deg, #d97706, #fbbf24);
             color: #09090b;
             font-weight: 700;
-            font-size: 0.7rem;
-            padding: 2px 8px;
+            font-size: 0.65rem;
+            padding: 2px 6px;
             border-radius: 20px;
         }
         .sidebar-link {
@@ -197,13 +199,16 @@
             background: #1a1a1f;
             border: 1px solid #fbbf24;
             color: white;
-            padding: 12px 28px;
+            padding: 10px 24px;
             border-radius: 30px;
             z-index: 2000;
             font-weight: 600;
+            font-size: 0.9rem;
             box-shadow: 0 8px 25px rgba(251, 191, 36, 0.3);
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             pointer-events: none;
+            text-align: center;
+            max-width: 90vw;
         }
         .toast.show {
             transform: translateX(-50%) translateY(0);
@@ -217,11 +222,11 @@
         .upi-badge {
             background: #121215;
             border: 1px solid #272730;
-            padding: 0.75rem;
-            border-radius: 12px;
+            padding: 0.65rem;
+            border-radius: 10px;
             cursor: pointer;
             text-align: center;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             transition: all 0.2s;
         }
         .upi-badge.selected {
@@ -234,61 +239,65 @@
 </head>
 <body>
 
-    <!-- ===== WELCOME INTRO OVERLAY SCREEN ===== -->
+    <!-- WELCOME INTRO OVERLAY SCREEN -->
     <div id="welcomeScreen">
         <div class="text-center px-4 max-w-2xl">
             <h1 class="font-game text-4xl md:text-6xl font-black tracking-wider bg-gradient-to-r from-neon via-purple to-orange bg-clip-text text-transparent mb-4">VORTEX</h1>
             <p class="text-xl md:text-2xl font-game text-white mb-2">Welcome to VORTEX</p>
             <p class="text-gray-400 text-sm md:text-base mb-8">Let's build your dream battle station or find something beautiful.</p>
-            <button onclick="enterWebsite()" class="btn-neon px-10 py-4 rounded-full text-lg font-bold tracking-wider">ENTER STORE →</button>
+            <button onclick="enterWebsite()" class="btn-neon px-8 md:px-10 py-3.5 rounded-full text-base md:text-lg font-bold tracking-wider">ENTER STORE →</button>
         </div>
     </div>
 
     <!-- Toast Notification -->
     <div id="toast" class="toast"></div>
 
-    <!-- ===== ANNOUNCEMENT TICKER ===== -->
-    <div class="bg-gradient-to-r from-neon via-purple to-orange text-v-black font-semibold text-sm py-2.5 overflow-hidden whitespace-nowrap select-none">
+    <!-- ANNOUNCEMENT TICKER -->
+    <div class="bg-gradient-to-r from-neon via-purple to-orange text-v-black font-semibold text-xs md:text-sm py-2 overflow-hidden whitespace-nowrap select-none">
         <div class="ticker-track">
-            <span class="mx-8">🚀 FREE SHIPPING OVER ₹2,499 ACROSS INDIA</span>
-            <span class="mx-8">💎 30-DAY PRICE MATCH GUARANTEE</span>
-            <span class="mx-8">🔄 HASSLE-FREE 60-DAY RETURNS</span>
-            <span class="mx-8">⚡ INSTANT UPI & NO-COST EMI AVAILABLE</span>
-            <span class="mx-8">🔒 100% SECURE CHECKOUT</span>
-            <span class="mx-8">🎮 JOIN VORTEX GAMING REWARDS</span>
-            <span class="mx-8">🔥 NEXT-GEN GAMING HARDWARE</span>
-            <span class="mx-8">✨ EXHALE THE SMOOTHNESS</span>
+            <span class="mx-6">🚀 FREE SHIPPING OVER ₹2,499 ACROSS INDIA</span>
+            <span class="mx-6">💎 30-DAY PRICE MATCH GUARANTEE</span>
+            <span class="mx-6">🔄 HASSLE-FREE 60-DAY RETURNS</span>
+            <span class="mx-6">⚡ INSTANT UPI & NO-COST EMI AVAILABLE</span>
+            <span class="mx-6">🔒 100% SECURE CHECKOUT</span>
+            <span class="mx-6">🎮 JOIN VORTEX GAMING REWARDS</span>
+            <span class="mx-6">✨ EXHALE THE SMOOTHNESS</span>
         </div>
     </div>
 
-    <!-- ===== HEADER ===== -->
+    <!-- HEADER -->
     <header class="sticky top-0 z-50 glass">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-            <a href="#" onclick="showPage('products'); return false;" class="font-game text-3xl md:text-4xl font-extrabold tracking-wider bg-gradient-to-r from-neon to-purple bg-clip-text text-transparent whitespace-nowrap">VORTEX</a>
-
-            <div class="flex-1 min-w-[160px] max-w-[500px] relative">
-                <input type="text" id="searchInput" placeholder="Search gaming PCs, keyboards, mice..." class="w-full bg-v-card border border-v-border rounded-full px-5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-neon">
-                <div id="searchResults" class="absolute top-full mt-2 w-full bg-v-card border border-v-border rounded-xl shadow-2xl z-50 max-h-64 overflow-y-auto hidden"></div>
+        <div class="max-w-7xl mx-auto px-3 md:px-4 py-3 flex items-center justify-between gap-2 md:gap-4">
+            <div class="flex items-center gap-2">
+                <!-- Mobile Sidebar Trigger Button -->
+                <button id="mobileSidebarToggle" onclick="openMobileSidebar()" class="md:hidden text-gray-300 p-1 focus:outline-none" aria-label="Open Menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+                <a href="#" onclick="showPage('products'); return false;" class="font-game text-2xl md:text-4xl font-extrabold tracking-wider bg-gradient-to-r from-neon to-purple bg-clip-text text-transparent whitespace-nowrap">VORTEX</a>
             </div>
 
-            <div class="flex items-center gap-3 md:gap-5">
+            <div class="flex-1 max-w-[420px] relative mx-2">
+                <input type="text" id="searchInput" placeholder="Search gaming gear..." class="w-full bg-v-card border border-v-border rounded-full px-4 md:px-5 py-2 text-xs md:text-sm text-white placeholder-gray-500 focus:outline-none focus:border-neon">
+                <div id="searchResults" class="absolute top-full mt-2 w-full bg-v-card border border-v-border rounded-xl shadow-2xl z-50 max-h-60 overflow-y-auto hidden"></div>
+            </div>
+
+            <div class="flex items-center gap-2 md:gap-4">
                 <button id="accountBtn" onclick="openLoginModal()" class="text-gray-300 hover:text-neon flex items-center gap-1 text-sm" title="Account">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                    <span id="userGreeting" class="hidden md:inline font-medium">Login</span>
+                    <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                    <span id="userGreeting" class="hidden lg:inline font-medium text-xs">Login</span>
                 </button>
-                <button id="wishlistToggleBtn" onclick="toggleWishlistDrawer()" class="relative text-gray-300 hover:text-neon" title="Wishlist">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-                    <span id="wishlistBadge" class="absolute -top-2 -right-2 bg-neon text-v-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                <button id="wishlistToggleBtn" onclick="toggleWishlistDrawer()" class="relative text-gray-300 hover:text-neon p-1" title="Wishlist">
+                    <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                    <span id="wishlistBadge" class="absolute -top-1 -right-1 bg-neon text-v-black text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
                 </button>
-                <button id="cartToggleBtn" onclick="toggleCartDrawer()" class="relative text-gray-300 hover:text-neon" title="Cart">
-                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg>
-                    <span id="cartBadge" class="absolute -top-2 -right-2 bg-gradient-to-r from-neon to-purple text-v-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                <button id="cartToggleBtn" onclick="toggleCartDrawer()" class="relative text-gray-300 hover:text-neon p-1" title="Cart">
+                    <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg>
+                    <span id="cartBadge" class="absolute -top-1 -right-1 bg-gradient-to-r from-neon to-purple text-v-black text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
                 </button>
-                <button id="mobileSidebarToggle" onclick="openMobileSidebar()" class="md:hidden text-gray-300"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
             </div>
         </div>
 
-        <!-- Category Nav -->
+        <!-- Category Nav (Desktop) -->
         <nav class="hidden md:flex max-w-7xl mx-auto px-4 pb-2 gap-1 overflow-x-auto text-sm font-medium text-gray-400 scrollbar-hide">
             <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="all">All Gear</span>
             <span class="category-nav-link cursor-pointer px-3 py-1.5 rounded-full hover:text-neon whitespace-nowrap" data-cat="gaming-pcs">Gaming PCs</span>
@@ -299,42 +308,40 @@
         </nav>
     </header>
 
-    <!-- ===== MAIN LAYOUT ===== -->
-    <div class="max-w-7xl mx-auto px-4 py-6 flex gap-6">
+    <!-- MAIN LAYOUT -->
+    <div class="max-w-7xl mx-auto px-3 md:px-4 py-4 md:py-6 flex gap-6">
 
         <!-- DESKTOP SIDEBAR -->
-        <aside class="sidebar-desktop w-56 flex-shrink-0 hidden md:block">
+        <aside class="sidebar-desktop w-52 lg:w-56 flex-shrink-0 hidden md:block">
             <div class="sticky top-28 space-y-6">
-                <!-- Categories Box (Moved Above) -->
-                <div class="bg-v-card rounded-2xl border border-v-border p-4 space-y-1">
-                    <h3 class="font-game text-sm text-neon mb-3 uppercase">Categories</h3>
-                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300 active" data-cat="all">🔥 All Products</div>
-                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="gaming-pcs">🖥️ Gaming PCs</div>
-                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="keyboards">⌨️ Keyboards</div>
-                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="mice">🖱️ Mice</div>
-                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="headsets">🎧 Headsets</div>
-                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="gaming-chairs">🪑 Gaming Chairs</div>
+                <div class="bg-v-card rounded-2xl border border-v-border p-3 lg:p-4 space-y-1">
+                    <h3 class="font-game text-xs lg:text-sm text-neon mb-3 uppercase tracking-wide">Categories</h3>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-xs lg:text-sm text-gray-300 active" data-cat="all">🔥 All Products</div>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-xs lg:text-sm text-gray-300" data-cat="gaming-pcs">🖥️ Gaming PCs</div>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-xs lg:text-sm text-gray-300" data-cat="keyboards">⌨️ Keyboards</div>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-xs lg:text-sm text-gray-300" data-cat="mice">🖱️ Mice</div>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-xs lg:text-sm text-gray-300" data-cat="headsets">🎧 Headsets</div>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-xs lg:text-sm text-gray-300" data-cat="gaming-chairs">🪑 Gaming Chairs</div>
                 </div>
 
-                <!-- Company Box (Moved Below) -->
-                <div class="bg-v-card rounded-2xl border border-v-border p-4 space-y-1">
-                    <h3 class="font-game text-sm text-neon mb-3 uppercase">Company</h3>
-                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" onclick="showPage('about')">🏢 About Us</div>
-                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" onclick="showPage('career')">💼 Career</div>
-                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" onclick="showPage('terms')">📄 Terms & Condition</div>
-                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" onclick="showPage('privacy')">🔒 Privacy Policy</div>
+                <div class="bg-v-card rounded-2xl border border-v-border p-3 lg:p-4 space-y-1">
+                    <h3 class="font-game text-xs lg:text-sm text-neon mb-3 uppercase tracking-wide">Company</h3>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-xs lg:text-sm text-gray-300" onclick="showPage('about')">🏢 About Us</div>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-xs lg:text-sm text-gray-300" onclick="showPage('career')">💼 Career</div>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-xs lg:text-sm text-gray-300" onclick="showPage('terms')">📄 Terms & Condition</div>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-xs lg:text-sm text-gray-300" onclick="showPage('privacy')">🔒 Privacy Policy</div>
                 </div>
             </div>
         </aside>
 
-        <!-- MOBILE SIDEBAR -->
+        <!-- MOBILE SIDEBAR / DRAWER -->
         <div id="mobileSidebarOverlay" class="fixed inset-0 bg-black/70 z-40 hidden md:hidden" onclick="closeMobileSidebar()"></div>
         <aside id="mobileSidebar" class="fixed top-0 left-0 w-72 h-full bg-v-dark border-r border-v-border z-50 transform -translate-x-full transition-transform md:hidden overflow-y-auto">
             <div class="p-5">
-                <button onclick="closeMobileSidebar()" class="text-gray-400 text-2xl float-right">&times;</button>
+                <button onclick="closeMobileSidebar()" class="text-gray-400 text-2xl float-right focus:outline-none">&times;</button>
                 <div class="space-y-6 mt-8">
                     <div>
-                        <h3 class="font-game text-sm text-neon mb-3 uppercase">Categories</h3>
+                        <h3 class="font-game text-xs text-neon mb-3 uppercase tracking-wide">Categories</h3>
                         <div class="space-y-1">
                             <div class="sidebar-link rounded-lg px-3 py-3 text-sm active" data-cat="all" onclick="closeMobileSidebar(); filterCategory('all');">🔥 All Gear</div>
                             <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="gaming-pcs" onclick="closeMobileSidebar(); filterCategory('gaming-pcs');">🖥️ Gaming PCs</div>
@@ -345,7 +352,7 @@
                         </div>
                     </div>
                     <div>
-                        <h3 class="font-game text-sm text-neon mb-3 uppercase">Company</h3>
+                        <h3 class="font-game text-xs text-neon mb-3 uppercase tracking-wide">Company</h3>
                         <div class="space-y-1">
                             <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm" onclick="closeMobileSidebar(); showPage('about');">🏢 About Us</div>
                             <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm" onclick="closeMobileSidebar(); showPage('career');">💼 Career</div>
@@ -357,183 +364,181 @@
             </div>
         </aside>
 
-        <!-- ===== MAIN CONTENT ===== -->
+        <!-- MAIN CONTENT -->
         <main class="flex-1 min-w-0">
 
-            <!-- ---- VIEW: PRODUCTS STORE ---- -->
+            <!-- VIEW: PRODUCTS STORE -->
             <div id="viewProducts" class="view-section active">
 
                 <!-- Hero Section -->
-                <section class="relative rounded-3xl overflow-hidden mb-8 neon-border min-h-[280px] md:min-h-[320px]">
+                <section class="relative rounded-2xl md:rounded-3xl overflow-hidden mb-6 md:mb-8 neon-border min-h-[240px] md:min-h-[320px]">
                     <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=1200&h=500&fit=crop&auto=format" class="absolute inset-0 w-full h-full object-cover" alt="hero" loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent"></div>
-                    <div class="absolute inset-0 z-10 flex flex-col justify-center h-full min-h-[280px] md:min-h-[320px] px-6 md:px-12 py-10">
-                        <span class="text-neon font-game text-xs md:text-sm tracking-[0.3em] uppercase mb-3">Prestige Collection</span>
-                        <h1 class="font-game text-3xl md:text-5xl font-black text-white mb-3 leading-tight">EXHALE THE<br><span class="bg-gradient-to-r from-neon to-purple bg-clip-text text-transparent">SMOOTHNESS</span></h1>
-                        <p class="text-gray-300 text-sm md:text-base mb-5 max-w-md">Upgrade your battle station with India's premier pro-grade gaming hardware.</p>
-                        <button id="heroShopBtn" onclick="filterCategory('gaming-pcs'); document.getElementById('productGridSection').scrollIntoView({behavior: 'smooth'});" class="btn-neon self-start px-8 py-3.5 rounded-full text-base font-bold">EXPLORE RIGS →</button>
+                    <div class="absolute inset-0 bg-gradient-to-r from-black/95 via-black/70 to-transparent"></div>
+                    <div class="absolute inset-0 z-10 flex flex-col justify-center h-full px-5 md:px-12 py-8">
+                        <span class="text-neon font-game text-[10px] md:text-sm tracking-[0.25em] uppercase mb-2">Prestige Collection</span>
+                        <h1 class="font-game text-2xl sm:text-3xl md:text-5xl font-black text-white mb-2 md:mb-3 leading-tight">EXHALE THE<br><span class="bg-gradient-to-r from-neon to-purple bg-clip-text text-transparent">SMOOTHNESS</span></h1>
+                        <p class="text-gray-300 text-xs md:text-base mb-4 md:mb-5 max-w-md">Upgrade your battle station with India's premier pro-grade gaming hardware.</p>
+                        <button onclick="filterCategory('gaming-pcs'); document.getElementById('productGridSection').scrollIntoView({behavior: 'smooth'});" class="btn-neon self-start px-6 md:px-8 py-2.5 md:py-3.5 rounded-full text-xs md:text-base font-bold">EXPLORE RIGS →</button>
                     </div>
                 </section>
 
                 <!-- Products Section -->
                 <section id="productGridSection">
-                    <div class="flex flex-wrap items-center justify-between mb-5 gap-2">
-                        <h2 class="font-game text-xl md:text-2xl text-white" id="sectionTitle">🔥 Featured Rig & Gear</h2>
+                    <div class="flex flex-wrap items-center justify-between mb-4 gap-2">
+                        <h2 class="font-game text-lg md:text-2xl text-white" id="sectionTitle">🔥 Featured Rig & Gear</h2>
                     </div>
-                    <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5"></div>
+                    <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-5"></div>
                 </section>
             </div>
 
-            <!-- ---- VIEW: ABOUT US ---- -->
-            <div id="viewAbout" class="view-section bg-v-card p-6 md:p-10 rounded-3xl border border-v-border">
-                <h2 class="font-game text-2xl md:text-3xl text-white mb-4">About <span class="text-neon">VORTEX</span></h2>
-                <p class="text-gray-300 leading-relaxed mb-4">Founded in Bengaluru, India, VORTEX was born out of a relentless passion for high-performance gaming hardware. We engineer and curate elite gaming PCs, custom keyboards, high-DPI mice, and spatial audio headsets designed to give competitive gamers and creators the absolute edge.</p>
-                <p class="text-gray-300 leading-relaxed mb-4">Our mission is simple: to exhale smoothness into every frame, every keystroke, and every victory. Backed by rigorous benchmark testing, 3-year onsite warranties, and lightning-fast nationwide delivery, VORTEX is your definitive destination for pro-grade battle stations.</p>
-                <button onclick="showPage('products')" class="btn-neon px-6 py-2 mt-6 rounded-full text-sm font-bold">← BACK TO STORE</button>
+            <!-- VIEW: ABOUT US -->
+            <div id="viewAbout" class="view-section bg-v-card p-5 md:p-10 rounded-2xl md:rounded-3xl border border-v-border">
+                <h2 class="font-game text-xl md:text-3xl text-white mb-4">About <span class="text-neon">VORTEX</span></h2>
+                <p class="text-gray-300 text-sm md:text-base leading-relaxed mb-4">Founded in Bengaluru, India, VORTEX was born out of a relentless passion for high-performance gaming hardware. We engineer and curate elite gaming PCs, custom keyboards, high-DPI mice, and spatial audio headsets designed to give competitive gamers and creators the absolute edge.</p>
+                <p class="text-gray-300 text-sm md:text-base leading-relaxed mb-4">Our mission is simple: to exhale smoothness into every frame, every keystroke, and every victory. Backed by rigorous benchmark testing, 3-year onsite warranties, and lightning-fast nationwide delivery, VORTEX is your definitive destination for pro-grade battle stations.</p>
+                <button onclick="showPage('products')" class="btn-neon px-6 py-2.5 mt-4 rounded-full text-xs md:text-sm font-bold">← BACK TO STORE</button>
             </div>
 
-            <!-- ---- VIEW: CAREERS ---- -->
-            <div id="viewCareer" class="view-section bg-v-card p-6 md:p-10 rounded-3xl border border-v-border">
-                <h2 class="font-game text-2xl md:text-3xl text-white mb-4">Careers at <span class="text-neon">VORTEX</span></h2>
-                <p class="text-gray-300 leading-relaxed mb-4">Join our hyper-driven team of hardware engineers, software developers, esports enthusiasts, and customer experience champions based in Bengaluru.</p>
+            <!-- VIEW: CAREERS -->
+            <div id="viewCareer" class="view-section bg-v-card p-5 md:p-10 rounded-2xl md:rounded-3xl border border-v-border">
+                <h2 class="font-game text-xl md:text-3xl text-white mb-4">Careers at <span class="text-neon">VORTEX</span></h2>
+                <p class="text-gray-300 text-sm md:text-base leading-relaxed mb-4">Join our hyper-driven team of hardware engineers, software developers, esports enthusiasts, and customer experience champions based in Bengaluru.</p>
                 <div class="space-y-4 my-6">
                     <div class="bg-v-dark p-4 rounded-xl border border-v-border">
-                        <h3 class="text-white font-semibold">Senior PC Systems Architect</h3>
-                        <p class="text-gray-400 text-sm">Bengaluru (On-site) • Full Time</p>
+                        <h3 class="text-white text-sm md:text-base font-semibold">Senior PC Systems Architect</h3>
+                        <p class="text-gray-400 text-xs md:text-sm">Bengaluru (On-site) • Full Time</p>
                     </div>
                     <div class="bg-v-dark p-4 rounded-xl border border-v-border">
-                        <h3 class="text-white font-semibold">E-Commerce Frontend Developer</h3>
-                        <p class="text-gray-400 text-sm">Remote / Hybrid • Full Time</p>
+                        <h3 class="text-white text-sm md:text-base font-semibold">E-Commerce Frontend Developer</h3>
+                        <p class="text-gray-400 text-xs md:text-sm">Remote / Hybrid • Full Time</p>
                     </div>
                 </div>
-                <button onclick="showPage('products')" class="btn-neon px-6 py-2 mt-4 rounded-full text-sm font-bold">← BACK TO STORE</button>
+                <button onclick="showPage('products')" class="btn-neon px-6 py-2.5 mt-4 rounded-full text-xs md:text-sm font-bold">← BACK TO STORE</button>
             </div>
 
-            <!-- ---- VIEW: TERMS & CONDITIONS ---- -->
-            <div id="viewTerms" class="view-section bg-v-card p-6 md:p-10 rounded-3xl border border-v-border">
-                <h2 class="font-game text-2xl md:text-3xl text-white mb-4">Terms & Conditions</h2>
-                <div class="text-gray-300 text-sm space-y-4 leading-relaxed">
+            <!-- VIEW: TERMS & CONDITIONS -->
+            <div id="viewTerms" class="view-section bg-v-card p-5 md:p-10 rounded-2xl md:rounded-3xl border border-v-border">
+                <h2 class="font-game text-xl md:text-3xl text-white mb-4">Terms & Conditions</h2>
+                <div class="text-gray-300 text-xs md:text-sm space-y-4 leading-relaxed">
                     <p>Welcome to VORTEX Gaming India. By accessing our website and purchasing our products, you agree to comply with and be bound by the following terms and conditions.</p>
-                    <h3 class="text-white font-semibold text-base pt-2">1. Orders & Pricing</h3>
+                    <h3 class="text-white font-semibold text-sm md:text-base pt-2">1. Orders & Pricing</h3>
                     <p>All prices listed on VORTEX are in Indian Rupees (INR) and inclusive of applicable GST unless stated otherwise. We reserve the right to modify or discontinue any product without prior notice.</p>
-                    <h3 class="text-white font-semibold text-base pt-2">2. Shipping & Delivery</h3>
+                    <h3 class="text-white font-semibold text-sm md:text-base pt-2">2. Shipping & Delivery</h3>
                     <p>We offer free standard shipping across India on all orders above ₹2,499. Delivery times typically range between 3 to 7 business days depending on your location.</p>
-                    <h3 class="text-white font-semibold text-base pt-2">3. Warranty & Returns</h3>
+                    <h3 class="text-white font-semibold text-sm md:text-base pt-2">3. Warranty & Returns</h3>
                     <p>All pre-built gaming rigs and peripherals come with standard manufacturer warranties and our 60-day hassle-free return policy for unopened or defective items.</p>
                 </div>
-                <button onclick="showPage('products')" class="btn-neon px-6 py-2 mt-6 rounded-full text-sm font-bold">← BACK TO STORE</button>
+                <button onclick="showPage('products')" class="btn-neon px-6 py-2.5 mt-6 rounded-full text-xs md:text-sm font-bold">← BACK TO STORE</button>
             </div>
 
-            <!-- ---- VIEW: PRIVACY POLICY ---- -->
-            <div id="viewPrivacy" class="view-section bg-v-card p-6 md:p-10 rounded-3xl border border-v-border">
-                <h2 class="font-game text-2xl md:text-3xl text-white mb-4">Privacy Policy</h2>
-                <div class="text-gray-300 text-sm space-y-4 leading-relaxed">
+            <!-- VIEW: PRIVACY POLICY -->
+            <div id="viewPrivacy" class="view-section bg-v-card p-5 md:p-10 rounded-2xl md:rounded-3xl border border-v-border">
+                <h2 class="font-game text-xl md:text-3xl text-white mb-4">Privacy Policy</h2>
+                <div class="text-gray-300 text-xs md:text-sm space-y-4 leading-relaxed">
                     <p>At VORTEX, we respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you visit our store.</p>
-                    <h3 class="text-white font-semibold text-base pt-2">1. Information We Collect</h3>
+                    <h3 class="text-white font-semibold text-sm md:text-base pt-2">1. Information We Collect</h3>
                     <p>We collect details you provide during account creation, checkout, or support interactions, including your name, email address, shipping address, and phone number.</p>
-                    <h3 class="text-white font-semibold text-base pt-2">2. How We Use Your Data</h3>
+                    <h3 class="text-white font-semibold text-sm md:text-base pt-2">2. How We Use Your Data</h3>
                     <p>Your information is utilized solely to process orders, provide customer support updates, send tracking details, and improve our hardware catalog.</p>
-                    <h3 class="text-white font-semibold text-base pt-2">3. Security</h3>
+                    <h3 class="text-white font-semibold text-sm md:text-base pt-2">3. Security</h3>
                     <p>All payment transactions are encrypted via secure gateway protocols (SSL) and processed through trusted UPI and banking partners.</p>
                 </div>
-                <button onclick="showPage('products')" class="btn-neon px-6 py-2 mt-6 rounded-full text-sm font-bold">← BACK TO STORE</button>
+                <button onclick="showPage('products')" class="btn-neon px-6 py-2.5 mt-6 rounded-full text-xs md:text-sm font-bold">← BACK TO STORE</button>
             </div>
 
             <!-- FOOTER -->
-            <footer class="border-t border-v-border pt-10 pb-6 mt-12">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
+            <footer class="border-t border-v-border pt-8 pb-6 mt-10">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-xs md:text-sm">
                     <div>
-                        <h4 class="font-game text-neon text-lg mb-3">VORTEX INDIA</h4>
+                        <h4 class="font-game text-neon text-base md:text-lg mb-2">VORTEX INDIA</h4>
                         <p class="text-gray-400">Elite gaming gear engineered for high FPS performance.</p>
                     </div>
                     <div>
-                        <h4 class="text-white font-semibold mb-3">Company</h4>
-                        <p><a href="#" onclick="showPage('about'); return false;" class="text-gray-400 hover:text-neon">About Us</a></p>
-                        <p><a href="#" onclick="showPage('career'); return false;" class="text-gray-400 hover:text-neon">Career</a></p>
-                        <p><a href="#" onclick="showPage('terms'); return false;" class="text-gray-400 hover:text-neon">Terms & Condition</a></p>
-                        <p><a href="#" onclick="showPage('privacy'); return false;" class="text-gray-400 hover:text-neon">Privacy Policy</a></p>
+                        <h4 class="text-white font-semibold mb-2">Company</h4>
+                        <p class="mb-1"><a href="#" onclick="showPage('about'); return false;" class="text-gray-400 hover:text-neon">About Us</a></p>
+                        <p class="mb-1"><a href="#" onclick="showPage('career'); return false;" class="text-gray-400 hover:text-neon">Career</a></p>
+                        <p class="mb-1"><a href="#" onclick="showPage('terms'); return false;" class="text-gray-400 hover:text-neon">Terms & Condition</a></p>
+                        <p class="mb-1"><a href="#" onclick="showPage('privacy'); return false;" class="text-gray-400 hover:text-neon">Privacy Policy</a></p>
                     </div>
                     <div>
-                        <h4 class="text-white font-semibold mb-3">Quick Navigation</h4>
-                        <p><a href="#" onclick="filterCategory('all'); return false;" class="text-gray-400 hover:text-neon">All Products</a></p>
-                        <p><a href="#" onclick="filterCategory('gaming-pcs'); return false;" class="text-gray-400 hover:text-neon">Gaming PCs</a></p>
-                        <p><a href="#" onclick="filterCategory('keyboards'); return false;" class="text-gray-400 hover:text-neon">Keyboards</a></p>
-                        <p><a href="#" onclick="filterCategory('mice'); return false;" class="text-gray-400 hover:text-neon">Mice</a></p>
-                        <p><a href="#" onclick="filterCategory('headsets'); return false;" class="text-gray-400 hover:text-neon">Headsets</a></p>
-                        <p><a href="#" onclick="filterCategory('gaming-chairs'); return false;" class="text-gray-400 hover:text-neon">Gaming Chairs</a></p>
+                        <h4 class="text-white font-semibold mb-2">Quick Navigation</h4>
+                        <p class="mb-1"><a href="#" onclick="filterCategory('all'); return false;" class="text-gray-400 hover:text-neon">All Products</a></p>
+                        <p class="mb-1"><a href="#" onclick="filterCategory('gaming-pcs'); return false;" class="text-gray-400 hover:text-neon">Gaming PCs</a></p>
+                        <p class="mb-1"><a href="#" onclick="filterCategory('keyboards'); return false;" class="text-gray-400 hover:text-neon">Keyboards</a></p>
+                        <p class="mb-1"><a href="#" onclick="filterCategory('mice'); return false;" class="text-gray-400 hover:text-neon">Mice</a></p>
                     </div>
                     <div>
-                        <h4 class="text-white font-semibold mb-3">Support</h4>
-                        <p class="text-gray-400">📍 Tech Park, Bengaluru, IN</p>
-                        <p class="text-gray-400">📞 +91 1800-VORTEX-IN</p>
+                        <h4 class="text-white font-semibold mb-2">Support</h4>
+                        <p class="text-gray-400 mb-1">📍 Tech Park, Bengaluru, IN</p>
+                        <p class="text-gray-400 mb-1">📞 +91 1800-VORTEX-IN</p>
                         <p class="text-neon">📧 support@vortexgear.in</p>
                     </div>
                 </div>
-                <div class="text-center text-gray-500 text-xs mt-8 pt-6 border-t border-v-border">© 2026 Vortex Gaming India Pvt. Ltd. All rights reserved.</div>
+                <div class="text-center text-gray-500 text-[10px] md:text-xs mt-6 pt-4 border-t border-v-border">© 2026 Vortex Gaming India Pvt. Ltd. All rights reserved.</div>
             </footer>
         </main>
     </div>
 
-    <!-- ===== CART DRAWER ===== -->
+    <!-- CART DRAWER -->
     <div id="cartOverlay" class="drawer-overlay" onclick="toggleCartDrawer()"></div>
     <div id="cartDrawer" class="drawer-slide">
-        <div class="p-5 border-b border-v-border flex justify-between items-center">
-            <h2 class="font-game text-lg text-white">🛒 Your Cart</h2>
-            <button onclick="toggleCartDrawer()" class="text-gray-400 text-2xl">&times;</button>
+        <div class="p-4 md:p-5 border-b border-v-border flex justify-between items-center">
+            <h2 class="font-game text-base md:text-lg text-white">🛒 Your Cart</h2>
+            <button onclick="toggleCartDrawer()" class="text-gray-400 text-2xl focus:outline-none">&times;</button>
         </div>
-        <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
-        <div class="p-5 border-t border-v-border bg-v-card">
-            <div class="flex justify-between items-center mb-4">
-                <span class="text-gray-400">Total Amount:</span>
-                <span id="cartSubtotal" class="text-2xl font-bold text-neon">₹0</span>
+        <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-4 md:p-5 space-y-3"></div>
+        <div class="p-4 md:p-5 border-t border-v-border bg-v-card">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-gray-400 text-xs md:text-sm">Total Amount:</span>
+                <span id="cartSubtotal" class="text-xl md:text-2xl font-bold text-neon">₹0</span>
             </div>
-            <button onclick="openCheckoutModal()" class="btn-neon w-full py-3.5 rounded-full font-bold">PROCEED TO CHECKOUT</button>
+            <button onclick="openCheckoutModal()" class="btn-neon w-full py-3 rounded-full font-bold text-sm">PROCEED TO CHECKOUT</button>
         </div>
     </div>
 
-    <!-- ===== WISHLIST DRAWER ===== -->
+    <!-- WISHLIST DRAWER -->
     <div id="wishlistOverlay" class="drawer-overlay" onclick="toggleWishlistDrawer()"></div>
     <div id="wishlistDrawer" class="drawer-slide">
-        <div class="p-5 border-b border-v-border flex justify-between items-center">
-            <h2 class="font-game text-lg text-white">❤️ Saved Wishlist</h2>
-            <button onclick="toggleWishlistDrawer()" class="text-gray-400 text-2xl">&times;</button>
+        <div class="p-4 md:p-5 border-b border-v-border flex justify-between items-center">
+            <h2 class="font-game text-base md:text-lg text-white">❤️ Saved Wishlist</h2>
+            <button onclick="toggleWishlistDrawer()" class="text-gray-400 text-2xl focus:outline-none">&times;</button>
         </div>
-        <div id="wishlistItemsContainer" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
+        <div id="wishlistItemsContainer" class="flex-1 overflow-y-auto p-4 md:p-5 space-y-3"></div>
     </div>
 
-    <!-- ===== LOGIN MODAL ===== -->
+    <!-- LOGIN MODAL -->
     <div id="loginModalOverlay" class="modal-overlay" onclick="closeLoginModal()">
-        <div class="bg-v-dark border border-v-border rounded-3xl p-6 w-full max-w-md mx-4" onclick="event.stopPropagation()">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="font-game text-xl text-white" id="authTitle">Sign In to VORTEX</h2>
-                <button onclick="closeLoginModal()" class="text-gray-400 text-2xl">&times;</button>
+        <div class="bg-v-dark border border-v-border rounded-2xl md:rounded-3xl p-5 md:p-6 w-full max-w-md mx-auto" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center mb-5">
+                <h2 class="font-game text-lg md:text-xl text-white">Sign In to VORTEX</h2>
+                <button onclick="closeLoginModal()" class="text-gray-400 text-2xl focus:outline-none">&times;</button>
             </div>
             <form onsubmit="handleAuthSubmit(event)" class="space-y-4">
                 <div>
-                    <label class="text-xs text-gray-400 uppercase font-semibold">Mobile Number or Email</label>
-                    <input type="text" id="authEmail" placeholder="+91 9876543210 or gamer@vortex.in" required class="w-full mt-1 bg-v-card border border-v-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon">
+                    <label class="text-[10px] md:text-xs text-gray-400 uppercase font-semibold">Mobile Number or Email</label>
+                    <input type="text" id="authEmail" placeholder="+91 9876543210 or gamer@vortex.in" required class="w-full mt-1 bg-v-card border border-v-border rounded-xl px-4 py-2.5 text-xs md:text-sm text-white focus:outline-none focus:border-neon">
                 </div>
                 <div>
-                    <label class="text-xs text-gray-400 uppercase font-semibold">Password</label>
-                    <input type="password" id="authPassword" placeholder="••••••••" required class="w-full mt-1 bg-v-card border border-v-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon">
+                    <label class="text-[10px] md:text-xs text-gray-400 uppercase font-semibold">Password</label>
+                    <input type="password" id="authPassword" placeholder="••••••••" required class="w-full mt-1 bg-v-card border border-v-border rounded-xl px-4 py-2.5 text-xs md:text-sm text-white focus:outline-none focus:border-neon">
                 </div>
-                <button type="submit" class="btn-neon w-full py-3.5 rounded-full text-base font-bold">LOG IN</button>
+                <button type="submit" class="btn-neon w-full py-3 rounded-full text-sm font-bold">LOG IN</button>
             </form>
-            <p class="text-center text-xs text-gray-400 mt-4">Demo Login: Simply click Log In to create a session.</p>
+            <p class="text-center text-[10px] md:text-xs text-gray-400 mt-3">Demo Login: Simply click Log In to create a session.</p>
         </div>
     </div>
 
-    <!-- ===== UPI & CHECKOUT MODAL ===== -->
+    <!-- UPI & CHECKOUT MODAL -->
     <div id="checkoutModalOverlay" class="modal-overlay" onclick="closeCheckoutModal()">
-        <div class="bg-v-dark border border-v-border rounded-3xl p-6 w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="font-game text-xl text-white">💳 Checkout & UPI Payment</h2>
-                <button onclick="closeCheckoutModal()" class="text-gray-400 text-2xl">&times;</button>
+        <div class="bg-v-dark border border-v-border rounded-2xl md:rounded-3xl p-5 md:p-6 w-full max-w-lg mx-auto max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center mb-5">
+                <h2 class="font-game text-lg md:text-xl text-white">💳 Checkout & UPI</h2>
+                <button onclick="closeCheckoutModal()" class="text-gray-400 text-2xl focus:outline-none">&times;</button>
             </div>
 
-            <div class="mb-6">
-                <label class="text-xs text-gray-400 uppercase font-semibold block mb-2">Select Payment Method</label>
-                <div class="grid grid-cols-2 gap-3 mb-4">
+            <div class="mb-5">
+                <label class="text-[10px] md:text-xs text-gray-400 uppercase font-semibold block mb-2">Select Payment Method</label>
+                <div class="grid grid-cols-2 gap-3 mb-2">
                     <div class="upi-badge selected" id="payMethodUpi" onclick="setPaymentMethod('upi')">⚡ Instant UPI</div>
                     <div class="upi-badge" id="payMethodCard" onclick="setPaymentMethod('card')">💳 Credit / Debit Card</div>
                 </div>
@@ -542,81 +547,81 @@
             <!-- UPI Payment View -->
             <form id="upiForm" onsubmit="handleCheckout(event)" class="space-y-4">
                 <div>
-                    <label class="text-xs text-gray-400 uppercase font-semibold">Select Preferred UPI App</label>
+                    <label class="text-[10px] md:text-xs text-gray-400 uppercase font-semibold">Preferred UPI App</label>
                     <div class="grid grid-cols-4 gap-2 mt-2">
-                        <div class="upi-badge selected text-xs" onclick="selectUPIApp(this)">Google Pay</div>
-                        <div class="upi-badge text-xs" onclick="selectUPIApp(this)">PhonePe</div>
-                        <div class="upi-badge text-xs" onclick="selectUPIApp(this)">Paytm</div>
-                        <div class="upi-badge text-xs" onclick="selectUPIApp(this)">BHIM</div>
+                        <div class="upi-badge selected text-[11px]" onclick="selectUPIApp(this)">GPay</div>
+                        <div class="upi-badge text-[11px]" onclick="selectUPIApp(this)">PhonePe</div>
+                        <div class="upi-badge text-[11px]" onclick="selectUPIApp(this)">Paytm</div>
+                        <div class="upi-badge text-[11px]" onclick="selectUPIApp(this)">BHIM</div>
                     </div>
                 </div>
                 <div>
-                    <label class="text-xs text-gray-400 uppercase font-semibold">Virtual Payment Address (UPI ID)</label>
-                    <input type="text" placeholder="username@upi or 9876543210@paytm" required class="w-full mt-1 bg-v-card border border-v-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon">
+                    <label class="text-[10px] md:text-xs text-gray-400 uppercase font-semibold">Virtual Payment Address (UPI ID)</label>
+                    <input type="text" placeholder="username@upi" required class="w-full mt-1 bg-v-card border border-v-border rounded-xl px-4 py-2.5 text-xs md:text-sm text-white focus:outline-none focus:border-neon">
                 </div>
-                <button type="submit" class="btn-neon w-full py-3.5 rounded-full text-base font-bold">PAY <span class="checkoutTotalDisplay">₹0</span> VIA UPI</button>
+                <button type="submit" class="btn-neon w-full py-3 rounded-full text-xs md:text-sm font-bold">PAY <span class="checkoutTotalDisplay">₹0</span> VIA UPI</button>
             </form>
 
             <!-- Card Payment View -->
             <form id="cardForm" onsubmit="handleCheckout(event)" class="space-y-4 hidden">
-                <input type="text" placeholder="Cardholder Name" required class="w-full bg-v-card border border-v-border rounded-xl px-4 py-3 text-white">
-                <input type="text" placeholder="Card Number" required class="w-full bg-v-card border border-v-border rounded-xl px-4 py-3 text-white">
-                <div class="flex gap-3">
-                    <input type="text" placeholder="MM/YY" required class="flex-1 bg-v-card border border-v-border rounded-xl px-4 py-3 text-white">
-                    <input type="text" placeholder="CVC" required class="w-24 bg-v-card border border-v-border rounded-xl px-4 py-3 text-white">
+                <input type="text" placeholder="Cardholder Name" required class="w-full bg-v-card border border-v-border rounded-xl px-4 py-2.5 text-xs md:text-sm text-white">
+                <input type="text" placeholder="Card Number" required class="w-full bg-v-card border border-v-border rounded-xl px-4 py-2.5 text-xs md:text-sm text-white">
+                <div class="flex gap-2">
+                    <input type="text" placeholder="MM/YY" required class="flex-1 bg-v-card border border-v-border rounded-xl px-4 py-2.5 text-xs md:text-sm text-white">
+                    <input type="text" placeholder="CVC" required class="w-20 bg-v-card border border-v-border rounded-xl px-4 py-2.5 text-xs md:text-sm text-white">
                 </div>
-                <button type="submit" class="btn-neon w-full py-3.5 rounded-full text-base font-bold">PAY <span class="checkoutTotalDisplay">₹0</span> SECURELY</button>
+                <button type="submit" class="btn-neon w-full py-3 rounded-full text-xs md:text-sm font-bold">PAY <span class="checkoutTotalDisplay">₹0</span> SECURELY</button>
             </form>
         </div>
     </div>
 
-    <!-- ===== ORDER CONFIRMATION ===== -->
+    <!-- ORDER CONFIRMATION -->
     <div id="confirmOverlay" class="modal-overlay" onclick="closeConfirmModal()">
-        <div class="bg-v-dark border border-green rounded-3xl p-8 text-center max-w-md mx-4" onclick="event.stopPropagation()">
-            <div class="text-6xl mb-4">✅</div>
-            <h2 class="font-game text-2xl text-white">Order Confirmed!</h2>
-            <p class="text-gray-400 mb-4">Payment Received! Your gaming gear is being prepared for dispatch.</p>
-            <p class="text-green font-bold" id="confirmOrderId">Order #VX-2026</p>
-            <button onclick="closeConfirmModal()" class="btn-neon px-8 py-3 rounded-full mt-6 font-bold">CONTINUE SHOPPING</button>
+        <div class="bg-v-dark border border-green rounded-2xl md:rounded-3xl p-6 md:p-8 text-center max-w-md mx-auto" onclick="event.stopPropagation()">
+            <div class="text-5xl md:text-6xl mb-3">✅</div>
+            <h2 class="font-game text-xl md:text-2xl text-white">Order Confirmed!</h2>
+            <p class="text-gray-400 text-xs md:text-sm mb-3">Payment Received! Your gear is being prepared.</p>
+            <p class="text-green text-sm md:text-base font-bold" id="confirmOrderId">Order #VX-2026</p>
+            <button onclick="closeConfirmModal()" class="btn-neon px-6 py-2.5 rounded-full mt-5 text-xs md:text-sm font-bold">CONTINUE SHOPPING</button>
         </div>
     </div>
 
-    <!-- ===== EXPANDED PRODUCT DETAIL MODAL ===== -->
+    <!-- EXPANDED PRODUCT DETAIL MODAL -->
     <div id="productDetailOverlay" class="modal-overlay" onclick="closeProductDetail()">
-        <div class="bg-v-dark border border-v-border rounded-3xl p-6 md:p-8 w-full max-w-3xl mx-4 max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
-            <button onclick="closeProductDetail()" class="text-gray-400 hover:text-white text-2xl float-right">&times;</button>
-            <div class="flex flex-col md:flex-row gap-6 mt-4">
+        <div class="bg-v-dark border border-v-border rounded-2xl md:rounded-3xl p-5 md:p-8 w-full max-w-3xl mx-auto max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
+            <button onclick="closeProductDetail()" class="text-gray-400 hover:text-white text-2xl float-right focus:outline-none">&times;</button>
+            <div class="flex flex-col md:flex-row gap-5 mt-3">
                 <div class="w-full md:w-1/2 relative">
-                    <div class="relative overflow-hidden rounded-2xl aspect-square bg-v-black border border-v-border">
-                        <img id="detailImage" src="" alt="Product Image" class="w-full h-full object-cover">
+                    <div class="relative overflow-hidden rounded-xl aspect-square bg-v-black border border-v-border">
+                        <img id="detailImage" src="" alt="Product" class="w-full h-full object-cover">
                     </div>
                 </div>
                 <div class="w-full md:w-1/2 flex flex-col justify-between">
                     <div>
-                        <span class="text-xs text-purple font-semibold uppercase tracking-wider" id="detailCategory"></span>
-                        <h2 class="text-xl md:text-2xl font-bold text-white mt-1" id="detailName"></h2>
-                        <div class="mt-3 flex items-center">
-                            <span class="text-neon text-2xl font-bold" id="detailPrice"></span>
-                            <span class="text-gray-500 line-through text-base ml-3" id="detailOriginalPrice"></span>
-                            <span class="badge-discount ml-3" id="detailDiscount"></span>
+                        <span class="text-[10px] md:text-xs text-purple font-semibold uppercase tracking-wider" id="detailCategory"></span>
+                        <h2 class="text-lg md:text-2xl font-bold text-white mt-1" id="detailName"></h2>
+                        <div class="mt-2 flex items-center gap-2">
+                            <span class="text-neon text-xl md:text-2xl font-bold" id="detailPrice"></span>
+                            <span class="text-gray-500 line-through text-xs md:text-sm" id="detailOriginalPrice"></span>
+                            <span class="badge-discount" id="detailDiscount"></span>
                         </div>
-                        <p class="text-gray-300 mt-3 text-sm leading-relaxed" id="detailDescription"></p>
+                        <p class="text-gray-300 mt-2.5 text-xs md:text-sm leading-relaxed" id="detailDescription"></p>
                         
-                        <div class="mt-4 pt-4 border-t border-v-border space-y-2">
-                            <h4 class="font-game text-xs text-neon uppercase tracking-wider">Expanded Specifications:</h4>
-                            <ul class="text-xs text-gray-400 space-y-1.5" id="detailSpecsList"></ul>
+                        <div class="mt-3 pt-3 border-t border-v-border space-y-1.5">
+                            <h4 class="font-game text-[10px] md:text-xs text-neon uppercase tracking-wider">Specifications:</h4>
+                            <ul class="text-[11px] md:text-xs text-gray-400 space-y-1" id="detailSpecsList"></ul>
                         </div>
                     </div>
-                    <div class="flex gap-3 mt-6">
-                        <button id="detailAddToCart" class="btn-neon px-6 py-3 rounded-full text-sm font-bold flex-1">ADD TO CART</button>
-                        <button id="detailWishlistBtn" class="bg-v-card border border-v-border hover:border-neon text-white p-3 rounded-full">❤️</button>
+                    <div class="flex gap-2.5 mt-5">
+                        <button id="detailAddToCart" class="btn-neon px-5 py-2.5 rounded-full text-xs md:text-sm font-bold flex-1">ADD TO CART</button>
+                        <button id="detailWishlistBtn" class="bg-v-card border border-v-border hover:border-neon text-white p-2.5 rounded-full">❤️</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ===== JAVASCRIPT ===== -->
+    <!-- JAVASCRIPT -->
     <script>
         const PRODUCTS = [
             // --- GAMING PCS (10 items) ---
@@ -975,26 +980,26 @@
                 const isWishlisted = wishlist.includes(p.id);
                 const discount = Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100);
                 return `
-                    <div class="product-card bg-v-card rounded-2xl border border-v-border overflow-hidden relative flex flex-col justify-between" onclick="openProductDetail('${p.id}')">
-                        <button class="absolute top-3 right-3 z-10 text-xl bg-v-black/65 backdrop-blur p-1.5 rounded-full transition hover:scale-110" onclick="toggleWishlist(event, '${p.id}')">
+                    <div class="product-card bg-v-card rounded-xl md:rounded-2xl border border-v-border overflow-hidden relative flex flex-col justify-between" onclick="openProductDetail('${p.id}')">
+                        <button class="absolute top-2.5 right-2.5 z-10 text-base md:text-xl bg-v-black/70 backdrop-blur p-1.5 rounded-full transition hover:scale-110 focus:outline-none" onclick="toggleWishlist(event, '${p.id}')">
                             ${isWishlisted ? '❤️' : '🤍'}
                         </button>
                         <div>
                             <div class="aspect-square overflow-hidden bg-v-black">
                                 <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover transition duration-500 hover:scale-105" loading="lazy">
                             </div>
-                            <div class="p-4">
-                                <span class="text-xs text-purple font-semibold uppercase">${p.category.replace('-', ' ')}</span>
-                                <h3 class="text-white text-sm font-semibold mt-1 line-clamp-2">${p.title}</h3>
-                                <div class="flex items-center gap-2 mt-3">
-                                    <span class="text-neon font-bold text-base">₹${p.price.toLocaleString('en-IN')}</span>
-                                    <span class="text-gray-500 line-through text-xs">₹${p.originalPrice.toLocaleString('en-IN')}</span>
+                            <div class="p-3 md:p-4">
+                                <span class="text-[10px] md:text-xs text-purple font-semibold uppercase">${p.category.replace('-', ' ')}</span>
+                                <h3 class="text-white text-xs md:text-sm font-semibold mt-1 line-clamp-2">${p.title}</h3>
+                                <div class="flex items-center gap-1.5 md:gap-2 mt-2 md:mt-3 flex-wrap">
+                                    <span class="text-neon font-bold text-sm md:text-base">₹${p.price.toLocaleString('en-IN')}</span>
+                                    <span class="text-gray-500 line-through text-[10px] md:text-xs">₹${p.originalPrice.toLocaleString('en-IN')}</span>
                                     <span class="badge-discount">${discount}% OFF</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="p-4 pt-0">
-                            <button class="btn-neon w-full py-2 rounded-xl text-xs font-bold" onclick="addToCart(event, '${p.id}')">ADD TO CART</button>
+                        <div class="p-3 md:p-4 pt-0">
+                            <button class="btn-neon w-full py-2 rounded-xl text-[11px] md:text-xs font-bold" onclick="addToCart(event, '${p.id}')">ADD TO CART</button>
                         </div>
                     </div>
                 `;
@@ -1032,15 +1037,15 @@
 
                 const matches = PRODUCTS.filter(p => p.title.toLowerCase().includes(val) || p.category.includes(val));
                 if (matches.length === 0) {
-                    results.innerHTML = `<div class="p-4 text-gray-400 text-sm">No items found</div>`;
+                    results.innerHTML = `<div class="p-3 text-gray-400 text-xs">No items found</div>`;
                 } else {
                     results.innerHTML = matches.map(p => `
-                        <div class="p-3 hover:bg-v-dark flex items-center justify-between cursor-pointer border-b border-v-border/50" onclick="openProductDetail('${p.id}'); document.getElementById('searchResults').classList.add('hidden');">
-                            <div class="flex items-center gap-3">
-                                <img src="${p.image}" class="w-10 h-10 object-cover rounded-lg">
-                                <span class="text-sm text-white font-medium">${p.title}</span>
+                        <div class="p-2.5 hover:bg-v-dark flex items-center justify-between cursor-pointer border-b border-v-border/50" onclick="openProductDetail('${p.id}'); document.getElementById('searchResults').classList.add('hidden');">
+                            <div class="flex items-center gap-2.5">
+                                <img src="${p.image}" class="w-8 h-8 object-cover rounded-md">
+                                <span class="text-xs text-white font-medium line-clamp-1">${p.title}</span>
                             </div>
-                            <span class="text-neon text-xs font-bold">₹${p.price.toLocaleString('en-IN')}</span>
+                            <span class="text-neon text-xs font-bold whitespace-nowrap">₹${p.price.toLocaleString('en-IN')}</span>
                         </div>
                     `).join('');
                 }
@@ -1121,7 +1126,7 @@
             let subtotal = 0;
 
             if (cart.length === 0) {
-                container.innerHTML = `<p class="text-gray-500 text-center py-10">Your cart is currently empty.</p>`;
+                container.innerHTML = `<p class="text-gray-500 text-center py-10 text-sm">Your cart is currently empty.</p>`;
             } else {
                 container.innerHTML = cart.map(item => {
                     const product = PRODUCTS.find(p => p.id === item.id);
@@ -1129,14 +1134,14 @@
                     subtotal += product.price * item.qty;
                     return `
                         <div class="flex gap-3 bg-v-card p-3 rounded-xl border border-v-border items-center">
-                            <img src="${product.image}" class="w-16 h-16 object-cover rounded-lg">
+                            <img src="${product.image}" class="w-14 h-14 object-cover rounded-lg">
                             <div class="flex-1">
                                 <h4 class="text-white text-xs font-semibold line-clamp-1">${product.title}</h4>
-                                <div class="text-neon text-sm font-bold mt-1">₹${product.price.toLocaleString('en-IN')}</div>
+                                <div class="text-neon text-xs font-bold mt-1">₹${product.price.toLocaleString('en-IN')}</div>
                                 <div class="flex items-center gap-2 mt-2">
-                                    <button class="bg-v-dark px-2 rounded border border-v-border text-xs" onclick="updateQty('${product.id}', -1)">-</button>
+                                    <button class="bg-v-dark px-2 py-0.5 rounded border border-v-border text-xs" onclick="updateQty('${product.id}', -1)">-</button>
                                     <span class="text-xs font-bold">${item.qty}</span>
-                                    <button class="bg-v-dark px-2 rounded border border-v-border text-xs" onclick="updateQty('${product.id}', 1)">+</button>
+                                    <button class="bg-v-dark px-2 py-0.5 rounded border border-v-border text-xs" onclick="updateQty('${product.id}', 1)">+</button>
                                 </div>
                             </div>
                         </div>
@@ -1163,7 +1168,7 @@
 
             const container = document.getElementById('wishlistItemsContainer');
             if (wishlist.length === 0) {
-                container.innerHTML = `<p class="text-gray-500 text-center py-10">No saved items in wishlist.</p>`;
+                container.innerHTML = `<p class="text-gray-500 text-center py-10 text-sm">No saved items in wishlist.</p>`;
             } else {
                 container.innerHTML = wishlist.map(id => {
                     const product = PRODUCTS.find(p => p.id === id);
@@ -1171,13 +1176,13 @@
                     return `
                         <div class="flex gap-3 bg-v-card p-3 rounded-xl border border-v-border items-center justify-between">
                             <div class="flex items-center gap-3">
-                                <img src="${product.image}" class="w-14 h-14 object-cover rounded-lg">
+                                <img src="${product.image}" class="w-12 h-12 object-cover rounded-lg">
                                 <div>
                                     <h4 class="text-white text-xs font-semibold line-clamp-1">${product.title}</h4>
-                                    <div class="text-neon text-sm font-bold mt-1">₹${product.price.toLocaleString('en-IN')}</div>
+                                    <div class="text-neon text-xs font-bold mt-1">₹${product.price.toLocaleString('en-IN')}</div>
                                 </div>
                             </div>
-                            <button class="btn-neon px-3 py-1.5 rounded-lg text-xs" onclick="addToCart(event, '${product.id}')">Move to Cart</button>
+                            <button class="btn-neon px-2.5 py-1.5 rounded-lg text-[11px] whitespace-nowrap" onclick="addToCart(event, '${product.id}')">Add</button>
                         </div>
                     `;
                 }).join('');
