@@ -304,14 +304,26 @@
 
         <!-- DESKTOP SIDEBAR -->
         <aside class="sidebar-desktop w-56 flex-shrink-0 hidden md:block">
-            <div class="sticky top-28 bg-v-card rounded-2xl border border-v-border p-4 space-y-1">
-                <h3 class="font-game text-sm text-neon mb-3 uppercase">Categories</h3>
-                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300 active" data-cat="all">🔥 All Products</div>
-                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="gaming-pcs">🖥️ Gaming PCs</div>
-                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="keyboards">⌨️ Keyboards</div>
-                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="mice">🖱️ Mice</div>
-                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="headsets">🎧 Headsets</div>
-                <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="gaming-chairs">🪑 Gaming Chairs</div>
+            <div class="sticky top-28 space-y-6">
+                <!-- Company Box -->
+                <div class="bg-v-card rounded-2xl border border-v-border p-4 space-y-1">
+                    <h3 class="font-game text-sm text-neon mb-3 uppercase">Company</h3>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" onclick="showPage('about')">🏢 About Us</div>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" onclick="showPage('career')">💼 Career</div>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" onclick="showPage('terms')">📄 Terms & Condition</div>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" onclick="showPage('privacy')">🔒 Privacy Policy</div>
+                </div>
+
+                <!-- Categories Box -->
+                <div class="bg-v-card rounded-2xl border border-v-border p-4 space-y-1">
+                    <h3 class="font-game text-sm text-neon mb-3 uppercase">Categories</h3>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300 active" data-cat="all">🔥 All Products</div>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="gaming-pcs">🖥️ Gaming PCs</div>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="keyboards">⌨️ Keyboards</div>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="mice">🖱️ Mice</div>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="headsets">🎧 Headsets</div>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="gaming-chairs">🪑 Gaming Chairs</div>
+                </div>
             </div>
         </aside>
 
@@ -320,13 +332,27 @@
         <aside id="mobileSidebar" class="fixed top-0 left-0 w-72 h-full bg-v-dark border-r border-v-border z-50 transform -translate-x-full transition-transform md:hidden overflow-y-auto">
             <div class="p-5">
                 <button onclick="closeMobileSidebar()" class="text-gray-400 text-2xl float-right">&times;</button>
-                <div class="space-y-2 mt-8">
-                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm active" data-cat="all" onclick="closeMobileSidebar(); filterCategory('all');">🔥 All Gear</div>
-                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="gaming-pcs" onclick="closeMobileSidebar(); filterCategory('gaming-pcs');">🖥️ Gaming PCs</div>
-                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="keyboards" onclick="closeMobileSidebar(); filterCategory('keyboards');">⌨️ Keyboards</div>
-                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="mice" onclick="closeMobileSidebar(); filterCategory('mice');">🖱️ Mice</div>
-                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="headsets" onclick="closeMobileSidebar(); filterCategory('headsets');">🎧 Headsets</div>
-                    <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="gaming-chairs" onclick="closeMobileSidebar(); filterCategory('gaming-chairs');">🪑 Gaming Chairs</div>
+                <div class="space-y-6 mt-8">
+                    <div>
+                        <h3 class="font-game text-sm text-neon mb-3 uppercase">Company</h3>
+                        <div class="space-y-1">
+                            <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm" onclick="closeMobileSidebar(); showPage('about');">🏢 About Us</div>
+                            <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm" onclick="closeMobileSidebar(); showPage('career');">💼 Career</div>
+                            <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm" onclick="closeMobileSidebar(); showPage('terms');">📄 Terms & Condition</div>
+                            <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm" onclick="closeMobileSidebar(); showPage('privacy');">🔒 Privacy Policy</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-game text-sm text-neon mb-3 uppercase">Categories</h3>
+                        <div class="space-y-1">
+                            <div class="sidebar-link rounded-lg px-3 py-3 text-sm active" data-cat="all" onclick="closeMobileSidebar(); filterCategory('all');">🔥 All Gear</div>
+                            <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="gaming-pcs" onclick="closeMobileSidebar(); filterCategory('gaming-pcs');">🖥️ Gaming PCs</div>
+                            <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="keyboards" onclick="closeMobileSidebar(); filterCategory('keyboards');">⌨️ Keyboards</div>
+                            <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="mice" onclick="closeMobileSidebar(); filterCategory('mice');">🖱️ Mice</div>
+                            <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="headsets" onclick="closeMobileSidebar(); filterCategory('headsets');">🎧 Headsets</div>
+                            <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="gaming-chairs" onclick="closeMobileSidebar(); filterCategory('gaming-chairs');">🪑 Gaming Chairs</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </aside>
@@ -341,7 +367,7 @@
                 <section class="relative rounded-3xl overflow-hidden mb-8 neon-border min-h-[280px] md:min-h-[320px]">
                     <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=1200&h=500&fit=crop&auto=format" class="absolute inset-0 w-full h-full object-cover" alt="hero" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent"></div>
-                    <div class="relative z-10 flex flex-col justify-center h-full min-h-[280px] md:min-h-[320px] px-6 md:px-12 py-10">
+                    <div class="absolute inset-0 z-10 flex flex-col justify-center h-full min-h-[280px] md:min-h-[320px] px-6 md:px-12 py-10">
                         <span class="text-neon font-game text-xs md:text-sm tracking-[0.3em] uppercase mb-3">Prestige Collection</span>
                         <h1 class="font-game text-3xl md:text-5xl font-black text-white mb-3 leading-tight">EXHALE THE<br><span class="bg-gradient-to-r from-neon to-purple bg-clip-text text-transparent">SMOOTHNESS</span></h1>
                         <p class="text-gray-300 text-sm md:text-base mb-5 max-w-md">Upgrade your battle station with India's premier pro-grade gaming hardware.</p>
@@ -413,7 +439,7 @@
                 <button onclick="showPage('products')" class="btn-neon px-6 py-2 mt-6 rounded-full text-sm font-bold">← BACK TO STORE</button>
             </div>
 
-            <!-- FOOTER (Company section placed right next/above according to user preference & reference image) -->
+            <!-- FOOTER -->
             <footer class="border-t border-v-border pt-10 pb-6 mt-12">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
                     <div>
@@ -432,8 +458,9 @@
                         <p><a href="#" onclick="filterCategory('all'); return false;" class="text-gray-400 hover:text-neon">All Products</a></p>
                         <p><a href="#" onclick="filterCategory('gaming-pcs'); return false;" class="text-gray-400 hover:text-neon">Gaming PCs</a></p>
                         <p><a href="#" onclick="filterCategory('keyboards'); return false;" class="text-gray-400 hover:text-neon">Keyboards</a></p>
-                        <p><a href="#" onclick="filterCategory('terms'); return false;" class="text-gray-400 hover:text-neon">Terms & Conditions</a></p>
-                        <p><a href="#" onclick="filterCategory('privacy'); return false;" class="text-gray-400 hover:text-neon">Privacy Policy</a></p>
+                        <p><a href="#" onclick="filterCategory('mice'); return false;" class="text-gray-400 hover:text-neon">Mice</a></p>
+                        <p><a href="#" onclick="filterCategory('headsets'); return false;" class="text-gray-400 hover:text-neon">Headsets</a></p>
+                        <p><a href="#" onclick="filterCategory('gaming-chairs'); return false;" class="text-gray-400 hover:text-neon">Gaming Chairs</a></p>
                     </div>
                     <div>
                         <h4 class="text-white font-semibold mb-3">Support</h4>
