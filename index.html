@@ -305,16 +305,7 @@
         <!-- DESKTOP SIDEBAR -->
         <aside class="sidebar-desktop w-56 flex-shrink-0 hidden md:block">
             <div class="sticky top-28 space-y-6">
-                <!-- Company Box -->
-                <div class="bg-v-card rounded-2xl border border-v-border p-4 space-y-1">
-                    <h3 class="font-game text-sm text-neon mb-3 uppercase">Company</h3>
-                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" onclick="showPage('about')">🏢 About Us</div>
-                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" onclick="showPage('career')">💼 Career</div>
-                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" onclick="showPage('terms')">📄 Terms & Condition</div>
-                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" onclick="showPage('privacy')">🔒 Privacy Policy</div>
-                </div>
-
-                <!-- Categories Box -->
+                <!-- Categories Box (Moved Above) -->
                 <div class="bg-v-card rounded-2xl border border-v-border p-4 space-y-1">
                     <h3 class="font-game text-sm text-neon mb-3 uppercase">Categories</h3>
                     <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300 active" data-cat="all">🔥 All Products</div>
@@ -323,6 +314,15 @@
                     <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="mice">🖱️ Mice</div>
                     <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="headsets">🎧 Headsets</div>
                     <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" data-cat="gaming-chairs">🪑 Gaming Chairs</div>
+                </div>
+
+                <!-- Company Box (Moved Below) -->
+                <div class="bg-v-card rounded-2xl border border-v-border p-4 space-y-1">
+                    <h3 class="font-game text-sm text-neon mb-3 uppercase">Company</h3>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" onclick="showPage('about')">🏢 About Us</div>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" onclick="showPage('career')">💼 Career</div>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" onclick="showPage('terms')">📄 Terms & Condition</div>
+                    <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm text-gray-300" onclick="showPage('privacy')">🔒 Privacy Policy</div>
                 </div>
             </div>
         </aside>
@@ -334,15 +334,6 @@
                 <button onclick="closeMobileSidebar()" class="text-gray-400 text-2xl float-right">&times;</button>
                 <div class="space-y-6 mt-8">
                     <div>
-                        <h3 class="font-game text-sm text-neon mb-3 uppercase">Company</h3>
-                        <div class="space-y-1">
-                            <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm" onclick="closeMobileSidebar(); showPage('about');">🏢 About Us</div>
-                            <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm" onclick="closeMobileSidebar(); showPage('career');">💼 Career</div>
-                            <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm" onclick="closeMobileSidebar(); showPage('terms');">📄 Terms & Condition</div>
-                            <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm" onclick="closeMobileSidebar(); showPage('privacy');">🔒 Privacy Policy</div>
-                        </div>
-                    </div>
-                    <div>
                         <h3 class="font-game text-sm text-neon mb-3 uppercase">Categories</h3>
                         <div class="space-y-1">
                             <div class="sidebar-link rounded-lg px-3 py-3 text-sm active" data-cat="all" onclick="closeMobileSidebar(); filterCategory('all');">🔥 All Gear</div>
@@ -351,6 +342,15 @@
                             <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="mice" onclick="closeMobileSidebar(); filterCategory('mice');">🖱️ Mice</div>
                             <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="headsets" onclick="closeMobileSidebar(); filterCategory('headsets');">🎧 Headsets</div>
                             <div class="sidebar-link rounded-lg px-3 py-3 text-sm" data-cat="gaming-chairs" onclick="closeMobileSidebar(); filterCategory('gaming-chairs');">🪑 Gaming Chairs</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-game text-sm text-neon mb-3 uppercase">Company</h3>
+                        <div class="space-y-1">
+                            <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm" onclick="closeMobileSidebar(); showPage('about');">🏢 About Us</div>
+                            <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm" onclick="closeMobileSidebar(); showPage('career');">💼 Career</div>
+                            <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm" onclick="closeMobileSidebar(); showPage('terms');">📄 Terms & Condition</div>
+                            <div class="sidebar-link rounded-lg px-3 py-2.5 text-sm" onclick="closeMobileSidebar(); showPage('privacy');">🔒 Privacy Policy</div>
                         </div>
                     </div>
                 </div>
